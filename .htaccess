@@ -1,8 +1,10 @@
-# ¿ªÆôURLÖØĞ´
+ï»¿# å¼€å¯URLé‡å†™
 RewriteEngine on
-# URLÖØĞ´µÄ×÷ÓÃÓò
+# URLé‡å†™çš„ä½œç”¨åŸŸ
 RewriteBase /
-# Âú×ãÔõÑùµÄÌõ¼ş
+# æ»¡è¶³æ€æ ·çš„æ¡ä»¶
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond $1 !^(index\.php|images|css|robots\.txt)
-# Ó¦ÓÃÔõÑùµÄ¹æÔò
+# åº”ç”¨æ€æ ·çš„è§„åˆ™
 RewriteRule ^(.*)$ /index.php/$1 [L]
