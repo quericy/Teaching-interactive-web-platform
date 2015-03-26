@@ -1,10 +1,9 @@
-﻿# 开启URL重写
-RewriteEngine on
-# URL重写的作用域
+﻿RewriteEngine on
+
 RewriteBase /
-# 满足怎样的条件
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond $1 !^(index\.php|images|css|robots\.txt)
-# 应用怎样的规则
+
 RewriteRule ^(.*)$ /index.php/$1 [L]
