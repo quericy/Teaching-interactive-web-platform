@@ -6,7 +6,7 @@
  * Date: 2015/3/26 0026
  * Time: 22:33
  */
-class default_controller extends CI_Controller
+class Default_controller extends CI_Controller
 {
     public function __construct()
     {
