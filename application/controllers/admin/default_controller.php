@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * 后台默认控制器
  * Created by PhpStorm.
@@ -19,3 +19,6 @@ class Default_controller extends CI_Controller
     }
 
 }
+
+/* End of file default_controller.php */
+/* Location: ./application/controllers/admin/default_controller.php */

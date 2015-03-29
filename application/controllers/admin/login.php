@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * Created by PhpStorm.
@@ -15,3 +15,6 @@ class login extends CI_Controller
     }
 
 }
+
+/* End of file login.php */
+/* Location: ./application/controllers/admin/login.php */
