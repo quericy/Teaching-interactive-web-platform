@@ -1,0 +1,154 @@
+/*整体布局*/
+html,body{
+    margin:0;
+    height:100%;
+    background: #eee;
+}
+/*正文部分*/
+.content {
+    position: relative;
+    height:85%;
+    min-height: 600px;
+    background: #fff;
+    margin-left: 240px;
+    border-left: 1px solid #cccccc;
+    padding: 15px 15px 0 15px;
+}
+/*页脚*/
+footer {
+    padding: 0;
+    color: #666;
+    font-size: .85em;
+    line-height: 1.3em;
+    margin: 0;
+}
+footer hr {
+    margin: 0 auto 20px;
+    border-top: 1px solid #ccc;
+}
+footer p{
+    vertical-align:middle;
+}
+/*css query查询*/
+@media (max-width: 767px) {
+    .sidebar-nav {
+        display: none;
+    }
+    .content {
+        margin: 0;
+    }
+}
+/*左侧导航栏css*/
+.sidebar-nav {
+    width: 240px;
+    position: absolute;
+    float: left;
+    border-top: none;
+    border-left: none;
+    margin: 0;
+}
+.sidebar-nav ul {
+    list-style: none;
+    padding-left: 0px;
+}
+.sidebar-nav li a .fa-caret-right {
+    color: #666;
+    padding-right: .25em;
+}
+.sidebar-nav .nav-header {
+    border-top: 1px solid #fcfcfc;
+    border-bottom: 1px solid #c8c8cb;
+    background: #efeff0;
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #efeff0), color-stop(1, #fafafa));
+    background: -ms-linear-gradient(bottom, #efeff0, #fafafa);
+    background: -moz-linear-gradient(center bottom, #efeff0 0%, #fafafa 100%);
+    background: -o-linear-gradient(bottom, #efeff0, #fafafa);
+    filter: progid:dximagetransform.microsoft.gradient(startColorStr='#e3e3e3', EndColorStr='#ffffff');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fafafa',EndColorStr='#efeff0')";
+    border-left: none;
+    color: #444;
+    display: block;
+    font-weight: normal;
+    font-size: 1em;
+    line-height: 2.5em;
+    padding: .25em .25em .25em 1em;
+    margin-bottom: 0;
+    text-shadow: none;
+    text-transform: none;
+    /*Change the arrow direction if the item is collapsed*/
+
+}
+.sidebar-nav .nav-header .label {
+    float: right;
+    margin-top: .5em;
+    margin-right: .25em;
+    line-height: 1.5em;
+}
+.sidebar-nav .nav-header:hover {
+    background: #efeff0;
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #efeff0), color-stop(1, #ffffff));
+    background: -ms-linear-gradient(bottom, #efeff0, #ffffff);
+    background: -moz-linear-gradient(center bottom, #efeff0 0%, #ffffff 100%);
+    background: -o-linear-gradient(bottom, #efeff0, #ffffff);
+    filter: progid:dximagetransform.microsoft.gradient(startColorStr='#e3e3e3', EndColorStr='#ffffff');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff',EndColorStr='#efeff0')";
+}
+
+.sidebar-nav .nav-header .fa-collapse,
+.sidebar-nav .nav-header .fa-collapse {
+    float: right;
+}
+.sidebar-nav .nav-header .label {
+    float: right;
+    margin-top: .7em;
+    line-height: 1.5em;
+}
+.sidebar-nav .nav-header i[class*="fa-"] {
+    line-height: 2.25em;
+    padding-right: .75em;
+}
+.sidebar-nav .nav-list {
+    margin: 0;
+    border: 0;
+    background: #fafafa;
+}
+.sidebar-nav .nav-list  > li > a:hover {
+    background: #d2d2dd;
+}
+.sidebar-nav .nav-list  > .active > a,
+.sidebar-nav .nav-list  > .active > a:hover {
+    text-shadow: none;
+    background: #e5e5ea;
+    border-top: 1px solid #d0d0d6;
+    border-bottom: 1px solid #d0d0d6;
+}
+.sidebar-nav .nav-list li:first-child.active a {
+    border-top: 0;
+}
+.sidebar-nav .nav-list li:last-child.active a {
+    border-bottom: 0;
+}
+.sidebar-nav .nav-list  > li:hover {
+    border-left: 4px solid #8989a6;
+    overflow: hidden;
+}
+.sidebar-nav .nav-list  > li:hover a {
+    margin-left: -4px;
+}
+.sidebar-nav .nav-list  > .active {
+    overflow: hidden;
+    border-left: 4px solid #909096;
+}
+.sidebar-nav .nav-list  > .active a {
+    margin-left: -4px;
+}
+.sidebar-nav .nav-list  > .active > a:hover {
+    background: #c3c3d2;
+}
+.sidebar-nav .nav-list  > li > a {
+    color: #222;
+    padding: .5em 1em;
+}
+.sidebar-nav .nav-list.collapse.in {
+    border-bottom: 1px solid #ccc;
+}

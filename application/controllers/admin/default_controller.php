@@ -15,7 +15,8 @@ class Default_controller extends CI_Controller
 
     public function index()
     {
-        echo 'AdminPage';
+        $this->smarty->assign('base_url',$this->config->item('base_url'));
+        $this->smarty->view('admin/index.tpl');
     }
 
 }
