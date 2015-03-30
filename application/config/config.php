@@ -1,5 +1,15 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/***全局变量begin***/
+define('_site_domain','http://ci.me/');
+define('_site_css',_site_domain.'css/');
+define('_site_js',_site_domain.'js/');
+
+define('_admin_domain',_site_domain.'admin/');
+define('_admin_css',_site_css.'admin/');
+define('_admin_js',_site_js.'admin/');
+/***全局变量end***/
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL

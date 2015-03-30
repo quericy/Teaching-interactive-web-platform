@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a href="<{$base_url}>admin/"><span class="navbar-brand"><span class="glyphicon glyphicon-home"></span>&nbsp;管理后台</span></a>
+        <a href="<{$smarty.const.base_url}>admin/"><span class="navbar-brand"><span class="glyphicon glyphicon-home"></span>&nbsp;管理后台</span></a>
     </div>
 
     <div class="navbar-collapse collapse" style="height: 1px;">
@@ -25,7 +25,7 @@
                     <li><a href="./">个人信息</a></li>
                     <li><a href="./">设置</a></li>
                     <li class="divider"></li>
-                    <li><a tabindex="-1" href="<{$base_url}>admin/login/out">退出</a></li>
+                    <li><a tabindex="-1" href="<{$smarty.const.base_url}>admin/login/out">退出</a></li>
                 </ul>
             </li>
         </ul>
@@ -39,7 +39,7 @@
                 <i class="glyphicon glyphicon-scale"></i>&nbsp;仪表板<i class="fa-collapse glyphicon glyphicon-chevron-down"></i>
             </a></li>
         <li><ul class="dashboard-menu nav nav-list collapse in">
-                <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 后台首页</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 后台概览</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 前台站点</a></li>
             </ul></li>
 
