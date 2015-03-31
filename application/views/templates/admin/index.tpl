@@ -14,7 +14,33 @@
 <body>
 <{include file="admin/nav.tpl"}>
 <div class="content">
+    <ol class="breadcrumb">
+        <li class="active">管理后台</li>
+        <li class="active">仪表板</li>
+        <li>后台概览</li>
+    </ol>
 
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">系统状态</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">1
+
+                </div>
+                <div class="col-md-3 col-sm-6">2
+
+                </div>
+                <div class="col-md-3 col-sm-6">3
+
+                </div>
+                <div class="col-md-3 col-sm-6">4
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <{include file="admin/footer.tpl"}>
 </body>

@@ -40,7 +40,7 @@
             </a></li>
         <li><ul class="dashboard-menu nav nav-list collapse in">
                 <li><a href="<{$smarty.const._admin_domain}>"><span class="glyphicon glyphicon-triangle-right"></span> 后台概览</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 前台站点</a></li>
+                <li><a href="<{$smarty.const._site_domain}>" target="_blank"><span class="glyphicon glyphicon-triangle-right"></span> 前台站点</a></li>
             </ul></li>
 
         <li><a href="#" data-target=".work-menu" class="nav-header collapsed" data-toggle="collapse">
