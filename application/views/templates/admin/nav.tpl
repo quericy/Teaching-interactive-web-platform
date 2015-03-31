@@ -67,12 +67,14 @@
             </a></li>
         <li><ul class="data-answer nav nav-list collapse">
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 留言列表</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 统计汇总</a></li>
             </ul></li>
 
         <li><a href="#" data-target=".data-system" class="nav-header collapsed" data-toggle="collapse">
                 <i class="glyphicon glyphicon-cog"></i>&nbsp;系统设置<i class="fa-collapse glyphicon glyphicon-chevron-down"></i>
             </a></li>
         <li><ul class="data-system nav nav-list collapse">
+                <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 学生管理</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 教师管理</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 系统设置</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 日志记录</a></li>
