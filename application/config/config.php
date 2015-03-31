@@ -1,8 +1,14 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /***全局变量begin***/
-define('global_site','http://ci.me/');
-define('_site_domain',global_site);
+
+if(isset($_SERVER['RUNTIME_DOMAIN'])&&!empty($_SERVER['RUNTIME_DOMAIN'])){
+    define('_site_domain',$_SERVER['RUNTIME_DOMAIN']);
+}else{
+    define('_site_domain','http://'.$_SERVER['SERVER_NAME'].'/');
+}
+
+
 define('_site_css',_site_domain.'css/');
 define('_site_js',_site_domain.'js/');
 
