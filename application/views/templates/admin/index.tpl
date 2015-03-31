@@ -10,6 +10,7 @@
     <link type="text/css" rel="stylesheet" href="<{$smarty.const._admin_css}>index.css"/>
     <!--IE8 css query-->
     <script src="<{$smarty.const._site_js}>respond.min.js"></script>
+    <script src="<{$smarty.const._site_js}>Chart.min.js"></script>
 </head>
 <body>
 <{include file="admin/nav.tpl"}>
