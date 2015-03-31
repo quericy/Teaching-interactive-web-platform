@@ -56,9 +56,7 @@
                     <h3 class="panel-title">用户数量</h3>
                 </div>
                 <div class="panel-body">
-
                     <canvas id="introChart" height="250" width="auto"></canvas>
-
                 </div>
             </div>
         </div>
