@@ -1,7 +1,8 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /***全局变量begin***/
-define('_site_domain','http://ci.me/');
+define('global_site','http://ci.me/');
+define('_site_domain',global_site);
 define('_site_css',_site_domain.'css/');
 define('_site_js',_site_domain.'js/');
 
