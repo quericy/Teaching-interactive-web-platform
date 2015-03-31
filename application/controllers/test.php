@@ -10,7 +10,7 @@ class test extends CI_Controller{
         $this->load->database();
  
         $this->smarty->assign('title','测试Smarty');
-        $this->smarty->assign('base_url',$this->config->item('base_url'));
+//        $this->smarty->assign('base_url',$this->config->item('base_url'));
         $this->smarty->view('test.tpl');
     }
 }
