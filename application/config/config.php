@@ -1,17 +1,22 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /***全局变量begin***/
-
-if(isset($_SERVER['RUNTIME_DOMAIN'])&&!empty($_SERVER['RUNTIME_DOMAIN'])){
-    define('_site_domain',$_SERVER['RUNTIME_DOMAIN']);
+//系统环境变量是否开启SSL协议
+if(isset($_SERVER['USE_SSL'])&&$_SERVER['USE_SSL']=='1'){
+    define('_site_protocol','https://');
 }else{
-    define('_site_domain','http://'.$_SERVER['SERVER_NAME'].'/');
+    define('_site_protocol','http://');
 }
-
-
+//系统环境变量是否指定域名
+if(isset($_SERVER['RUNTIME_DOMAIN'])&&!empty($_SERVER['RUNTIME_DOMAIN'])){
+    define('_site_domain',_site_protocol.$_SERVER['RUNTIME_DOMAIN'].'/');
+}else{
+    define('_site_domain',_site_protocol.$_SERVER['SERVER_NAME'].'/');
+}
+//前台全局参数
 define('_site_css',_site_domain.'css/');
 define('_site_js',_site_domain.'js/');
-
+//后台全局参数
 define('_admin_domain',_site_domain.'admin/');
 define('_admin_css',_site_css.'admin/');
 define('_admin_js',_site_js.'admin/');
