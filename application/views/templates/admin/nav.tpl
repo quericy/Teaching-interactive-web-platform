@@ -22,8 +22,8 @@
                     <i class="glyphicon glyphicon-triangle-bottom"></i>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="./">个人信息</a></li>
-                    <li><a href="./">设置</a></li>
+                    <li><a href="#">个人信息</a></li>
+                    <li><a href="#">设置</a></li>
                     <li class="divider"></li>
                     <li><a tabindex="-1" href="<{$smarty.const._admin_domain}>login/out">退出</a></li>
                 </ul>
@@ -75,7 +75,7 @@
             </a></li>
         <li><ul class="data-system nav nav-list collapse">
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 学生管理</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 教师管理</a></li>
+                <li><a href="<{$smarty.const._admin_domain}>admin_list"><span class="glyphicon glyphicon-triangle-right"></span> 教师管理</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 系统设置</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 日志记录</a></li>
             </ul></li>
