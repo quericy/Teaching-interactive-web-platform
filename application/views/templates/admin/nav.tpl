@@ -35,16 +35,16 @@
 <!--左侧边栏begin-->
 <div class="sidebar-nav">
     <ul>
-        <li><a href="#" data-target=".dashboard-menu" class="nav-header" data-toggle="collapse">
-                <i class="glyphicon glyphicon-scale"></i>&nbsp;仪表板<i class="fa-collapse glyphicon glyphicon-chevron-down"></i>
+        <li><a href="#" data-target=".dashboard-menu" class="nav-header <{if $nav_show!='dashboard'}>collapsed<{/if}>" data-toggle="collapse">
+                <i class="glyphicon glyphicon-scale"></i>&nbsp;仪表板<i class="fa-collapse glyphicon"></i>
             </a></li>
         <li><ul class="dashboard-menu nav nav-list collapse <{if $nav_show=='dashboard'}>in<{/if}>">
                 <li><a href="<{$smarty.const._admin_domain}>"><span class="glyphicon glyphicon-triangle-right"></span> 后台概览</a></li>
                 <li><a href="<{$smarty.const._site_domain}>" target="_blank"><span class="glyphicon glyphicon-triangle-right"></span> 前台站点</a></li>
             </ul></li>
 
-        <li><a href="#" data-target=".work-menu" class="nav-header collapsed" data-toggle="collapse">
-                <i class="glyphicon glyphicon-edit"></i>&nbsp;作业管理<i class="fa-collapse glyphicon glyphicon-chevron-down"></i><span class="label label-info">+3</span>
+        <li><a href="#" data-target=".work-menu" class="nav-header <{if $nav_show!='work'}>collapsed<{/if}>" data-toggle="collapse">
+                <i class="glyphicon glyphicon-edit"></i>&nbsp;作业管理<i class="fa-collapse glyphicon"></i><span class="label label-info">+3</span>
             </a></li>
         <li><ul class="work-menu nav nav-list collapse <{if $nav_show=='work'}>in<{/if}>">
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 作业列表</a></li>
@@ -52,8 +52,8 @@
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 完成情况</a></li>
             </ul></li>
 
-        <li><a href="#" data-target=".data-menu" class="nav-header collapsed" data-toggle="collapse">
-                <i class="glyphicon glyphicon-folder-open"></i>&nbsp;课件资料<i class="fa-collapse glyphicon glyphicon-chevron-down"></i>
+        <li><a href="#" data-target=".data-menu" class="nav-header <{if $nav_show!='data'}>collapsed<{/if}>" data-toggle="collapse">
+                <i class="glyphicon glyphicon-folder-open"></i>&nbsp;课件资料<i class="fa-collapse glyphicon"></i>
             </a></li>
         <li><ul class="data-menu nav nav-list collapse <{if $nav_show=='data'}>in<{/if}>">
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 课件列表</a></li>
@@ -62,16 +62,16 @@
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 统计汇总</a></li>
             </ul></li>
 
-        <li><a href="#" data-target=".answer-menu" class="nav-header collapsed" data-toggle="collapse">
-                <i class="glyphicon glyphicon-comment"></i>&nbsp;答疑管理<i class="fa-collapse glyphicon glyphicon-chevron-down"></i>
+        <li><a href="#" data-target=".answer-menu" class="nav-header <{if $nav_show!='answer'}>collapsed<{/if}>" data-toggle="collapse">
+                <i class="glyphicon glyphicon-comment"></i>&nbsp;答疑管理<i class="fa-collapse glyphicon"></i>
             </a></li>
         <li><ul class="answer-menu nav nav-list collapse <{if $nav_show=='answer'}>in<{/if}>">
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 留言列表</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 统计汇总</a></li>
             </ul></li>
 
-        <li><a href="#" data-target=".system-menu" class="nav-header collapsed" data-toggle="collapse">
-                <i class="glyphicon glyphicon-cog"></i>&nbsp;系统设置<i class="fa-collapse glyphicon glyphicon-chevron-down"></i>
+        <li><a href="#" data-target=".system-menu" class="nav-header <{if $nav_show!='system'}>collapsed<{/if}>" data-toggle="collapse">
+                <i class="glyphicon glyphicon-cog"></i>&nbsp;系统设置<i class="fa-collapse glyphicon"></i>
             </a></li>
         <li><ul class="system-menu nav nav-list collapse <{if $nav_show=='system'}>in<{/if}>">
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 学生管理</a></li>

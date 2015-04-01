@@ -56,7 +56,7 @@
                     <h3 class="panel-title">用户数量</h3>
                 </div>
                 <div class="panel-body">
-                    <canvas id="introChart" height="250" width="auto"></canvas>
+                    <canvas id="UserInfoChart" height="250" width="auto"></canvas>
                 </div>
             </div>
         </div>
@@ -76,7 +76,7 @@
 <script type="text/javascript">
 
     // var ctx = document.getElementById("introChart").getContext("2d");
-    var canvas = document.getElementById("introChart");
+    var canvas = document.getElementById("UserInfoChart");
     if (typeof window.G_vmlCanvasManager != "undefined") {
         var canvas = window.G_vmlCanvasManager.initElement(canvas);
         var ctx = canvas.getContext("2d");
