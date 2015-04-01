@@ -56,7 +56,7 @@
                     <h3 class="panel-title">用户数量</h3>
                 </div>
                 <div class="panel-body">
-                    <canvas id="UserInfoChart" height="250" width="auto"></canvas>
+                    <canvas id="UserInfoChart" height="250" ></canvas>
                 </div>
             </div>
         </div>
