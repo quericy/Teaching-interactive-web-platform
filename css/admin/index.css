@@ -108,10 +108,10 @@ footer p{
     padding-right: .75em;
 }
 /*左侧导航上下箭头判断begin*/
-.nav-header i[class*="fa-collapse"]:before {
+.sidebar-nav .nav-header i[class*="fa-collapse"]:before {
     content:"\e113"
 }
-.collapsed i[class*="fa-collapse"]:before {
+.sidebar-nav .collapsed i[class*="fa-collapse"]:before {
     content:"\e114"
 }
 /*上下箭头判断end*/
