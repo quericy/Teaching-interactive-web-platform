@@ -16,6 +16,7 @@ class Admin_list extends CI_Controller
     public function index()
     {
         $this->smarty->assign('web_title','教师管理');
+        $this->smarty->assign('nav_show','system');
         $this->smarty->view('admin/admin_list.tpl');
     }
 

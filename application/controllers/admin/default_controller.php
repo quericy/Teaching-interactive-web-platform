@@ -16,6 +16,7 @@ class Default_controller extends CI_Controller
     public function index()
     {
         $this->smarty->assign('web_title','仪表板');
+        $this->smarty->assign('nav_show','dashboard');
         $this->smarty->view('admin/index.tpl');
     }
 
