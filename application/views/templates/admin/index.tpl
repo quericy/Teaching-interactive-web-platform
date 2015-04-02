@@ -7,6 +7,7 @@
     <title>管理后台-<{$web_title}></title>
     <!-- Bootstrap -->
     <link type="text/css" rel="stylesheet" href="<{$smarty.const._site_css}>bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="<{$smarty.const._admin_css}>default.css"/>
     <link type="text/css" rel="stylesheet" href="<{$smarty.const._admin_css}>index.css"/>
     <!--IE8 css查询修复begin-->
     <script src="<{$smarty.const._site_js}>respond.min.js"></script>
@@ -35,26 +36,26 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-3 col-sm-6">
-                    <div style="width: 160px;margin: 0 auto;">
-                        <canvas id="sys_status_1" width="150" style="margin:5px auto;text-align: center"></canvas>
+                    <div class="sys_div" class="sys_div">
+                        <canvas id="sys_status_1" class="sys_canvas" width="150"></canvas>
                         <h4 class="text-muted text-center">作业完成情况</h4>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <div style="width: 160px;margin: 0 auto;">
-                        <canvas id="sys_status_2" width="150" style="margin:5px auto;text-align: center"></canvas>
+                    <div class="sys_div">
+                        <canvas id="sys_status_2" class="sys_canvas" width="150"></canvas>
                         <h4 class="text-muted text-center">用户类型分布</h4>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <div style="width: 160px;margin: 0 auto;">
-                        <canvas id="sys_status_3" width="150" style="margin:5px auto;text-align: center"></canvas>
+                    <div class="sys_div">
+                        <canvas id="sys_status_3" class="sys_canvas" width="150"></canvas>
                         <h4 class="text-muted text-center">资料类型分布</h4>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <div style="width: 160px;margin: 0 auto;">
-                        <canvas id="sys_status_4" width="150" style="margin:5px auto;text-align: center"></canvas>
+                    <div class="sys_div">
+                        <canvas id="sys_status_4" class="sys_canvas" width="150"></canvas>
                         <h4 class="text-muted text-center">系统资源状况</h4>
                     </div>
                 </div>
@@ -68,9 +69,11 @@
                     <h3 class="panel-title">活跃用户</h3>
                 </div>
                 <div class="panel-body">
-                    <canvas id="UserInfoChart" height="200"></canvas>
+                    <div class="user_info_chart_canvas">
+                        <canvas id="UserInfoChart" height="200"></canvas>
+                    </div>
                 </div>
-                <div class="panel-footer">标识颜色:<span class="label label-default">教师</span>&nbsp;&nbsp;<span
+                <div class="panel-footer">标识颜色:&nbsp;&nbsp;<span class="label label-default">教师</span>&nbsp;&nbsp;<span
                             class="label label-primary">学生</span></div>
             </div>
         </div>
@@ -80,7 +83,7 @@
                     <h3 class="panel-title">系统信息</h3>
                 </div>
                 <h5>&nbsp;&nbsp;当前系统共有:</h5>
-                <table class="table table-striped" style="height: 200px;">
+                <table class="table table-striped info_tips_table">
                     <tr>
                         <td>用户:</td>
                         <td>教师<span class="label label-success">3</span>人</td>
@@ -183,16 +186,11 @@
             color: "#E2EAE9"
         }
     ]
-    var ctx = get_canvas('UserInfoChart');
-    var sys_1_ctx = get_canvas('sys_status_1');
-    var sys_2_ctx = get_canvas('sys_status_2');
-    var sys_3_ctx = get_canvas('sys_status_3');
-    var sys_4_ctx = get_canvas('sys_status_4');
-    new Chart(ctx).Line(lineChartData, {scaleShowLabels : true, animation: Modernizr.canvas,animationSteps:120,scaleFontColor : "#767C8D"});
-    new Chart(sys_1_ctx).Doughnut(sys_1_data);
-    new Chart(sys_2_ctx).Doughnut(sys_2_data);
-    new Chart(sys_3_ctx).Doughnut(sys_3_data);
-    new Chart(sys_4_ctx).Doughnut(sys_4_data);
+    new Chart(get_canvas('UserInfoChart')).Line(lineChartData, {scaleShowLabels : true, animation: Modernizr.canvas,animationSteps:120,scaleFontColor : "#767C8D"});
+    new Chart(get_canvas('sys_status_1')).Doughnut(sys_1_data);
+    new Chart(get_canvas('sys_status_2')).Doughnut(sys_2_data);
+    new Chart(get_canvas('sys_status_3')).Doughnut(sys_3_data);
+    new Chart(get_canvas('sys_status_4')).Doughnut(sys_4_data);
     //根据id获取canvas画布(兼容IE8)
     function get_canvas(canvas_id) {
         // var ctx = document.getElementById("introChart").getContext("2d");

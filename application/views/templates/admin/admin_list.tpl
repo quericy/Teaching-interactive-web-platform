@@ -7,7 +7,7 @@
     <title>管理后台-<{$web_title}></title>
     <!-- Bootstrap -->
     <link type="text/css" rel="stylesheet" href="<{$smarty.const._site_css}>bootstrap.min.css"/>
-    <link type="text/css" rel="stylesheet" href="<{$smarty.const._admin_css}>index.css"/>
+    <link type="text/css" rel="stylesheet" href="<{$smarty.const._admin_css}>default.css"/>
     <!--IE8 css query-->
     <script src="<{$smarty.const._site_js}>respond.min.js"></script>
 </head>
