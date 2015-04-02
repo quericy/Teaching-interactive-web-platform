@@ -13,6 +13,7 @@ html,body{
     margin-left: 240px;
     border-left: 1px solid #cccccc;
     padding: 15px 15px 0 15px;
+    overflow:scroll;
 }
 /*页脚*/
 footer {
