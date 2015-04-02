@@ -68,9 +68,10 @@
                     <h3 class="panel-title">活跃用户</h3>
                 </div>
                 <div class="panel-body">
-                    <canvas id="UserInfoChart" height="250"></canvas>
+                    <canvas id="UserInfoChart" height="200"></canvas>
                 </div>
-                <div class="panel-footer">标识颜色:<span class="label label-default">教师</span>&nbsp;&nbsp;<span class="label label-primary">学生</span></div>
+                <div class="panel-footer">标识颜色:<span class="label label-default">教师</span>&nbsp;&nbsp;<span
+                            class="label label-primary">学生</span></div>
             </div>
         </div>
         <div class="col-md-6 col-sm-10">
@@ -78,8 +79,31 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">系统信息</h3>
                 </div>
-                <div class="panel-body">
-
+                <h5>&nbsp;&nbsp;当前系统共有:</h5>
+                <table class="table table-striped" style="height: 200px;">
+                    <tr>
+                        <td>用户:</td>
+                        <td>教师<span class="label label-success">3</span>人</td>
+                        <td>学生<span class="label label-success">5</span>人</td>
+                    </tr>
+                    <tr>
+                        <td>作业:</td>
+                        <td>发布<span class="label label-success">66</span>份</td>
+                        <td>完成<span class="label label-success">125</span>份</td>
+                    </tr>
+                    <tr>
+                        <td>课件资料:</td>
+                        <td>课件<span class="label label-success">23</span>份</td>
+                        <td>资料<span class="label label-success">12</span>份</td>
+                    </tr>
+                    <tr>
+                        <td>答疑:</td>
+                        <td>问答<span class="label label-success">213</span>条</td>
+                        <td>留言<span class="label label-success">92</span>条</td>
+                    </tr>
+                </table>
+                <div class="panel-footer">
+                    <div class="text-right">缓存生成时间:<code>2015年4月2日 15:30</code></div>
                 </div>
             </div>
         </div>
