@@ -8,12 +8,12 @@ html,body{
 .content {
     position: relative;
     height:85%;
-    min-height: 600px;
+    min-height: 500px;
     background: #fff;
     margin-left: 240px;
     border-left: 1px solid #cccccc;
     padding: 15px 15px 0 15px;
-    overflow:scroll;
+    overflow-y:scroll;
 }
 /*页脚*/
 footer {
