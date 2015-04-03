@@ -25,29 +25,64 @@
         <div class="panel-heading">
             <h3 class="panel-title">教师列表</h3>
         </div>
+        <table id="admin_table" class="table table-striped table-hover">
+            <tr>
+                <th class="text-center"><input id="all_check" type="checkbox"></th>
+                <th class="text-center">ID</th>
+                <th class="text-left">用户名</th>
+                <th class="text-center">用户类型</th>
+                <th class="text-center">最近登录</th>
+                <th class="text-center">操作</th>
+            </tr>
+            <{foreach  from=$admin_info_list item=val key=key}>
+            <tr>
+                <td class="text-center"><input class="item_check" type="checkbox"></td>
+                <td class="text-center">1</td>
+                <td class="text-left">啦啦啦</td>
+                <td class="text-center">教师</td>
+                <td class="text-center">暂无数据</td>
+                <td class="text-center">
+                    <div class="btn-group" role="group">
+                        <a href="#" class="btn btn-default btn-sm">修改</a>
+                        <button type="button" class="btn btn-default btn-sm">删除</button>
+                    </div>
 
-
-                <table class="table table-striped table-hover">
-                    <tr><th><input id="all_check" type="checkbox"></th><th>ID</th><th>用户名</th><th>用户类型</th><th>最近登录</th><th>操作</th></tr>
-                    <tr><td><input class="item_check" type="checkbox"></td><td>test</td><td>test</td><td>test</td><td>test</td><td>test</td></tr>
-                    <tr><td><input class="item_check" type="checkbox"></td><td>test</td><td>test</td><td>test</td><td>test</td><td>test</td></tr>
-                    <tr><td><input class="item_check" type="checkbox"></td><td>test</td><td>test</td><td>test</td><td>test</td><td>test</td></tr>
-                    <tr><td><input class="item_check" type="checkbox"></td><td>test</td><td>test</td><td>test</td><td>test</td><td>test</td></tr>
-                </table>
-            </div>
-
+                </td>
+            </tr>
+            <{/foreach}>
+        </table>
+    </div>
+    <nav class="pull-right">
+        <ul class="pagination">
+            <li>
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li>
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 
 </div>
 <{include file="admin/footer.tpl"}>
 <script src="<{$smarty.const._site_js}>icheck.min.js"></script>
 <script type="text/javascript">
-    $('#all_check').on('ifChecked', function(event){
+    $('#all_check').on('ifChecked', function (event) {
         $('.item_check').iCheck('check');
     });
-    $('#all_check').on('ifUnchecked', function(event){
+    $('#all_check').on('ifUnchecked', function (event) {
         $('.item_check').iCheck('uncheck');
     });
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',
