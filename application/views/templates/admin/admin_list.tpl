@@ -20,7 +20,10 @@
         <li class="active">系统设置</li>
         <li>教师管理</li>
     </ol>
-
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        调试中...
+    </div>
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">教师列表</h3>
@@ -44,7 +47,7 @@
                 <td class="text-center">
                     <div class="btn-group" role="group">
                         <a href="#" class="btn btn-default btn-sm">修改</a>
-                        <button type="button" class="btn btn-default btn-sm">删除</button>
+                        <button type="button" class="btn btn-default btn-sm"  data-toggle="modal" data-target="#del_dialog">删除</button>
                     </div>
 
                 </td>
@@ -54,12 +57,12 @@
     </div>
     <nav class="pull-right">
         <ul class="pagination">
-            <li>
+            <li class="disabled">
                 <a href="#" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <li><a href="#">1</a></li>
+            <li class="active"><a href="#">1</a></li>
             <li><a href="#">2</a></li>
             <li><a href="#">3</a></li>
             <li><a href="#">4</a></li>
@@ -71,8 +74,26 @@
             </li>
         </ul>
     </nav>
-
 </div>
+
+
+<!-- 删除确认弹窗 -->
+<div id="del_dialog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title" id="myModalLabel">确认删除</h5>
+            </div>
+            <div class="modal-body">确定要删除这位教师吗?删除后将无法恢复!</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">删除</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <{include file="admin/footer.tpl"}>
 <script src="<{$smarty.const._site_js}>icheck.min.js"></script>
 <script type="text/javascript">
