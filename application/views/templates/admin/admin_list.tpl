@@ -91,7 +91,7 @@
             <div class="modal-body">确定要删除这位教师吗?删除后将无法恢复!</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger">删除</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
             </div>
         </div>
     </div>
