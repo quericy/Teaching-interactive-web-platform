@@ -21,14 +21,15 @@
         <li>教师管理</li>
     </ol>
     <div class="alert alert-info alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
         调试中...
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">教师列表</h3>
         </div>
-        <table id="admin_table" class="table table-striped table-hover">
+        <table id="admin_table" class="table table-striped table-hover table-condensed">
             <tr>
                 <th class="text-center"><input id="all_check" type="checkbox"></th>
                 <th class="text-center">ID</th>
@@ -45,11 +46,12 @@
                 <td class="text-center">教师</td>
                 <td class="text-center">暂无数据</td>
                 <td class="text-center">
-                    <div class="btn-group" role="group">
+                    <div class="btn-group" style="min-width: 100px;margin:auto" role="group">
                         <a href="#" class="btn btn-default btn-sm">修改</a>
-                        <button type="button" class="btn btn-default btn-sm"  data-toggle="modal" data-target="#del_dialog">删除</button>
+                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal"
+                                data-target="#del_dialog">删除
+                        </button>
                     </div>
-
                 </td>
             </tr>
             <{/foreach}>
@@ -82,7 +84,8 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                 <h5 class="modal-title" id="myModalLabel">确认删除</h5>
             </div>
             <div class="modal-body">确定要删除这位教师吗?删除后将无法恢复!</div>
