@@ -25,7 +25,7 @@
                     aria-hidden="true">&times;</span></button>
         调试中...
     </div>
-    <div class="panel panel-default">`
+    <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">教师列表</h3>
         </div>
