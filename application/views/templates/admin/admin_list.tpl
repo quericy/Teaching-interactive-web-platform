@@ -9,6 +9,7 @@
     <link type="text/css" rel="stylesheet" href="<{$smarty.const._site_css}>bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="<{$smarty.const._site_css}>iCheck_square_blue.css"/>
     <link type="text/css" rel="stylesheet" href="<{$smarty.const._admin_css}>default.css"/>
+    <link type="text/css" rel="stylesheet" href="<{$smarty.const._admin_css}>admin_list.css"/>
     <!--IE8 css query-->
     <script src="<{$smarty.const._site_js}>respond.min.js"></script>
 </head>
@@ -46,7 +47,7 @@
                 <td class="text-center">教师</td>
                 <td class="text-center">暂无数据</td>
                 <td class="text-center">
-                    <div class="btn-group" style="min-width: 100px;margin:auto" role="group">
+                    <div class="btn-group" role="group">
                         <a href="#" class="btn btn-default btn-sm">修改</a>
                         <button type="button" class="btn btn-default btn-sm" data-toggle="modal"
                                 data-target="#del_dialog">删除

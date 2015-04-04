@@ -161,3 +161,9 @@ footer p{
 .sidebar-nav .nav-list.collapse.in {
     border-bottom: 1px solid #ccc;
 }
+
+
+/****公共样式部分*****/
+.table-hover>tbody>tr:hover{
+    background-color: #fcf8e3;
+}
