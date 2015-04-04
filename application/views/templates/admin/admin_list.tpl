@@ -33,7 +33,7 @@
         <table id="admin_table" class="table table-striped table-hover table-condensed">
             <tr>
                 <th class="text-center"><input id="all_check" type="checkbox"></th>
-                <th class="text-center">ID</th>
+                <th class="text-left">ID</th>
                 <th class="text-left">用户名</th>
                 <th class="text-center">用户类型</th>
                 <th class="text-center">最近登录</th>
@@ -42,7 +42,7 @@
             <{foreach  from=$admin_info_list item=val key=key}>
             <tr>
                 <td class="text-center"><input class="item_check" type="checkbox"></td>
-                <td class="text-center">1</td>
+                <td class="text-left">1</td>
                 <td class="text-left">啦啦啦</td>
                 <td class="text-center">教师</td>
                 <td class="text-center">暂无数据</td>
