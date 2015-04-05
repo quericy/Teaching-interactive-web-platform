@@ -37,15 +37,19 @@
                 <th class="text-left">用户名</th>
                 <th class="text-center">用户类型</th>
                 <th class="text-center">最近登录</th>
+                <th class="text-center">状态</th>
                 <th class="text-center">操作</th>
             </tr>
             <{foreach  from=$admin_info_list item=val key=key}>
             <tr>
                 <td class="text-center"><input class="item_check" type="checkbox"></td>
-                <td class="text-left">1</td>
-                <td class="text-left">啦啦啦</td>
-                <td class="text-center">教师</td>
+                <td class="text-left"><{$val.uid}></td>
+                <td class="text-left"><{$val.user_name}></td>
+                <td class="text-center"><{if $val.type==2}>管理员<{else}>教师<{/if}></td>
                 <td class="text-center">暂无数据</td>
+                <td class="text-center"><{if $val.status==1}><span class="alert-success">已启用</span><{else}><span
+                        class="alert-danger">已禁用</span><{/if}>
+                </td>
                 <td class="text-center">
                     <div class="btn-group" role="group">
                         <a href="#" class="btn btn-default btn-sm">修改</a>
@@ -58,25 +62,48 @@
             <{/foreach}>
         </table>
     </div>
-    <nav class="pull-right">
-        <ul class="pagination">
-            <li class="disabled">
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="pull-left">
+                <button type="button" class="btn btn-success" style="margin-top: 20px">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    添加新教师
+                </button>
+                <div class="btn-group" style="margin-top: 20px">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                            aria-expanded="false">
+                        批量操作<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">启用用户</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">禁用用户</a></li>
+                    </ul>
+                </div>
+                &nbsp;&nbsp;
+            </div>
+            <nav class="pull-right">
+                <ul class="pagination">
+                    <li class="disabled">
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
 </div>
 
 

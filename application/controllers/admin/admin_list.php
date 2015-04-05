@@ -17,7 +17,9 @@ class Admin_list extends CI_Controller
     {
         $this->smarty->assign('web_title','教师管理');
         $this->smarty->assign('nav_show','system');
-        $admin_info_list=array(1,2,3,4,5);
+
+        $this->load->model('admin');
+        $admin_info_list=$this->admin->get_admin_list();
         $this->smarty->assign('admin_info_list',$admin_info_list);
         $this->smarty->view('admin/admin_list.tpl');
     }
