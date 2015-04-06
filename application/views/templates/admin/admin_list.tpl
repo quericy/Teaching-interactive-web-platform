@@ -69,10 +69,10 @@
                     <span class="glyphicon glyphicon-plus"></span>
                     添加新教师
                 </button>
-                <div class="btn-group" style="margin-top: 20px">
+                <div class="btn-group dropup" style="margin-top: 20px">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
                             aria-expanded="false">
-                        批量操作<span class="caret"></span>
+                        批量操作&nbsp;<span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#">启用用户</a></li>
