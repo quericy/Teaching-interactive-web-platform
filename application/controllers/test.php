@@ -7,6 +7,8 @@
  */
 class test extends CI_Controller{
     public function lala(){
+        var_dump($_SERVER['SERVER_NAME']);
+        var_dump($_SERVER['SERVER_NAME']!='teachtest.oschina.mopaas.com');
 //        $this->load->database();
 //        global $RUNTIME_DOMAIN;
 //        echo ' global:' . $RUNTIME_DOMAIN;
