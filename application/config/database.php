@@ -47,11 +47,12 @@
 
 $active_group = 'default';
 $active_record = TRUE;
-if($_SERVER['SERVER_NAME']!='teachtest.oschina.mopaas.com'){
-	$db['default']['hostname'] = 'localhost';
-	$db['default']['username'] = 'root';
-	$db['default']['password'] = 'root';
-	$db['default']['database'] = 'teaching_interactive';
+//数据库临时切换
+if($_SERVER['SERVER_NAME']=='teachtest.oschina.mopaas.com'){//演示平台数据库
+	$db['default']['hostname'] = '10.4.26.93';
+	$db['default']['username'] = 'ulcVC3jQh2z1V';
+	$db['default']['password'] = 'p78s7qRXI7US1';
+	$db['default']['database'] = 'd5fb6626cd2934111b2b52b6ab6029beb';
 	$db['default']['dbdriver'] = 'mysql';
 	$db['default']['dbprefix'] = 'table_';
 	$db['default']['pconnect'] = TRUE;
@@ -64,10 +65,10 @@ if($_SERVER['SERVER_NAME']!='teachtest.oschina.mopaas.com'){
 	$db['default']['autoinit'] = TRUE;
 	$db['default']['stricton'] = FALSE;
 }else{
-	$db['default']['hostname'] = '10.4.26.93';
-	$db['default']['username'] = 'ulcVC3jQh2z1V';
-	$db['default']['password'] = 'p78s7qRXI7US1';
-	$db['default']['database'] = 'd5fb6626cd2934111b2b52b6ab6029beb';
+	$db['default']['hostname'] = 'localhost';
+	$db['default']['username'] = 'root';
+	$db['default']['password'] = 'root';
+	$db['default']['database'] = 'teaching_interactive';
 	$db['default']['dbdriver'] = 'mysql';
 	$db['default']['dbprefix'] = 'table_';
 	$db['default']['pconnect'] = TRUE;
