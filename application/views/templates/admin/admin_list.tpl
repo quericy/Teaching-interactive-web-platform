@@ -54,7 +54,7 @@
                     <div class="btn-group" role="group">
                         <a href="#" class="btn btn-default btn-sm">修改</a>
                         <button type="button" class="btn btn-default btn-sm" data-toggle="modal"
-                                data-target="#del_dialog">删除
+                          data-tid="<{$val.uid}>" data-name="<{$val.user_name}>"  data-target="#del_dialog">删除
                         </button>
                     </div>
                 </td>
@@ -101,9 +101,9 @@
                             aria-hidden="true">&times;</span></button>
                 <h5 class="modal-title" id="myModalLabel">确认删除</h5>
             </div>
-            <div class="modal-body">确定要删除这位教师吗?删除后将无法恢复!</div>
+            <div class="modal-body">确定要删除<span id="del_teacher_name" class="text-danger"></span>吗?删除后将无法恢复!</div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger">删除</button>
+                <button id="del_button" type="button" class="btn btn-danger">删除</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
             </div>
         </div>
@@ -113,6 +113,14 @@
 <{include file="admin/footer.tpl"}>
 <script src="<{$smarty.const._site_js}>icheck.min.js"></script>
 <script type="text/javascript">
+    $('#del_dialog').on('show.bs.modal',function(e){
+        var obj=$(e.relatedTarget);
+        $('#del_teacher_name').html(obj.data('name'));
+       // alert(obj.data('name'));
+        $('#del_button').attr('data-tid',obj.data('tid'));
+    });
+
+    //多选框
     $('#all_check').on('ifChecked', function (event) {
         $('.item_check').iCheck('check');
     });
