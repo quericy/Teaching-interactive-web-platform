@@ -15,21 +15,18 @@ class Admin_list extends CI_Controller
 
     public function index($page=1)
     {
+        //每页10条数据
         $per_page=10;
-        $this->smarty->assign('web_title','教师管理');
-        $this->smarty->assign('nav_show','system');
-
+        //获取管理员列表
         $this->load->model('admin');
         $admin_info_list=$this->admin->get_admin_list($page,$per_page);
-
         $this->smarty->assign('admin_info_list',$admin_info_list);
-
-
-
-
-
+        //分页
         $this->load->library('page_cls');
         $this->smarty->assign('page_string', $this->page_cls->get_page_config($this,$this->admin->get_admin_count(),true,$per_page));
+        //基本信息展示
+        $this->smarty->assign('web_title','教师管理');
+        $this->smarty->assign('nav_show','system');
         $this->smarty->view('admin/admin_list.tpl');
     }
 

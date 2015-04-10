@@ -43,7 +43,7 @@
             <{foreach  from=$admin_info_list item=val key=key}>
             <tr>
                 <td class="text-center"><input class="item_check" type="checkbox"></td>
-                <td class="text-left"><{$val.uid}></td>
+                <td class="text-left"><{$val.tid}></td>
                 <td class="text-left"><{$val.user_name}></td>
                 <td class="text-center"><{if $val.type==2}>管理员<{else}>教师<{/if}></td>
                 <td class="text-center">暂无数据</td>
@@ -54,7 +54,7 @@
                     <div class="btn-group" role="group">
                         <a href="#" class="btn btn-default btn-sm">修改</a>
                         <button type="button" class="btn btn-default btn-sm" data-toggle="modal"
-                          data-tid="<{$val.uid}>" data-name="<{$val.user_name}>"  data-target="#del_dialog">删除
+                          data-tid="<{$val.tid}>" data-name="<{$val.user_name}>"  data-target="#del_dialog">删除
                         </button>
                     </div>
                 </td>
