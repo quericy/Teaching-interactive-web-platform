@@ -46,7 +46,13 @@
                 <td class="text-left"><{$val.tid}></td>
                 <td class="text-left"><{$val.user_name}></td>
                 <td class="text-center"><{if $val.type==2}>管理员<{else}>教师<{/if}></td>
-                <td class="text-center">暂无数据</td>
+                <td class="text-center">
+                    <{if !empty($val.login_time)}>
+                        <{$val.login_time|date_format:'%Y-%m-%d %H:%M:%S'}><br><{$val.login_ip}>
+                    <{else}>
+                        暂无记录
+                    <{/if}>
+                </td>
                 <td class="text-center"><{if $val.status==1}><span class="alert-success">已启用</span><{else}><span
                         class="alert-danger">已禁用</span><{/if}>
                 </td>
