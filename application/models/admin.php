@@ -25,7 +25,7 @@ class Admin extends CI_Model
         $offset=$per_page*($page-1);
         $offset=$offset>0?$offset:0;
         $query = $this->db->get('admin', $per_page,$offset);
-        return $query->result_array();
+        return $this->security->xss_clean($query->result_array());
     }
 
     /**
