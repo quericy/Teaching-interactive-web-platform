@@ -39,6 +39,7 @@ class CI_Smarty extends Smarty
         foreach ($data as $key => $val) {
             $this->assign($key, $val);
         }
+        $this->assign('_current_url', current_url());//注册当前页面完整链接
         if ($return == FALSE) {
             $CI =& get_instance();
             if (method_exists($CI->output, 'set_output')) {

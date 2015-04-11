@@ -125,7 +125,23 @@
        // alert(obj.data('name'));
         $('#del_button').attr('data-tid',obj.data('tid'));
     });
-
+    $(document).delegate('#del_button','click',function(){
+        var tid=$(this).attr('data-tid');
+        $.ajax({
+            type:'post',
+            url:'<{$smarty.const._admin_domain}>admin_list/del/'+tid,
+            success:function(res){
+                switch (res){
+                    case '1':
+                        location.reload();
+                        break;
+                    default :
+                        alert('操作失败');
+                        break;
+                }
+            }
+        });
+    });
     //多选框
     $('#all_check').on('ifChecked', function (event) {
         $('.item_check').iCheck('check');
