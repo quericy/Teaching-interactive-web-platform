@@ -42,7 +42,7 @@
             </tr>
             <{foreach  from=$admin_info_list item=val key=key}>
             <tr>
-                <td class="text-center"><input class="item_check" type="checkbox"></td>
+                <td class="text-center"><input class="item_check" type="checkbox" data-tid="<{$val.tid}>"></td>
                 <td class="text-left"><{$val.tid}></td>
                 <td class="text-left"><{$val.user_name}></td>
                 <td class="text-center"><{if $val.type==2}>管理员<{else}>教师<{/if}></td>
@@ -81,9 +81,9 @@
                         批量操作&nbsp;<span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">启用用户</a></li>
+                        <li><a id="status_on" href="#">启用用户</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">禁用用户</a></li>
+                        <li><a id="status_off"  href="#">禁用用户</a></li>
                     </ul>
                 </div>
                 &nbsp;&nbsp;
@@ -118,6 +118,7 @@
 
 <{include file="admin/footer.tpl"}>
 <script src="<{$smarty.const._site_js}>icheck.min.js"></script>
+<script src="<{$smarty.const._site_js}>admin_common.js"></script>
 <script type="text/javascript">
     $('#del_dialog').on('show.bs.modal',function(e){
         var obj=$(e.relatedTarget);
@@ -133,12 +134,38 @@
             success:function(res){
                 switch (res){
                     case '1':
-                        location.reload();
+                        my_dialog('提示','删除成功!',{
+                            btn_class:'info',
+                            call_back: function () {
+                                location.reload();
+                            }
+                        });
                         break;
                     default :
-                        alert('操作失败');
+                        my_dialog('提示','操作失败',false);
                         break;
                 }
+            }
+        });
+    });
+    $(document).delegate('#status_on','click',function(){
+        var check_arr=new Array();
+        $(".item_check:checkbox").each(function(){
+            if(this.checked == true){
+                check_arr.push($(this).data('tid'));
+            }
+        });
+        var tid_str=check_arr.join(',');
+        if(tid_str==''){
+            my_dialog('提示','请至少勾选一个用户',false);
+            return;
+        }
+        $.ajax({
+            type:'post',
+            url:'<{$smarty.const._admin_domain}>admin_list/status_change/on',
+            data:{tid_str:tid_str},
+            success:function(res){
+                my_dialog('提示',res,false);
             }
         });
     });
@@ -156,6 +183,7 @@
             increaseArea: '20%' // 触摸扩展区域
         });
     });
+
 </script>
 </body>
 </html>
