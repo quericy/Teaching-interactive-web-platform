@@ -49,26 +49,28 @@ class Admin_list extends CI_Controller
         echo 1;
     }
 
+    /**
+     * 启用/禁用管理员
+     * @param $status 状态(1启用,0禁用)
+     */
     public function status_change($status)
     {
         /****权限判断*****/
 
         /****权限判断*****/
-        $tid_str=$this->input->post('tid_str',true);
+        $tid_str = $this->input->post('tid_str', true);
         $tid_arr = explode(',', $tid_str);
-        if (count($tid_arr) == 0) {
+        if (empty($tid_str) || count($tid_arr) == 0) {
             echo -1;
+            return;
         }
         foreach ($tid_arr as $k => $v) {
             $tid_arr[$k] = intval($v);
         }
-        $tid_str = implode(',', $tid_arr);
-
-        echo $tid_str.$status;
-
+        $status = $status == '1' ? 1 : 0;
+        $this->admin->change_admin_status($tid_arr, $status);
+        echo 1;
     }
-
-
 }
 
 /* End of file admin_list.php */

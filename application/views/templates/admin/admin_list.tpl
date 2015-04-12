@@ -48,9 +48,9 @@
                 <td class="text-center"><{if $val.type==2}>管理员<{else}>教师<{/if}></td>
                 <td class="text-center">
                     <{if !empty($val.login_time)}>
-                        <{$val.login_time|date_format:'%Y-%m-%d %H:%M:%S'}><br><{$val.login_ip}>
+                    <{$val.login_time|date_format:'%Y-%m-%d %H:%M:%S'}><br><{$val.login_ip}>
                     <{else}>
-                        暂无记录
+                    暂无记录
                     <{/if}>
                 </td>
                 <td class="text-center"><{if $val.status==1}><span class="alert-success">已启用</span><{else}><span
@@ -60,7 +60,7 @@
                     <div class="btn-group" role="group">
                         <a href="#" class="btn btn-default btn-sm">修改</a>
                         <button type="button" class="btn btn-default btn-sm" data-toggle="modal"
-                          data-tid="<{$val.tid}>" data-name="<{$val.user_name}>"  data-target="#del_dialog">删除
+                                data-tid="<{$val.tid}>" data-name="<{$val.user_name}>" data-target="#del_dialog">删除
                         </button>
                     </div>
                 </td>
@@ -83,7 +83,7 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a id="status_on" href="#">启用用户</a></li>
                         <li class="divider"></li>
-                        <li><a id="status_off"  href="#">禁用用户</a></li>
+                        <li><a id="status_off" href="#">禁用用户</a></li>
                     </ul>
                 </div>
                 &nbsp;&nbsp;
@@ -120,55 +120,80 @@
 <script src="<{$smarty.const._site_js}>icheck.min.js"></script>
 <script src="<{$smarty.const._site_js}>admin_common.js"></script>
 <script type="text/javascript">
-    $('#del_dialog').on('show.bs.modal',function(e){
-        var obj=$(e.relatedTarget);
+    //删除模态框展示
+    $('#del_dialog').on('show.bs.modal', function (e) {
+        var obj = $(e.relatedTarget);
         $('#del_teacher_name').html(obj.data('name'));
-       // alert(obj.data('name'));
-        $('#del_button').attr('data-tid',obj.data('tid'));
+        $('#del_button').attr('data-tid', obj.data('tid'));
     });
-    $(document).delegate('#del_button','click',function(){
-        var tid=$(this).attr('data-tid');
+    //删除请求
+    $(document).delegate('#del_button', 'click', function () {
+        var tid = $(this).attr('data-tid');
         $.ajax({
-            type:'post',
-            url:'<{$smarty.const._admin_domain}>admin_list/del/'+tid,
-            success:function(res){
-                switch (res){
+            type: 'post',
+            url: '<{$smarty.const._admin_domain}>admin_list/del/' + tid,
+            success: function (res) {
+                switch (res) {
                     case '1':
-                        my_dialog('提示','删除成功!',{
-                            btn_class:'info',
+                        my_dialog('提示', '删除成功!', {
+                            btn_class: 'info',
                             call_back: function () {
                                 location.reload();
                             }
                         });
                         break;
                     default :
-                        my_dialog('提示','操作失败',false);
+                        my_dialog('提示', '操作失败', false);
                         break;
                 }
             }
         });
     });
-    $(document).delegate('#status_on','click',function(){
-        var check_arr=new Array();
-        $(".item_check:checkbox").each(function(){
-            if(this.checked == true){
+    //批量启用
+    $(document).delegate('#status_on', 'click', function () {
+        change_status(1);
+    });
+    //批量禁用
+    $(document).delegate('#status_off', 'click', function () {
+        change_status(0);
+    });
+    //更改用户状态
+    function change_status(status) {
+        var status_text = status == '1' ? '启用' : '禁用';
+        var check_arr = new Array();
+        $(".item_check:checkbox").each(function () {
+            if (this.checked == true) {
                 check_arr.push($(this).data('tid'));
             }
         });
-        var tid_str=check_arr.join(',');
-        if(tid_str==''){
-            my_dialog('提示','请至少勾选一个用户',false);
+        var tid_str = check_arr.join(',');
+        if (tid_str == '') {
+            my_dialog('提示', '请至少勾选一个用户', false);
             return;
         }
         $.ajax({
-            type:'post',
-            url:'<{$smarty.const._admin_domain}>admin_list/status_change/on',
+            type: 'post',
+            url: '<{$smarty.const._admin_domain}>admin_list/status_change/' + status,
             data:{tid_str:tid_str},
-            success:function(res){
-                my_dialog('提示',res,false);
+            success: function (res) {
+                switch (res) {
+                    case '1':
+                        my_dialog('提示', status_text + '用户成功!', {
+                            call_back: function () {
+                                location.reload();
+                            }
+                        });
+                        break;
+                    case '-1':
+                        my_dialog('提示', '请至少勾选一个用户', false);
+                        break;
+                    default :
+                        my_dialog('提示', '操作失败', false);
+                        break;
+                }
             }
         });
-    });
+    }
     //多选框
     $('#all_check').on('ifChecked', function (event) {
         $('.item_check').iCheck('check');
@@ -183,7 +208,6 @@
             increaseArea: '20%' // 触摸扩展区域
         });
     });
-
 </script>
 </body>
 </html>

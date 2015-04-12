@@ -20,12 +20,12 @@ class Admin extends CI_Model
      * @param int $per_page 每页条数(默认15)
      * @return mixed 教师数据数组
      */
-    function get_admin_list($page=1,$per_page= 15)
+    function get_admin_list($page = 1, $per_page = 15)
     {
 
-        $offset=$per_page*($page-1);
-        $offset=$offset>0?$offset:0;
-        $query = $this->db->get('admin', $per_page,$offset);
+        $offset = $per_page * ($page - 1);
+        $offset = $offset > 0 ? $offset : 0;
+        $query = $this->db->get('admin', $per_page, $offset);
         return $this->security->xss_clean($query->result_array());
     }
 
@@ -44,7 +44,18 @@ class Admin extends CI_Model
      */
     function del_admin_by_tid($tid)
     {
-        $this->db->delete('admin',array('tid' => $tid));
+        $this->db->delete('admin', array('tid' => $tid));
+    }
+
+    /**
+     * 更改管理员状态
+     * @param $tid_arr 管理员tid数组
+     * @param $status 状态(1启用,0禁用)
+     */
+    function change_admin_status($tid_arr, $status)
+    {
+        $this->db->where_in('tid', $tid_arr);
+        $this->db->update('admin', array('status' => $status));
     }
 }
 /* End of file admin.php */

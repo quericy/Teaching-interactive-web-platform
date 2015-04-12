@@ -34,7 +34,7 @@ function my_dialog(title, content, btn_obj) {
                 ok_class = 'btn-danger';
                 break;
             default:
-                ok_class = 'btn-default';
+                ok_class = 'btn-primary';
                 break;
         }
         html += '<button id="ok_btn" type="button" class="btn ' + ok_class + '">' + btn_obj.btn_text + '</button>';
