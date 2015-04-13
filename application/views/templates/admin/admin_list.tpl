@@ -58,7 +58,10 @@
                 </td>
                 <td class="text-center">
                     <div class="btn-group" role="group">
-                        <a href="#" class="btn btn-default btn-sm">修改</a>
+                        <a href="javascript:void(0)" class="btn btn-default btn-sm" data-toggle="modal"
+                           data-type="edit" data-tid="<{$val.tid}>" data-name="<{$val.user_name}>"
+                           data-target="#add_dialog">编辑
+                        </a>
                         <button type="button" class="btn btn-default btn-sm" data-toggle="modal"
                                 data-tid="<{$val.tid}>" data-name="<{$val.user_name}>" data-target="#del_dialog">删除
                         </button>
@@ -71,7 +74,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="pull-left">
-                <button type="button" class="btn btn-success" style="margin-top: 20px">
+                <button type="button" class="btn btn-success" style="margin-top: 20px" data-toggle="modal"
+                        data-type="add" data-target="#add_dialog">
                     <span class="glyphicon glyphicon-plus"></span>
                     添加新教师
                 </button>
@@ -96,10 +100,53 @@
     </div>
 
 </div>
+<!-- 添加用户弹窗 -->
+<div id="add_dialog" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog  ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title" id="myModalLabel"></h5>
+            </div>
+            <div class="modal-body">
 
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                    <input type="text" class="form-control" placeholder="教师用户名" aria-describedby="basic-addon1">
+                    <span class="form-control-feedback text-danger" style="font-size:23px;" aria-hidden="true">*</span>
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                    <input type="password" class="form-control" placeholder="请输入密码">
+                    <span class="form-control-feedback text-danger" style="font-size:23px;"  aria-hidden="true">*</span>
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                    <input type="text" class="form-control" placeholder="请输入邮箱">
+                </div>
+                <br>
+                <label>类型:</label>
+                &nbsp;
+                <span><input type="radio" name="iCheck" checked>&nbsp;教师</span>
+                &nbsp;&nbsp;&nbsp;
+                <span><input type="radio" name="iCheck">&nbsp;管理员</span>
+
+
+            </div>
+            <div class="modal-footer">
+                <button id="add_button" type="button" class="btn btn-success">
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- 删除确认弹窗 -->
-<div id="del_dialog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="del_dialog" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -120,6 +167,20 @@
 <script src="<{$smarty.const._site_js}>icheck.min.js"></script>
 <script src="<{$smarty.const._site_js}>admin_common.js"></script>
 <script type="text/javascript">
+    //添加用户模态框展示触发
+    $('#add_dialog').on('show.bs.modal', function (e) {
+        var obj = $(e.relatedTarget);
+        if (obj.data('type') == 'edit') {
+            $('#myModalLabel').html('修改教师信息');
+            $('#add_button').html('<span class="glyphicon glyphicon-pencil"></span>&nbsp;修改');
+        } else {
+            $('#myModalLabel').html('添加教师信息');
+            $('#add_button').html('<span class="glyphicon glyphicon-plus"></span>&nbsp;添加');
+
+        }
+
+        $('#del_button').attr('data-tid', obj.data('tid'));
+    });
     //删除模态框展示
     $('#del_dialog').on('show.bs.modal', function (e) {
         var obj = $(e.relatedTarget);
