@@ -130,7 +130,7 @@
                 <div class="input-group">
                     <label>状态:</label>
                     &nbsp;
-                    <span><input type="radio" name="user_type" value="1" checked>&nbsp;教师</span>
+                    <span><input type="radio" name="user_type" value="1">&nbsp;教师</span>
                     &nbsp;&nbsp;&nbsp;
                     <span><input type="radio" name="user_type" value="2">&nbsp;管理员</span>
                 </div>
@@ -139,7 +139,7 @@
                 <div class="input-group">
                     <label>类型:</label>
                     &nbsp;
-                    <span><input type="radio" name="user_status" value="1" checked>&nbsp;启用</span>
+                    <span><input type="radio" name="user_status" value="1">&nbsp;启用</span>
                     &nbsp;&nbsp;&nbsp;
                     <span><input type="radio" name="user_status" value="0">&nbsp;禁用</span>
                 </div>
@@ -189,16 +189,14 @@
             //密码赋值
             $('#password_input').val('');
             //用户类型选中
-            var user_type_value = obj.data('user-type');
             $("input[name='user_type']").each(function () {
-                if (user_type_value == this.value) {
+                if (obj.data('user-type') == this.value) {
                     $(this).iCheck('check');
                 }
             });
             //用户状态选中
-            var status_value = obj.data('status');
             $("input[name='user_status']").each(function () {
-                if (status_value == this.value) {
+                if (obj.data('status') == this.value) {
                     $(this).iCheck('check');
                 }
             });
@@ -222,11 +220,48 @@
     //添加/修改用户ajax请求
     $(document).delegate('#add_button', 'click', function () {
         var tid = $(this).attr('data-tid');
-        if(tid>0){
+        var user_name_input = $('#user_name_input').val();
+        var password_input = $('#password_input').val();
+        var user_type = 1;
+        $("input[name='user_type']").each(function () {
+            if (this.checked == true) {
+                user_type = $(this).val();
+            }
+        });
+        var user_status = $("input[name='user_status'][check]").val();
+        $("input[name='user_status']").each(function () {
+            if (this.checked == true) {
+                user_status = $(this).val();
+            }
+        });
 
-        }else{
-
+        if (tid > 0) {
+            var ajax_url = 'edit/' + tid;
+            var add_edit_text = "编辑";
+        } else {
+            var ajax_url = 'add/';
+            var add_edit_text = "添加";
         }
+        $.ajax({
+            type: 'post',
+            url: '<{$smarty.const._admin_domain}>admin_list/' + ajax_url,
+            data:{user_name:user_name_input,password_input:password_input,user_type:user_type,user_status:user_status},
+            success: function (res) {
+                switch (res) {
+                    case '1':
+                        my_dialog('提示', '教师' + add_edit_text + '成功!', {
+                            btn_class: 'info',
+                            call_back: function () {
+                                location.reload();
+                            }
+                        });
+                        break;
+                    default :
+                        my_dialog('提示', '操作失败', false);
+                        break;
+                }
+            }
+        });
     });
     //删除模态框展示
     $('#del_dialog').on('show.bs.modal', function (e) {
