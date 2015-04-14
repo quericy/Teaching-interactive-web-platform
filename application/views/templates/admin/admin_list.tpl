@@ -58,8 +58,9 @@
                 </td>
                 <td class="text-center">
                     <div class="btn-group" role="group">
-                        <a href="javascript:void(0)" class="btn btn-default btn-sm" data-toggle="modal"
-                           data-type="edit" data-tid="<{$val.tid}>" data-name="<{$val.user_name}>"
+                        <a href="#" class="btn btn-default btn-sm" data-toggle="modal"
+                           data-type="edit" data-tid="<{$val.tid}>" data-user-name="<{$val.user_name}>"
+                           data-user-type="<{$val.type}>" data-status="<{$val.status}>"
                            data-target="#add_dialog">编辑
                         </a>
                         <button type="button" class="btn btn-default btn-sm" data-toggle="modal"
@@ -113,27 +114,35 @@
 
                 <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                    <input type="text" class="form-control" placeholder="教师用户名" aria-describedby="basic-addon1">
+                    <input id="user_name_input" type="text" class="form-control" placeholder="教师用户名"
+                           aria-describedby="basic-addon1">
                     <span class="form-control-feedback text-danger" style="font-size:23px;" aria-hidden="true">*</span>
                 </div>
                 <br>
+
                 <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                    <input type="password" class="form-control" placeholder="请输入密码">
-                    <span class="form-control-feedback text-danger" style="font-size:23px;"  aria-hidden="true">*</span>
+                    <input id="password_input" type="password" class="form-control" placeholder="请输入密码">
+                    <span class="form-control-feedback text-danger" style="font-size:23px;" aria-hidden="true">*</span>
                 </div>
                 <br>
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-                    <input type="text" class="form-control" placeholder="请输入邮箱">
-                </div>
-                <br>
-                <label>类型:</label>
-                &nbsp;
-                <span><input type="radio" name="iCheck" checked>&nbsp;教师</span>
-                &nbsp;&nbsp;&nbsp;
-                <span><input type="radio" name="iCheck">&nbsp;管理员</span>
 
+                <div class="input-group">
+                    <label>状态:</label>
+                    &nbsp;
+                    <span><input type="radio" name="user_type" value="1" checked>&nbsp;教师</span>
+                    &nbsp;&nbsp;&nbsp;
+                    <span><input type="radio" name="user_type" value="2">&nbsp;管理员</span>
+                </div>
+                <br>
+
+                <div class="input-group">
+                    <label>类型:</label>
+                    &nbsp;
+                    <span><input type="radio" name="user_status" value="1" checked>&nbsp;启用</span>
+                    &nbsp;&nbsp;&nbsp;
+                    <span><input type="radio" name="user_status" value="0">&nbsp;禁用</span>
+                </div>
 
             </div>
             <div class="modal-footer">
@@ -172,14 +181,52 @@
         var obj = $(e.relatedTarget);
         if (obj.data('type') == 'edit') {
             $('#myModalLabel').html('修改教师信息');
+            //按钮设置
             $('#add_button').html('<span class="glyphicon glyphicon-pencil"></span>&nbsp;修改');
+            $('#add_button').attr('data-tid', obj.data('tid'));
+            //用户名赋值
+            $('#user_name_input').attr('value', obj.data('user-name'));
+            //密码赋值
+            $('#password_input').val('');
+            //用户类型选中
+            var user_type_value = obj.data('user-type');
+            $("input[name='user_type']").each(function () {
+                if (user_type_value == this.value) {
+                    $(this).iCheck('check');
+                }
+            });
+            //用户状态选中
+            var status_value = obj.data('status');
+            $("input[name='user_status']").each(function () {
+                if (status_value == this.value) {
+                    $(this).iCheck('check');
+                }
+            });
         } else {
             $('#myModalLabel').html('添加教师信息');
+            //按钮设置
             $('#add_button').html('<span class="glyphicon glyphicon-plus"></span>&nbsp;添加');
-
+            $('#add_button').attr('data-tid', 0);
+            //用户名赋值
+            $('#user_name_input').attr('value', '');
+            //密码赋值
+            $('#password_input').val('');
+            //用户类型选中
+            $("input[name='user_type']:first").iCheck('check');
+            //用户状态选中
+            $("input[name='user_status']:first").iCheck('check');
         }
 
-        $('#del_button').attr('data-tid', obj.data('tid'));
+
+    });
+    //添加/修改用户ajax请求
+    $(document).delegate('#add_button', 'click', function () {
+        var tid = $(this).attr('data-tid');
+        if(tid>0){
+
+        }else{
+
+        }
     });
     //删除模态框展示
     $('#del_dialog').on('show.bs.modal', function (e) {
