@@ -24,6 +24,7 @@ class Admin_list extends CI_Controller
         //每页10条数据
         $per_page = 10;
         //获取管理员列表
+
         $admin_info_list = $this->admin->get_admin_list($page, $per_page);
         $assign_arr['admin_info_list'] = $admin_info_list;
         //分页
@@ -35,6 +36,23 @@ class Admin_list extends CI_Controller
         $this->smarty->view('admin/admin_list.tpl', $assign_arr);
     }
 
+    /**
+     * 添加管理员
+     */
+    public function add()
+    {
+
+
+    }
+
+    /**
+     * 修改管理员
+     * @param $tid 管理员tid
+     */
+    public function edit($tid)
+    {
+
+    }
     /**
      * 删除管理员
      * @param $tid 管理员tid
@@ -69,6 +87,7 @@ class Admin_list extends CI_Controller
         }
         $status = $status == '1' ? 1 : 0;
         $this->admin->change_admin_status($tid_arr, $status);
+
         echo 1;
     }
 }

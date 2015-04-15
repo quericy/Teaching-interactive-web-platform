@@ -57,6 +57,24 @@ class Admin extends CI_Model
         $this->db->where_in('tid', $tid_arr);
         $this->db->update('admin', array('status' => $status));
     }
+
+    function add_admin()
+    {
+
+
+    }
+
+    /**
+     * 符合条件的管理员数量
+     * @param $cond 指定条件
+     * @return int 数量
+     */
+    function get_counts($cond)
+    {
+        $this->db->from('admin');
+        $this->db->where($cond);
+        return $this->db->count_all_results();
+    }
 }
 /* End of file admin.php */
 /* Location: ./application/models/admin.php */
