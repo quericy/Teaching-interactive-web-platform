@@ -23,110 +23,33 @@
  * @category	Libraries
  * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/config.html
+ * @property CI_Loader $load
+ * @property CI_DB_active_record $db
+ * @property CI_Calendar $calendar
+ * @property Email $email
+ * @property CI_Encrypt $encrypt
+ * @property CI_Ftp $ftp
+ * @property CI_Hooks $hooks
+ * @property CI_Image_lib $image_lib
+ * @property CI_Language $language
+ * @property CI_Log $log
+ * @property CI_Output $output
+ * @property CI_Pagination $pagination
+ * @property CI_Parser $parser
+ * @property CI_Session $session
+ * @property CI_Sha1 $sha1
+ * @property CI_Table $table
+ * @property CI_Trackback $trackback
+ * @property CI_Unit_test $unit
+ * @property CI_Upload $upload
+ * @property CI_URI $uri
+ * @property CI_User_agent $agent
+ * @property CI_Validation $validation
+ * @property CI_Xmlrpc $xmlrpc
+ * @property CI_Zip $zip
  */
 class CI_Model {
-//------------------------------------------------------------------------
-//补善CI在IDE中的代码提示－开始
-//------------------------------------------------------------------------
-	/**
-	 * @var CI_Loader
-	 */
-	var $load;
-	/**
-	 * @var CI_DB_active_record
-	 */
-	var $db;
-	/**
-	 * @var CI_Calendar
-	 */
-	var $calendar;
-	/**
-	 * @var Email
-	 */
-	var $email;
-	/**
-	 * @var CI_Encrypt
-	 */
-	var $encrypt;
-	/**
-	 * @var CI_Ftp
-	 */
-	var $ftp;
-	/**
-	 * @var CI_Hooks
-	 */
-	var $hooks;
-	/**
-	 * @var CI_Image_lib
-	 */
-	var $image_lib;
-	/**
-	 * @var CI_Language
-	 */
-	var $language;
-	/**
-	 * @var CI_Log
-	 */
-	var $log;
-	/**
-	 * @var CI_Output
-	 */
-	var $output;
-	/**
-	 * @var CI_Pagination
-	 */
-	var $pagination;
-	/**
-	 * @var CI_Parser
-	 */
-	var $parser;
-	/**
-	 * @var CI_Session
-	 */
-	var $session;
-	/**
-	 * @var CI_Sha1
-	 */
-	var $sha1;
-	/**
-	 * @var CI_Table
-	 */
-	var $table;
-	/**
-	 * @var CI_Trackback
-	 */
-	var $trackback;
-	/**
-	 * @var CI_Unit_test
-	 */
-	var $unit;
-	/**
-	 * @var CI_Upload
-	 */
-	var $upload;
-	/**
-	 * @var CI_URI
-	 */
-	var $uri;
-	/**
-	 * @var CI_User_agent
-	 */
-	var $agent;
-	/**
-	 * @var CI_Validation
-	 */
-	var $validation;
-	/**
-	 * @var CI_Xmlrpc
-	 */
-	var $xmlrpc;
-	/**
-	 * @var CI_Zip
-	 */
-	var $zip;
-//------------------------------------------------------------------------
-//补善CI在IDE中的代码提示—结束
-//------------------------------------------------------------------------
+
 	/**
 	 * Constructor
 	 *
