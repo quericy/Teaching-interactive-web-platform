@@ -12,7 +12,7 @@ class Admin_list extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('admin');
+        $this->load->model('admin','admin_cls');
     }
 
     /**
@@ -25,11 +25,11 @@ class Admin_list extends CI_Controller
         $per_page = 10;
         //获取管理员列表
 
-        $admin_info_list = $this->admin->get_admin_list($page, $per_page);
+        $admin_info_list = $this->admin_cls->get_admin_list($page, $per_page);
         $assign_arr['admin_info_list'] = $admin_info_list;
         //分页
         $this->load->library('page_cls');
-        $assign_arr['page_string'] = $this->page_cls->get_page_config($this, $this->admin->get_admin_count(), true, $per_page);
+        $assign_arr['page_string'] = $this->page_cls->get_page_config($this, $this->admin_cls->get_admin_count(), true, $per_page);
         //基本信息展示
         $assign_arr['web_title'] = '教师管理';
         $assign_arr['nav_show'] = 'system';
@@ -41,8 +41,21 @@ class Admin_list extends CI_Controller
      */
     public function add()
     {
-
-
+        $user_name = $this->input->post('user_name', true);
+        $password = $this->input->post('password_input', true);
+        $user_type = $this->input->post('user_type', true);
+        $user_status = $this->input->post('user_status', true);
+        if(empty($user_name)||empty($password)){
+            echo -2;
+            return;
+        }
+        /***密码策略***/
+        
+        /***密码策略***/
+        $user_type=$user_type=='2'?'2':'1';
+        $user_status=$user_status=='1'?'1':'0';
+        $res=$this->admin_cls->add_admin($user_name,$password,$user_type,$user_status);
+        echo $res==true?1:-1;
     }
 
     /**
@@ -63,7 +76,7 @@ class Admin_list extends CI_Controller
 
         /****权限判断*****/
         $tid = intval($tid);
-        $this->admin->del_admin_by_tid($tid);
+        $this->admin_cls->del_admin_by_tid($tid);
         echo 1;
     }
 
@@ -86,7 +99,7 @@ class Admin_list extends CI_Controller
             $tid_arr[$k] = intval($v);
         }
         $status = $status == '1' ? 1 : 0;
-        $this->admin->change_admin_status($tid_arr, $status);
+        $this->admin_cls->change_admin_status($tid_arr, $status);
 
         echo 1;
     }

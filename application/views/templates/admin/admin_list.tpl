@@ -249,12 +249,18 @@
             success: function (res) {
                 switch (res) {
                     case '1':
-                        my_dialog('提示', '教师' + add_edit_text + '成功!', {
+                        my_dialog('消息', '教师' + add_edit_text + '成功!', {
                             btn_class: 'info',
                             call_back: function () {
                                 location.reload();
                             }
                         });
+                        break;
+                    case '-1':
+                        my_dialog('提示', '该教师已存在!',false);
+                        break;
+                    case '-2':
+                        my_dialog('提示', '参数不完整!',false);
                         break;
                     default :
                         my_dialog('提示', '操作失败', false);

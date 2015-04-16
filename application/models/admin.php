@@ -15,6 +15,17 @@ class Admin extends CI_Model
     }
 
     /**
+     * 用户密码自定义md5加密函数
+     * @param $pwd_str 待加密的字符串
+     * @return string 加密后字符串
+     */
+    function super_md5($pwd_str)
+    {
+        $this->load->library('encrypt');
+        return md5($this->encrypt->encode(md5($pwd_str)));
+    }
+
+    /**
      * 获得管理员列表
      * @param int $page 页数
      * @param int $per_page 每页条数(默认15)
@@ -58,10 +69,15 @@ class Admin extends CI_Model
         $this->db->update('admin', array('status' => $status));
     }
 
-    function add_admin()
+    function add_admin($user_name, $password, $user_type, $user_status)
     {
-
-
+        if ($this->get_counts('user_name = \'' . $user_name . '\'') > 0) {
+            return false;
+        }
+        return $this->db->insert('admin', array('user_name' => $user_name,
+            'user_pwd' => $this->super_md5($password),
+            'type' => $user_type,
+            'status' => $user_status));
     }
 
     /**
