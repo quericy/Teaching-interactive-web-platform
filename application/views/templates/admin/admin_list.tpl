@@ -257,10 +257,16 @@
                         });
                         break;
                     case '-1':
-                        my_dialog('提示', '该教师已存在!',false);
+                        my_dialog('提示', '系统繁忙,请重试!',false);
                         break;
                     case '-2':
-                        my_dialog('提示', '参数不完整!',false);
+                        my_dialog('提示', '输入参数不完整!',false);
+                        break;
+                    case '-3':
+                        my_dialog('提示', '该教师不存在!',false);
+                        break;
+                    case '-4':
+                        my_dialog('提示', '该用户名已存在!',false);
                         break;
                     default :
                         my_dialog('提示', '操作失败', false);

@@ -12,7 +12,7 @@ class Admin_list extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('admin','admin_cls');
+        $this->load->model('admin', 'admin_cls');
     }
 
     /**
@@ -45,17 +45,21 @@ class Admin_list extends CI_Controller
         $password = $this->input->post('password_input', true);
         $user_type = $this->input->post('user_type', true);
         $user_status = $this->input->post('user_status', true);
-        if(empty($user_name)||empty($password)){
+        if (empty($user_name) || empty($password)) {
             echo -2;
             return;
         }
         /***密码策略***/
-        
+
         /***密码策略***/
-        $user_type=$user_type=='2'?'2':'1';
-        $user_status=$user_status=='1'?'1':'0';
-        $res=$this->admin_cls->add_admin($user_name,$password,$user_type,$user_status);
-        echo $res==true?1:-1;
+        $user_type = $user_type == '2' ? '2' : '1';
+        $user_status = $user_status == '1' ? '1' : '0';
+        //用户名已存在
+        if ($this->admin_cls->get_counts('user_name = \'' . $user_name . '\'') > 0) {
+            return -4;
+        }
+        $res = $this->admin_cls->add_admin($user_name, $password, $user_type, $user_status);
+        echo $res == true ? 1 : -1;
     }
 
     /**
@@ -64,8 +68,33 @@ class Admin_list extends CI_Controller
      */
     public function edit($tid)
     {
+        $tid = intval($tid);
+        $user_name = $this->input->post('user_name', true);
+        $password = $this->input->post('password_input', true);
+        $user_type = $this->input->post('user_type', true);
+        $user_status = $this->input->post('user_status', true);
+        //检查教师是否不存在
+        if ($this->admin_cls->get_counts('tid = ' . $tid) == 0) {
+            echo -3;
+            return;
+        }
+        if (empty($user_name)) {
+            echo -2;
+            return;
+        }
+        //用户名判断(包括自己的用户名)
+        $user_info = $this->admin_cls->get_one_admin('user_name', 'tid = ' . $tid);
+        if (!empty($user_info) && $user_info['user_name'] != $user_name) {
+            echo -4;
+            return;
+        }
+        /***密码策略***/
 
+        /***密码策略***/
+        $res = $this->admin_cls->update_admin($tid, $user_name, $password, $user_type, $user_status);
+        echo $res == true ? 1 : -1;
     }
+
     /**
      * 删除管理员
      * @param $tid 管理员tid

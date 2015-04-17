@@ -26,6 +26,19 @@ class Admin extends CI_Model
     }
 
     /**
+     * 查询一条管理员记录
+     * @param $fields 查询字段
+     * @param $cond 条件
+     * @return mixed
+     */
+    function get_one_admin($fields, $cond)
+    {
+        $this->db->select($fields)->from('admin')->where($cond);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    /**
      * 获得管理员列表
      * @param int $page 页数
      * @param int $per_page 每页条数(默认15)
@@ -40,8 +53,9 @@ class Admin extends CI_Model
         return $this->security->xss_clean($query->result_array());
     }
 
+
     /**
-     * 获得管理员总数
+     * 获得当前系统的管理员总数
      * @return int 管理员计数
      */
     function get_admin_count()
@@ -69,11 +83,46 @@ class Admin extends CI_Model
         $this->db->update('admin', array('status' => $status));
     }
 
+    /**
+     * 更新管理员信息
+     * @param $tid 管理员ID
+     * @param $user_name 用户名
+     * @param $password 密码
+     * @param $user_type 用户类型(2管理员,1普通教师)
+     * @param $user_status 用户状态(1启用,0禁用)
+     * @return bool
+     */
+    function update_admin($tid, $user_name, $password, $user_type, $user_status)
+    {
+        //密码为空不更新密码
+        if (strlen(trim($password)) == 0) {
+            $update_arr = array(
+                'user_name' => $user_name,
+                'type' => $user_type,
+                'status' => $user_status
+            );
+        } else {
+            $update_arr = array(
+                'user_name' => $user_name,
+                'user_pwd' => $this->super_md5($password),
+                'type' => $user_type,
+                'status' => $user_status
+            );
+        }
+        $this->db->where_in('tid', $tid);
+        return $this->db->update('admin', $update_arr);
+    }
+
+    /**
+     * 添加管理员
+     * @param $user_name 用户名
+     * @param $password 密码
+     * @param $user_type 用户类型(2管理员,1普通教师)
+     * @param $user_status 用户状态(1启用,0禁用)
+     * @return bool
+     */
     function add_admin($user_name, $password, $user_type, $user_status)
     {
-        if ($this->get_counts('user_name = \'' . $user_name . '\'') > 0) {
-            return false;
-        }
         return $this->db->insert('admin', array('user_name' => $user_name,
             'user_pwd' => $this->super_md5($password),
             'type' => $user_type,
