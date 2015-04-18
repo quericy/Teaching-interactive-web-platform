@@ -41,6 +41,8 @@ class Admin_list extends CI_Controller
      */
     public function add()
     {
+        /****权限判断*****/
+        /****权限判断*****/
         $user_name = $this->input->post('user_name', true);
         $password = $this->input->post('password_input', true);
         $user_type = $this->input->post('user_type', true);
@@ -50,7 +52,6 @@ class Admin_list extends CI_Controller
             return;
         }
         /***密码策略***/
-
         /***密码策略***/
         $user_type = $user_type == '2' ? '2' : '1';
         $user_status = $user_status == '1' ? '1' : '0';
@@ -68,6 +69,8 @@ class Admin_list extends CI_Controller
      */
     public function edit($tid)
     {
+        /****权限判断*****/
+        /****权限判断*****/
         $tid = intval($tid);
         $user_name = $this->input->post('user_name', true);
         $password = $this->input->post('password_input', true);
@@ -89,7 +92,6 @@ class Admin_list extends CI_Controller
             return;
         }
         /***密码策略***/
-
         /***密码策略***/
         $res = $this->admin_cls->update_admin($tid, $user_name, $password, $user_type, $user_status);
         echo $res == true ? 1 : -1;
@@ -102,7 +104,6 @@ class Admin_list extends CI_Controller
     public function del($tid)
     {
         /****权限判断*****/
-
         /****权限判断*****/
         $tid = intval($tid);
         $this->admin_cls->del_admin_by_tid($tid);
@@ -116,7 +117,6 @@ class Admin_list extends CI_Controller
     public function status_change($status)
     {
         /****权限判断*****/
-
         /****权限判断*****/
         $tid_str = $this->input->post('tid_str', true);
         $tid_arr = explode(',', $tid_str);
