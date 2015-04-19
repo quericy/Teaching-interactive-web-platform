@@ -123,7 +123,7 @@
                 <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                     <input id="password_input" type="password" class="form-control" placeholder="请输入密码">
-                    <span class="form-control-feedback text-danger" style="font-size:23px;" aria-hidden="true">*</span>
+                    <span id="password-tips" class="form-control-feedback text-danger" style="font-size:23px;" aria-hidden="true">*</span>
                 </div>
                 <br>
 
@@ -200,6 +200,7 @@
                     $(this).iCheck('check');
                 }
             });
+            $('#password-tips').html('');
         } else {
             $('#myModalLabel').html('添加教师信息');
             //按钮设置
@@ -213,6 +214,7 @@
             $("input[name='user_type']:first").iCheck('check');
             //用户状态选中
             $("input[name='user_status']:first").iCheck('check');
+            $('#password-tips').html('*');
         }
 
 
@@ -260,7 +262,7 @@
                         my_dialog('提示', '系统繁忙,请重试!', false);
                         break;
                     case '-2':
-                        my_dialog('提示', '输入参数不完整!', false);
+                        my_dialog('提示', '输入信息不完整!', false);
                         break;
                     case '-3':
                         my_dialog('提示', '该教师不存在!', false);
