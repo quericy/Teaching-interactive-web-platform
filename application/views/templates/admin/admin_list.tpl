@@ -63,9 +63,10 @@
                            data-user-type="<{$val.type}>" data-status="<{$val.status}>"
                            data-target="#add_dialog">编辑
                         </a>
-                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal"
-                                data-tid="<{$val.tid}>" data-name="<{$val.user_name}>" data-target="#del_dialog">删除
-                        </button>
+                        <a href="#" class="del_btn btn btn-default btn-sm"
+                           data-tid="<{$val.tid}>" data-name="<{$val.user_name}>">
+                            删除
+                        </a>
                     </div>
                 </td>
             </tr>
@@ -101,7 +102,7 @@
     </div>
 
 </div>
-<!-- 添加用户弹窗 -->
+<!-- 添加用户弹窗begin -->
 <div id="add_dialog" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog  ">
         <div class="modal-content">
@@ -123,7 +124,8 @@
                 <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                     <input id="password_input" type="password" class="form-control" placeholder="请输入密码">
-                    <span id="password-tips" class="form-control-feedback text-danger" style="font-size:23px;" aria-hidden="true">*</span>
+                    <span id="password-tips" class="form-control-feedback text-danger" style="font-size:23px;"
+                          aria-hidden="true">*</span>
                 </div>
                 <br>
 
@@ -153,24 +155,7 @@
         </div>
     </div>
 </div>
-
-<!-- 删除确认弹窗 -->
-<div id="del_dialog" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                <h5 class="modal-title" id="myModalLabel">确认删除</h5>
-            </div>
-            <div class="modal-body">确定要删除<span id="del_teacher_name" class="text-danger"></span>吗?删除后将无法恢复!</div>
-            <div class="modal-footer">
-                <button id="del_button" type="button" class="btn btn-danger">删除</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- 添加用户弹窗end -->
 
 <{include file="admin/footer.tpl"}>
 <script src="<{$smarty.const._site_js}>icheck.min.js"></script>
@@ -216,9 +201,8 @@
             $("input[name='user_status']:first").iCheck('check');
             $('#password-tips').html('*');
         }
-
-
     });
+
     //添加/修改用户ajax请求
     $(document).delegate('#add_button', 'click', function () {
         var tid = $(this).attr('data-tid');
@@ -277,32 +261,35 @@
             }
         });
     });
-    //删除模态框展示
-    $('#del_dialog').on('show.bs.modal', function (e) {
-        var obj = $(e.relatedTarget);
-        $('#del_teacher_name').html(obj.data('name'));
-        $('#del_button').attr('data-tid', obj.data('tid'));
-    });
-    //删除请求
-    $(document).delegate('#del_button', 'click', function () {
-        var tid = $(this).attr('data-tid');
-        $.ajax({
-            type: 'post',
-            url: '<{$smarty.const._admin_domain}>admin_list/del/' + tid,
-            success: function (res) {
-                switch (res) {
-                    case '1':
-                        my_dialog('提示', '删除成功!', {
-                            btn_class: 'info',
-                            call_back: function () {
-                                location.reload();
-                            }
-                        });
-                        break;
-                    default :
-                        my_dialog('提示', '操作失败', false);
-                        break;
-                }
+
+    //删除用户
+    $(document).delegate('.del_btn', 'click', function () {
+        var tid = $(this).data('tid');
+        var t_name = $(this).data('name');
+        my_dialog('确认删除', '确定要删除<span id="del_teacher_name" class="text-danger">' + t_name + '</span>吗?删除后将无法恢复!', {
+            btn_text: '删除',
+            btn_class: 'danger',
+            show_cancel: true,
+            call_back: function () {
+                $.ajax({
+                    type: 'post',
+                    url: '<{$smarty.const._admin_domain}>admin_list/del/' + tid,
+                    success: function (res) {
+                        switch (res) {
+                            case '1':
+                                my_dialog('提示', '删除成功!', {
+                                    btn_class: 'info',
+                                    call_back: function () {
+                                        location.reload();
+                                    }
+                                });
+                                break;
+                            default :
+                                my_dialog('提示', '操作失败', false);
+                                break;
+                        }
+                    }
+                });
             }
         });
     });
