@@ -239,6 +239,9 @@
                             btn_class: 'info',
                             call_back: function () {
                                 location.reload();
+                            },
+                            cancel_call_back: function () {
+                                location.reload();
                             }
                         });
                         break;
@@ -280,6 +283,9 @@
                                 my_dialog('提示', '删除成功!', {
                                     btn_class: 'info',
                                     call_back: function () {
+                                        location.reload();
+                                    },
+                                    cancel_call_back: function () {
                                         location.reload();
                                     }
                                 });
@@ -324,6 +330,9 @@
                     case '1':
                         my_dialog('提示', status_text + '用户成功!', {
                             call_back: function () {
+                                location.reload();
+                            },
+                            cancel_call_back: function () {
                                 location.reload();
                             }
                         });
