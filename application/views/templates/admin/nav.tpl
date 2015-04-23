@@ -74,7 +74,7 @@
                 <i class="glyphicon glyphicon-cog"></i>&nbsp;系统设置<i class="fa-collapse glyphicon"></i>
             </a></li>
         <li><ul class="system-menu nav nav-list collapse <{if $nav_show=='system'}>in<{/if}>">
-                <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 学生管理</a></li>
+                <li><a href="<{$smarty.const._admin_domain}>user_list"><span class="glyphicon glyphicon-triangle-right"></span> 学生管理</a></li>
                 <li><a href="<{$smarty.const._admin_domain}>admin_list"><span class="glyphicon glyphicon-triangle-right"></span> 教师管理</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 系统设置</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 日志记录</a></li>
