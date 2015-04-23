@@ -18,3 +18,6 @@ class User_list extends CI_Controller
     }
 
 }
+
+/* End of file user_list.php */
+/* Location: ./application/controllers/admin/user_list.php */

@@ -8,6 +8,8 @@
  */
 class Admin extends CI_Model
 {
+    private $table_name='admin';//表名
+
     function __construct()
     {
         parent::__construct();
@@ -33,7 +35,7 @@ class Admin extends CI_Model
      */
     function get_one_admin($fields, $cond)
     {
-        $this->db->select($fields)->from('admin')->where($cond);
+        $this->db->select($fields)->from($this->table_name)->where($cond);
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -49,7 +51,7 @@ class Admin extends CI_Model
 
         $offset = $per_page * ($page - 1);
         $offset = $offset > 0 ? $offset : 0;
-        $query = $this->db->get('admin', $per_page, $offset);
+        $query = $this->db->get($this->table_name, $per_page, $offset);
         return $this->security->xss_clean($query->result_array());
     }
 
@@ -60,7 +62,7 @@ class Admin extends CI_Model
      */
     function get_admin_count()
     {
-        return $this->db->count_all('admin');
+        return $this->db->count_all($this->table_name);
     }
 
     /**
@@ -69,7 +71,7 @@ class Admin extends CI_Model
      */
     function del_admin_by_tid($tid)
     {
-        $this->db->delete('admin', array('tid' => $tid));
+        $this->db->delete($this->table_name, array('tid' => $tid));
     }
 
     /**
@@ -80,7 +82,7 @@ class Admin extends CI_Model
     function change_admin_status($tid_arr, $status)
     {
         $this->db->where_in('tid', $tid_arr);
-        $this->db->update('admin', array('status' => $status));
+        $this->db->update($this->table_name, array('status' => $status));
     }
 
     /**
@@ -110,7 +112,7 @@ class Admin extends CI_Model
             );
         }
         $this->db->where_in('tid', $tid);
-        return $this->db->update('admin', $update_arr);
+        return $this->db->update($this->table_name, $update_arr);
     }
 
     /**
@@ -123,7 +125,7 @@ class Admin extends CI_Model
      */
     function add_admin($user_name, $password, $user_type, $user_status)
     {
-        return $this->db->insert('admin', array('user_name' => $user_name,
+        return $this->db->insert($this->table_name, array('user_name' => $user_name,
             'user_pwd' => $this->super_md5($password),
             'type' => $user_type,
             'status' => $user_status));
@@ -136,7 +138,7 @@ class Admin extends CI_Model
      */
     function get_counts($cond)
     {
-        $this->db->from('admin');
+        $this->db->from($this->table_name);
         $this->db->where($cond);
         return $this->db->count_all_results();
     }
