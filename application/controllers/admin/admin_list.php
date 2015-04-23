@@ -9,10 +9,14 @@
  */
 class Admin_list extends CI_Controller
 {
+    private $assign_arr = array();
+
     public function __construct()
     {
         parent::__construct();
         $this->load->model('admin', 'admin_cls');
+        $this->assign_arr['web_title'] = '教师管理';
+        $this->assign_arr['nav_show'] = 'system';
     }
 
     /**
@@ -21,19 +25,15 @@ class Admin_list extends CI_Controller
      */
     public function index($page = 1)
     {
-        //每页10条数据
-        $per_page = 10;
+        $per_page = 10;//每页10条数据
         //获取管理员列表
-
         $admin_info_list = $this->admin_cls->get_admin_list($page, $per_page);
-        $assign_arr['admin_info_list'] = $admin_info_list;
+        $this->assign_arr['admin_info_list'] = $admin_info_list;
         //分页
         $this->load->library('page_cls');
-        $assign_arr['page_string'] = $this->page_cls->get_page_config($this, $this->admin_cls->get_admin_count(), true, $per_page);
-        //基本信息展示
-        $assign_arr['web_title'] = '教师管理';
-        $assign_arr['nav_show'] = 'system';
-        $this->smarty->view('admin/admin_list.tpl', $assign_arr);
+        $this->assign_arr['page_string'] = $this->page_cls->get_page_config($this, $this->admin_cls->get_admin_count(), true, $per_page);
+        //页面展示
+        $this->smarty->view('admin/admin_list.tpl', $this->assign_arr);
     }
 
     /**
@@ -41,8 +41,7 @@ class Admin_list extends CI_Controller
      */
     public function add()
     {
-        /****权限判断*****/
-        /****权限判断*****/
+        /****权限判断(未完成)*****/
         $user_name = $this->input->post('user_name', true);
         $password = $this->input->post('password_input', true);
         $user_type = $this->input->post('user_type', true);
@@ -51,8 +50,7 @@ class Admin_list extends CI_Controller
             echo -2;
             return;
         }
-        /***密码策略***/
-        /***密码策略***/
+        /***密码策略(未完成)***/
         $user_type = $user_type == '2' ? '2' : '1';
         $user_status = $user_status == '1' ? '1' : '0';
         //用户名已存在
@@ -69,8 +67,7 @@ class Admin_list extends CI_Controller
      */
     public function edit($tid)
     {
-        /****权限判断*****/
-        /****权限判断*****/
+        /****权限判断(未完成)*****/
         $tid = intval($tid);
         $user_name = $this->input->post('user_name', true);
         $password = $this->input->post('password_input', true);
@@ -91,8 +88,7 @@ class Admin_list extends CI_Controller
             echo -4;
             return;
         }
-        /***密码策略***/
-        /***密码策略***/
+        /***密码策略(未完成)***/
         $res = $this->admin_cls->update_admin($tid, $user_name, $password, $user_type, $user_status);
         echo $res == true ? 1 : -1;
     }
@@ -103,8 +99,7 @@ class Admin_list extends CI_Controller
      */
     public function del($tid)
     {
-        /****权限判断*****/
-        /****权限判断*****/
+        /****权限判断(未完成)*****/
         $tid = intval($tid);
         $this->admin_cls->del_admin_by_tid($tid);
         echo 1;
@@ -116,8 +111,7 @@ class Admin_list extends CI_Controller
      */
     public function status_change($status)
     {
-        /****权限判断*****/
-        /****权限判断*****/
+        /****权限判断(未完成)*****/
         $tid_str = $this->input->post('tid_str', true);
         $tid_arr = explode(',', $tid_str);
         if (empty($tid_str) || count($tid_arr) == 0) {

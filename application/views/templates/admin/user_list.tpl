@@ -19,12 +19,12 @@
     <ol class="breadcrumb">
         <li class="active"><a href="<{$smarty.const._admin_domain}>">管理后台</a></li>
         <li class="active">系统设置</li>
-        <li>学生管理</li>
+        <li><{$web_title}></li>
     </ol>
     <div class="alert alert-info alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                     aria-hidden="true">&times;</span></button>
-        调试中...
+        用户模块调试中...
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -40,12 +40,12 @@
                 <th class="text-center">状态</th>
                 <th class="text-center">操作</th>
             </tr>
-            <!--<{foreach  from=$admin_info_list item=val key=key}>
+            <{foreach  from=$user_info_list item=val key=key}>
             <tr>
-                <td class="text-center"><input class="item_check" type="checkbox" data-tid="<{$val.tid}>"></td>
-                <td class="text-left"><{$val.tid}></td>
+                <td class="text-center"><input class="item_check" type="checkbox" data-tid="<{$val.uid}>"></td>
+                <td class="text-left"><{$val.uid}></td>
                 <td class="text-left"><{$val.user_name}></td>
-                <td class="text-center"><{if $val.type==2}>管理员<{else}>教师<{/if}></td>
+                <td class="text-center"><{$val.email}></td>
                 <td class="text-center">
                     <{if !empty($val.login_time)}>
                     <{$val.login_time|date_format:'%Y-%m-%d %H:%M:%S'}><br><{$val.login_ip}>
@@ -58,29 +58,23 @@
                 </td>
                 <td class="text-center">
                     <div class="btn-group" role="group">
-                        <a href="#" class="btn btn-default btn-sm" data-toggle="modal"
-                           data-type="edit" data-tid="<{$val.tid}>" data-user-name="<{$val.user_name}>"
-                           data-user-type="<{$val.type}>" data-status="<{$val.status}>"
-                           data-target="#add_dialog">编辑
+                        <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
+                           data-tid="<{$val.uid}>" data-user-name="<{$val.user_name}>">
+                            重置
                         </a>
                         <a href="#" class="del_btn btn btn-default btn-sm"
-                           data-tid="<{$val.tid}>" data-name="<{$val.user_name}>">
+                           data-tid="<{$val.uid}>" data-name="<{$val.user_name}>">
                             删除
                         </a>
                     </div>
                 </td>
             </tr>
-            <{/foreach}>-->
+            <{/foreach}>
         </table>
     </div>
     <div class="container-fluid">
         <div class="row">
             <div class="pull-left">
-                <button type="button" class="btn btn-success" style="margin-top: 20px" data-toggle="modal"
-                        data-type="add" data-target="#add_dialog">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    添加新教师
-                </button>
                 <div class="btn-group dropup" style="margin-top: 20px">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
                             aria-expanded="false">
@@ -95,67 +89,13 @@
                 &nbsp;&nbsp;
             </div>
             <nav class="pull-right">
-                <!--<{$page_string}>-->
+                <{$page_string}>
             </nav>
 
         </div>
     </div>
 
 </div>
-<!-- 添加用户弹窗begin -->
-<div id="add_dialog" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog  ">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                <h5 class="modal-title" id="myModalLabel"></h5>
-            </div>
-            <div class="modal-body">
-
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                    <input id="user_name_input" type="text" class="form-control" placeholder="教师用户名"
-                           aria-describedby="basic-addon1">
-                    <span class="form-control-feedback text-danger" style="font-size:23px;" aria-hidden="true">*</span>
-                </div>
-                <br>
-
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                    <input id="password_input" type="password" class="form-control" placeholder="请输入密码">
-                    <span id="password-tips" class="form-control-feedback text-danger" style="font-size:23px;"
-                          aria-hidden="true">*</span>
-                </div>
-                <br>
-
-                <div class="input-group">
-                    <label>状态:</label>
-                    &nbsp;
-                    <span><input type="radio" name="user_type" value="1">&nbsp;教师</span>
-                    &nbsp;&nbsp;&nbsp;
-                    <span><input type="radio" name="user_type" value="2">&nbsp;管理员</span>
-                </div>
-                <br>
-
-                <div class="input-group">
-                    <label>类型:</label>
-                    &nbsp;
-                    <span><input type="radio" name="user_status" value="1">&nbsp;启用</span>
-                    &nbsp;&nbsp;&nbsp;
-                    <span><input type="radio" name="user_status" value="0">&nbsp;禁用</span>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button id="add_button" type="button" class="btn btn-success">
-                </button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 添加用户弹窗end -->
 
 <{include file="admin/footer.tpl"}>
 <script src="<{$smarty.const._site_js}>icheck.min.js"></script>

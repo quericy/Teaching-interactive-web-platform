@@ -16,11 +16,24 @@ class User extends CI_Model {
         $this->load->database();
     }
 
-    function get_user_list()
+    /**
+     * 用户列表
+     * @param int $page 页数
+     * @param int $per_page 每页数
+     * @return mixed 用户数组
+     */
+    function get_user_list($page = 1, $per_page = 15)
     {
-
+        $offset = $per_page * ($page - 1);
+        $offset = $offset > 0 ? $offset : 0;
+        $query = $this->db->get($this->table_name, $per_page, $offset);
+        return $this->security->xss_clean($query->result_array());
     }
 
+    /**
+     * 用户总数统计
+     * @return mixed 用户总数
+     */
     function get_user_count()
     {
         return $this->db->count_all($this->table_name);

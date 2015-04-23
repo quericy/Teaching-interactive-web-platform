@@ -19,12 +19,12 @@
     <ol class="breadcrumb">
         <li class="active"><a href="<{$smarty.const._admin_domain}>">管理后台</a></li>
         <li class="active">系统设置</li>
-        <li>教师管理</li>
+        <li><{$web_title}></li>
     </ol>
     <div class="alert alert-info alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                     aria-hidden="true">&times;</span></button>
-        调试中...
+        教师模块调试中...
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -87,9 +87,9 @@
                         批量操作&nbsp;<span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a id="status_on" href="#">启用用户</a></li>
+                        <li><a id="status_on" href="#">启用教师</a></li>
                         <li class="divider"></li>
-                        <li><a id="status_off" href="#">禁用用户</a></li>
+                        <li><a id="status_off" href="#">禁用教师</a></li>
                     </ul>
                 </div>
                 &nbsp;&nbsp;
@@ -102,7 +102,7 @@
     </div>
 
 </div>
-<!-- 添加用户弹窗begin -->
+<!-- 添加教师弹窗begin -->
 <div id="add_dialog" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog  ">
         <div class="modal-content">
@@ -155,13 +155,13 @@
         </div>
     </div>
 </div>
-<!-- 添加用户弹窗end -->
+<!-- 添加教师弹窗end -->
 
 <{include file="admin/footer.tpl"}>
 <script src="<{$smarty.const._site_js}>icheck.min.js"></script>
 <script src="<{$smarty.const._site_js}>admin_common.js"></script>
 <script type="text/javascript">
-    //添加用户模态框展示触发
+    //添加教师模态框展示触发
     $('#add_dialog').on('show.bs.modal', function (e) {
         var obj = $(e.relatedTarget);
         if (obj.data('type') == 'edit') {
@@ -203,7 +203,7 @@
         }
     });
 
-    //添加/修改用户ajax请求
+    //添加/修改教师ajax请求
     $(document).delegate('#add_button', 'click', function () {
         var tid = $(this).attr('data-tid');
         var user_name_input = $('#user_name_input').val();
@@ -265,7 +265,7 @@
         });
     });
 
-    //删除用户
+    //删除教师
     $(document).delegate('.del_btn', 'click', function () {
         var tid = $(this).data('tid');
         var t_name = $(this).data('name');
@@ -307,7 +307,7 @@
     $(document).delegate('#status_off', 'click', function () {
         change_status(0);
     });
-    //更改用户状态
+    //更改教师状态
     function change_status(status) {
         var status_text = status == '1' ? '启用' : '禁用';
         var check_arr = new Array();
@@ -318,7 +318,7 @@
         });
         var tid_str = check_arr.join(',');
         if (tid_str == '') {
-            my_dialog('提示', '请至少勾选一个用户', false);
+            my_dialog('提示', '请至少勾选一个教师', false);
             return;
         }
         $.ajax({
@@ -328,7 +328,7 @@
             success: function (res) {
                 switch (res) {
                     case '1':
-                        my_dialog('提示', status_text + '用户成功!', {
+                        my_dialog('提示', status_text + '教师成功!', {
                             call_back: function () {
                                 location.reload();
                             },
@@ -338,7 +338,7 @@
                         });
                         break;
                     case '-1':
-                        my_dialog('提示', '请至少勾选一个用户', false);
+                        my_dialog('提示', '请至少勾选一个教师', false);
                         break;
                     default :
                         my_dialog('提示', '操作失败', false);
