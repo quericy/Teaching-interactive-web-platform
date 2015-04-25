@@ -24,7 +24,7 @@
     <div class="alert alert-info alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                     aria-hidden="true">&times;</span></button>
-        用户模块调试中...
+        学生模块调试中...
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
