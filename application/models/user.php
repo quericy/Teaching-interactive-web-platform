@@ -38,6 +38,15 @@ class User extends CI_Model {
     {
         return $this->db->count_all($this->table_name);
     }
+
+    /**
+     * 删除用户
+     * @param $uid 用户uid
+     */
+    function del_user_by_uid($uid)
+    {
+        $this->db->delete($this->table_name, array('uid' => $uid));
+    }
 }
 
 /* End of file user.php */

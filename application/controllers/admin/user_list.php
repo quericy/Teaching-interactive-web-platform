@@ -35,6 +35,18 @@ class User_list extends CI_Controller
         $this->smarty->view('admin/user_list.tpl', $this->assign_arr);
     }
 
+    /**
+     * 删除用户
+     * @param $uid 用户uid
+     */
+    public function del($uid)
+    {
+        /****权限判断(未完成)*****/
+        $uid = intval($uid);
+        $this->user_cls->del_user_by_uid($uid);
+        echo 1;
+    }
+
 }
 
 /* End of file user_list.php */

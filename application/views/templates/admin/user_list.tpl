@@ -59,11 +59,11 @@
                 <td class="text-center">
                     <div class="btn-group" role="group">
                         <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
-                           data-tid="<{$val.uid}>" data-user-name="<{$val.user_name}>">
+                           data-uid="<{$val.uid}>" data-user-name="<{$val.user_name}>">
                             重置
                         </a>
                         <a href="#" class="del_btn btn btn-default btn-sm"
-                           data-tid="<{$val.uid}>" data-name="<{$val.user_name}>">
+                           data-uid="<{$val.uid}>" data-name="<{$val.user_name}>">
                             删除
                         </a>
                     </div>
@@ -207,16 +207,16 @@
 
     //删除用户
     $(document).delegate('.del_btn', 'click', function () {
-        var tid = $(this).data('tid');
-        var t_name = $(this).data('name');
-        my_dialog('确认删除', '确定要删除<span id="del_teacher_name" class="text-danger">' + t_name + '</span>吗?删除后将无法恢复!', {
+        var uid = $(this).data('uid');
+        var u_name = $(this).data('name');
+        my_dialog('确认删除', '确定要删除<span id="del_teacher_name" class="text-danger">' + u_name + '</span>吗?删除后将无法恢复!', {
             btn_text: '删除',
             btn_class: 'danger',
             show_cancel: true,
             call_back: function () {
                 $.ajax({
                     type: 'post',
-                    url: '<{$smarty.const._admin_domain}>admin_list/del/' + tid,
+                    url: '<{$smarty.const._admin_domain}>user_list/del/' + uid,
                     success: function (res) {
                         switch (res) {
                             case '1':
