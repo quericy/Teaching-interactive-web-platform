@@ -47,6 +47,28 @@ class User_list extends CI_Controller
         echo 1;
     }
 
+    /**
+     * 启用/禁用用户
+     * @param $status 状态(1启用,0禁用)
+     */
+    public function status_change($status)
+    {
+        /****权限判断(未完成)*****/
+        $uid_str = $this->input->post('uid_str', true);
+        $uid_arr = explode(',', $uid_str);
+        if (empty($uid_str) || count($uid_arr) == 0) {
+            echo -1;
+            return;
+        }
+        foreach ($uid_arr as $k => $v) {
+            $uid_arr[$k] = intval($v);
+        }
+        $status = $status == '1' ? 1 : 0;
+        $this->user_cls->change_user_status($uid_arr, $status);
+
+        echo 1;
+    }
+
 }
 
 /* End of file user_list.php */

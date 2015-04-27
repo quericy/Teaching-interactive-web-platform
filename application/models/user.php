@@ -47,6 +47,17 @@ class User extends CI_Model {
     {
         $this->db->delete($this->table_name, array('uid' => $uid));
     }
+
+    /**
+     * 更改用户状态
+     * @param $uid_arr 用户uid数组
+     * @param $status 状态(1启用,0禁用)
+     */
+    function change_user_status($uid_arr, $status)
+    {
+        $this->db->where_in('uid', $uid_arr);
+        $this->db->update($this->table_name, array('status' => $status));
+    }
 }
 
 /* End of file user.php */

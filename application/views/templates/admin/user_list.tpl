@@ -42,7 +42,7 @@
             </tr>
             <{foreach  from=$user_info_list item=val key=key}>
             <tr>
-                <td class="text-center"><input class="item_check" type="checkbox" data-tid="<{$val.uid}>"></td>
+                <td class="text-center"><input class="item_check" type="checkbox" data-uid="<{$val.uid}>"></td>
                 <td class="text-left"><{$val.uid}></td>
                 <td class="text-left"><{$val.user_name}></td>
                 <td class="text-center"><{$val.email}></td>
@@ -253,18 +253,18 @@
         var check_arr = new Array();
         $(".item_check:checkbox").each(function () {
             if (this.checked == true) {
-                check_arr.push($(this).data('tid'));
+                check_arr.push($(this).data('uid'));
             }
         });
-        var tid_str = check_arr.join(',');
-        if (tid_str == '') {
+        var uid_str = check_arr.join(',');
+        if (uid_str == '') {
             my_dialog('提示', '请至少勾选一个用户', false);
             return;
         }
         $.ajax({
             type: 'post',
-            url: '<{$smarty.const._admin_domain}>admin_list/status_change/' + status,
-            data:{tid_str:tid_str},
+            url: '<{$smarty.const._admin_domain}>user_list/status_change/' + status,
+            data:{uid_str:uid_str},
             success: function (res) {
                 switch (res) {
                     case '1':
