@@ -58,7 +58,7 @@
                 </td>
                 <td class="text-center">
                     <div class="btn-group" role="group">
-                        <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
+                        <a href="#" class="reset_btn btn btn-primary btn-sm" data-toggle="modal"
                            data-uid="<{$val.uid}>" data-user-name="<{$val.user_name}>">
                             重置
                         </a>
@@ -101,106 +101,37 @@
 <script src="<{$smarty.const._site_js}>icheck.min.js"></script>
 <script src="<{$smarty.const._site_js}>admin_common.js"></script>
 <script type="text/javascript">
-    //添加用户模态框展示触发
-    $('#add_dialog').on('show.bs.modal', function (e) {
-        var obj = $(e.relatedTarget);
-        if (obj.data('type') == 'edit') {
-            $('#myModalLabel').html('修改教师信息');
-            //按钮设置
-            $('#add_button').html('<span class="glyphicon glyphicon-pencil"></span>&nbsp;修改');
-            $('#add_button').attr('data-tid', obj.data('tid'));
-            //用户名赋值
-            $('#user_name_input').attr('value', obj.data('user-name'));
-            //密码赋值
-            $('#password_input').val('');
-            //用户类型选中
-            $("input[name='user_type']").each(function () {
-                if (obj.data('user-type') == this.value) {
-                    $(this).iCheck('check');
-                }
-            });
-            //用户状态选中
-            $("input[name='user_status']").each(function () {
-                if (obj.data('status') == this.value) {
-                    $(this).iCheck('check');
-                }
-            });
-            $('#password-tips').html('');
-        } else {
-            $('#myModalLabel').html('添加教师信息');
-            //按钮设置
-            $('#add_button').html('<span class="glyphicon glyphicon-plus"></span>&nbsp;添加');
-            $('#add_button').attr('data-tid', 0);
-            //用户名赋值
-            $('#user_name_input').attr('value', '');
-            //密码赋值
-            $('#password_input').val('');
-            //用户类型选中
-            $("input[name='user_type']:first").iCheck('check');
-            //用户状态选中
-            $("input[name='user_status']:first").iCheck('check');
-            $('#password-tips').html('*');
-        }
-    });
-
-    //添加/修改用户ajax请求
-    $(document).delegate('#add_button', 'click', function () {
-        var tid = $(this).attr('data-tid');
-        var user_name_input = $('#user_name_input').val();
-        var password_input = $('#password_input').val();
-        var user_type = 1;
-        $("input[name='user_type']").each(function () {
-            if (this.checked == true) {
-                user_type = $(this).val();
-            }
-        });
-        var user_status = $("input[name='user_status'][check]").val();
-        $("input[name='user_status']").each(function () {
-            if (this.checked == true) {
-                user_status = $(this).val();
-            }
-        });
-
-        if (tid > 0) {
-            var ajax_url = 'edit/' + tid;
-            var add_edit_text = "编辑";
-        } else {
-            var ajax_url = 'add/';
-            var add_edit_text = "添加";
-        }
-        $.ajax({
-            type: 'post',
-            url: '<{$smarty.const._admin_domain}>admin_list/' + ajax_url,
-            data:{user_name:user_name_input,password_input:password_input,user_type:user_type,user_status:user_status},
-            success: function (res) {
-                switch (res) {
-                    case '1':
-                        my_dialog('消息', '教师' + add_edit_text + '成功!', {
-                            btn_class: 'info',
-                            call_back: function () {
-                                location.reload();
-                            },
-                            cancel_call_back: function () {
-                                location.reload();
-                            }
-                        });
-                        break;
-                    case '-1':
-                        my_dialog('提示', '系统繁忙,请重试!', false);
-                        break;
-                    case '-2':
-                        my_dialog('提示', '输入信息不完整!', false);
-                        break;
-                    case '-3':
-                        my_dialog('提示', '该教师不存在!', false);
-                        break;
-                    case '-4':
-                        my_dialog('提示', '该用户名已存在!', false);
-                        break;
-                    default :
-                        my_dialog('提示', '操作失败', false);
-                        break;
-                }
+    //重置密码
+    $(document).delegate('.reset_btn','click',function(){
+        var uid=$(this).data('uid');
+        var u_name=$(this).data('user-name');
+        my_dialog('重置用户密码','确定要重置用户<span  class="text-danger">'+u_name+'</span>的密码吗?<br>重置的用户密码将以系统设定的默认密码为准',{
+            btn_text:'重置',
+            btn_class:'info',
+            show_cancel:true,
+            call_back:function(){
+                $.ajax({
+                   type:'post',
+                    url:'<{$smarty.const._admin_domain}>user_list/reset_pwd/'+uid,
+                    success: function (res) {
+                        switch (res){
+                            case '1':
+                                my_dialog('提示', '重置密码成功!', {
+                                    btn_class: 'info',
+                                    call_back: function () {
+                                        location.reload();
+                                    },
+                                    cancel_call_back: function () {
+                                        location.reload();
+                                    }
+                                });
+                                break;
+                            default :
+                                my_dialog('提示', '操作失败', false);
+                                break;
+                        }
+                    }
+                });
             }
         });
     });

@@ -17,14 +17,14 @@ class Admin extends CI_Model
     }
 
     /**
-     * 用户密码自定义md5加密函数
-     * @param $pwd_str 待加密的字符串
+     * 管理员密码自定义md5加密函数
+     * @param string $pwd_str 待加密的字符串
      * @return string 加密后字符串
      */
     function super_md5($pwd_str)
     {
         $this->load->library('encrypt');
-        return md5($this->encrypt->encode(md5($pwd_str)));
+        return md5($this->encrypt->encode(md5($pwd_str).'admin_key'));
     }
 
     /**

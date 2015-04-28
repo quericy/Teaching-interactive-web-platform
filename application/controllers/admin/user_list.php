@@ -47,6 +47,14 @@ class User_list extends CI_Controller
         echo 1;
     }
 
+    public function reset_pwd($uid)
+    {
+        /****权限判断(未完成)*****/
+        $uid=intval($uid);
+        $this->user_cls->reset_user_pwd($uid);
+        echo 1;
+    }
+
     /**
      * 启用/禁用用户
      * @param $status 状态(1启用,0禁用)

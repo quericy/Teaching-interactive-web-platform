@@ -17,6 +17,17 @@ class User extends CI_Model {
     }
 
     /**
+     * 用户密码自定义md5加密函数
+     * @param $pwd_str 待加密的字符串
+     * @return string 加密后字符串
+     */
+    function user_md5($pwd_str)
+    {
+        $this->load->library('encrypt');
+        return md5($this->encrypt->encode(md5($pwd_str).'user_key'));
+    }
+
+    /**
      * 用户列表
      * @param int $page 页数
      * @param int $per_page 每页数
@@ -46,6 +57,16 @@ class User extends CI_Model {
     function del_user_by_uid($uid)
     {
         $this->db->delete($this->table_name, array('uid' => $uid));
+    }
+
+    /**
+     * 用户密码重置
+     * @param $uid 用户ID
+     */
+    function reset_user_pwd($uid)
+    {
+        $this->db->where_in('uid', $uid);
+        $this->db->update($this->table_name, array('user_pwd' => $this->user_md5('123456')));
     }
 
     /**
