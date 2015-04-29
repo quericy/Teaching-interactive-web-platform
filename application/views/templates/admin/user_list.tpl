@@ -98,8 +98,6 @@
 </div>
 
 <{include file="admin/footer.tpl"}>
-<script src="<{$smarty.const._site_js}>icheck.min.js"></script>
-<script src="<{$smarty.const._site_js}>admin_common.js"></script>
 <script type="text/javascript">
     //重置密码
     $(document).delegate('.reset_btn','click',function(){

@@ -158,8 +158,6 @@
 <!-- 添加教师弹窗end -->
 
 <{include file="admin/footer.tpl"}>
-<script src="<{$smarty.const._site_js}>icheck.min.js"></script>
-<script src="<{$smarty.const._site_js}>admin_common.js"></script>
 <script type="text/javascript">
     //添加教师模态框展示触发
     $('#add_dialog').on('show.bs.modal', function (e) {

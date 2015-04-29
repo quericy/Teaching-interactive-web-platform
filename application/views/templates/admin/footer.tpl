@@ -5,9 +5,7 @@
 <script src="<{$smarty.const._site_js}>jquery.min.js"></script>
 <script src="<{$smarty.const._site_js}>bootstrap.min.js"></script>
 <script type="text/javascript">
-    $(function() {
-        var uls = $('.sidebar-nav > ul > *').clone();
-        uls.addClass('visible-xs');
-        $('#main-menu').append(uls.clone());
-    });
+
 </script>
+<script src="<{$smarty.const._site_js}>icheck.min.js"></script>
+<script src="<{$smarty.const._site_js}>admin_common.js"></script>

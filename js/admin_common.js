@@ -2,6 +2,10 @@
  * Created by 熠 on 2015/4/12 0012.
  */
 $(document).ready(function () {
+    //适配移动设备时,进行nav填充
+    var uls = $('.sidebar-nav > ul > *').clone();
+    uls.addClass('visible-xs');
+    $('#main-menu').append(uls.clone());
     //添加复用模态框默认容器
     $('body').append('<div id="my_modal_dialog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>');
 });
