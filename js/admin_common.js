@@ -6,6 +6,12 @@ $(document).ready(function () {
     var uls = $('.sidebar-nav > ul > *').clone();
     uls.addClass('visible-xs');
     $('#main-menu').append(uls.clone());
+    //icheck初始化
+    $('input').iCheck({
+        checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue',
+        increaseArea: '20%' // 触摸扩展区域
+    });
     //添加复用模态框默认容器
     $('body').append('<div id="my_modal_dialog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>');
 });

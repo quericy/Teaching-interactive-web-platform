@@ -223,13 +223,6 @@
     $('#all_check').on('ifUnchecked', function (event) {
         $('.item_check').iCheck('uncheck');
     });
-    $(document).ready(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // 触摸扩展区域
-        });
-    });
 </script>
 </body>
 </html>
