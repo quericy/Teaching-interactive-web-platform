@@ -9,7 +9,7 @@
     <link type="text/css" rel="stylesheet" href="<{$smarty.const._site_css}>bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="<{$smarty.const._site_css}>iCheck_square_blue.css"/>
     <link type="text/css" rel="stylesheet" href="<{$smarty.const._admin_css}>default.css"/>
-    <link type="text/css" rel="stylesheet" href="<{$smarty.const._admin_css}>admin_list.css"/>
+    <link type="text/css" rel="stylesheet" href="<{$smarty.const._admin_css}><{$controller_name}>.css"/>
     <!--IE8 css query-->
     <script src="<{$smarty.const._site_js}>respond.min.js"></script>
 </head>
@@ -230,7 +230,7 @@
         }
         $.ajax({
             type: 'post',
-            url: '<{$smarty.const._admin_domain}>admin_list/' + ajax_url,
+            url: '<{$smarty.const._admin_domain}><{$controller_name}>/' + ajax_url,
             data:{user_name:user_name_input,password_input:password_input,user_type:user_type,user_status:user_status},
             success: function (res) {
                 switch (res) {
@@ -276,7 +276,7 @@
             call_back: function () {
                 $.ajax({
                     type: 'post',
-                    url: '<{$smarty.const._admin_domain}>admin_list/del/' + tid,
+                    url: '<{$smarty.const._admin_domain}><{$controller_name}>/del/' + tid,
                     success: function (res) {
                         switch (res) {
                             case '1':
@@ -323,7 +323,7 @@
         }
         $.ajax({
             type: 'post',
-            url: '<{$smarty.const._admin_domain}>admin_list/status_change/' + status,
+            url: '<{$smarty.const._admin_domain}><{$controller_name}>/status_change/' + status,
             data:{tid_str:tid_str},
             success: function (res) {
                 switch (res) {

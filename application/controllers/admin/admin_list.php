@@ -15,6 +15,7 @@ class Admin_list extends CI_Controller
     {
         parent::__construct();
         $this->load->model('admin', 'admin_cls');
+        $this->assign_arr['controller_name'] = $this->router->class;
         $this->assign_arr['web_title'] = '教师管理';
         $this->assign_arr['nav_show'] = 'system';
     }

@@ -14,6 +14,7 @@ class User_list extends CI_Controller
     {
         parent::__construct();
         $this->load->model('user', 'user_cls');
+        $this->assign_arr['controller_name'] = $this->router->class;
         $this->assign_arr['web_title'] = '学生管理';
         $this->assign_arr['nav_show'] = 'system';
     }
