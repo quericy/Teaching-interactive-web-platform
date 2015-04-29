@@ -9,7 +9,7 @@
     <link type="text/css" rel="stylesheet" href="<{$smarty.const._site_css}>bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="<{$smarty.const._site_css}>iCheck_square_blue.css"/>
     <link type="text/css" rel="stylesheet" href="<{$smarty.const._admin_css}>default.css"/>
-    <link type="text/css" rel="stylesheet" href="<{$smarty.const._admin_css}>admin_list.css"/>
+    <link type="text/css" rel="stylesheet" href="<{$smarty.const._admin_css}>user_list.css"/>
     <!--IE8 css query-->
     <script src="<{$smarty.const._site_js}>respond.min.js"></script>
 </head>
@@ -30,7 +30,7 @@
         <div class="panel-heading">
             <h3 class="panel-title">学生列表</h3>
         </div>
-        <table id="admin_table" class="table table-striped table-hover table-condensed">
+        <table id="user_table" class="table table-striped table-hover table-condensed">
             <tr>
                 <th class="text-center"><input id="all_check" type="checkbox"></th>
                 <th class="text-left">ID</th>
