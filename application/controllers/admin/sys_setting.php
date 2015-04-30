@@ -26,6 +26,14 @@ class sys_setting extends CI_Controller
         $this->smarty->view('admin/sys_setting.tpl', $this->assign_arr);
     }
 
+    /**
+     * 保存配置
+     */
+    public function save_setting()
+    {
+        echo 1;
+    }
+
 
 }
 

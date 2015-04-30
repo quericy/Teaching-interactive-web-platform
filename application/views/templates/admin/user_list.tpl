@@ -21,7 +21,7 @@
         <li class="active">系统设置</li>
         <li><{$web_title}></li>
     </ol>
-    <div class="alert alert-info alert-dismissible" role="alert">
+    <div class="alert alert-info alert-dismissible fade in" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                     aria-hidden="true">&times;</span></button>
         学生模块调试中...

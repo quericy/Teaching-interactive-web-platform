@@ -21,18 +21,19 @@
         <li class="active">系统设置</li>
         <li><{$web_title}></li>
     </ol>
-    <div class="alert alert-info alert-dismissible" role="alert">
+    <div id="header_tips"  >
+    </div>
+    <div  class="alert alert-info alert-dismissible fade in" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                     aria-hidden="true">&times;</span></button>
         <strong>提示：</strong>系统参数只有管理员有权查看与修改
     </div>
-
     <div>
         <div class="form-group">
-            <label for="Web_Name">站点名称:</label>
+            <label for="web_name">站点名称:</label>
             <span class="glyphicon glyphicon-question-sign" style="color:#A7A7A7;"
                   data-toggle="tooltip" data-placement="right" title="前台显示的站点用户名称"></span>
-            <input id="Web_Name" type="text" class="form-control" placeholder="请输入站点名称">
+            <input id="web_name" type="text" class="form-control" placeholder="请输入站点名称">
         </div>
         <div class="form-group">
             <label for="cookie_time">用户记住密码有效期:</label>
@@ -70,10 +71,36 @@
 
 </div>
 
+
 <{include file="admin/footer.tpl"}>
 <script type="text/javascript">
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
+    });
+    $(document).delegate('#save_sys_setting', 'click', function () {
+        var web_name = $('#web_name').val();
+        var cookie_time = $('#cookie_time').val();
+        var reset_pwd = $('#reset_pwd').val();
+        var user_status = $("#power_reset_pwd")[0].checked;//jquery选择器转DOM对象取check的值
+        var power_data_view = $("#power_data_view")[0].checked;
+        var power_log_view = $("#power_log_view")[0].checked;
+
+        $.ajax({
+            type: 'post',
+            url: '<{$smarty.const._admin_domain}><{$controller_name}>/save_setting/',
+            data:{web_name:web_name,cookie_time:cookie_time,reset_pwd:reset_pwd,user_status:user_status,power_data_view:power_data_view,power_log_view:power_log_view},
+            success: function (res) {
+                switch (res) {
+                    case '1':
+                        $('#header_tips').html('<div class="alert alert-success fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>提示：</strong>系统参数保存成功!</div>');
+                        break;
+                    default :
+                        my_dialog('提示', '操作失败', false);
+                        break;
+                }
+            }
+        });
+
     });
 </script>
 </body>
