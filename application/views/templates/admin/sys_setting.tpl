@@ -41,7 +41,7 @@
                   data-toggle="tooltip" data-placement="right" title="单位为天,过大会导致浏览器无法记录"></span>
 
             <div class="input-group">
-                <input id="cookie_time" type="number" min="0" max="365" class="form-control" placeholder="请输入天数">
+                <input id="cookie_time" type="number" min="0" max="365" class="form-control" placeholder="请输入天数" value="7">
                 <span class="input-group-addon">天</span>
             </div>
         </div>
@@ -85,6 +85,13 @@
         var power_data_view = $("#power_data_view")[0].checked;
         var power_log_view = $("#power_log_view")[0].checked;
 
+        if(cookie_time==''){
+            my_dialog('提示','记住密码有效期必须为数字!',false);
+            return;
+        }
+        user_status=user_status==true?1:0;
+        power_data_view=power_data_view==true?1:0;
+        power_log_view=power_log_view==true?1:0;
         $.ajax({
             type: 'post',
             url: '<{$smarty.const._admin_domain}><{$controller_name}>/save_setting/',
