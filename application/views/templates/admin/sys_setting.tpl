@@ -81,7 +81,7 @@
         var web_name = $('#web_name').val();
         var cookie_time = $('#cookie_time').val();
         var reset_pwd = $('#reset_pwd').val();
-        var user_status = $("#power_reset_pwd")[0].checked;//jquery选择器转DOM对象取check的值
+        var power_reset_pwd = $("#power_reset_pwd")[0].checked;//jquery选择器转DOM对象取check的值
         var power_data_view = $("#power_data_view")[0].checked;
         var power_log_view = $("#power_log_view")[0].checked;
 
@@ -89,13 +89,13 @@
             my_dialog('提示','记住密码有效期必须为数字!',false);
             return;
         }
-        user_status=user_status==true?1:0;
+        power_reset_pwd=power_reset_pwd==true?1:0;
         power_data_view=power_data_view==true?1:0;
         power_log_view=power_log_view==true?1:0;
         $.ajax({
             type: 'post',
             url: '<{$smarty.const._admin_domain}><{$controller_name}>/save_setting/',
-            data:{web_name:web_name,cookie_time:cookie_time,reset_pwd:reset_pwd,user_status:user_status,power_data_view:power_data_view,power_log_view:power_log_view},
+            data:{web_name:web_name,cookie_time:cookie_time,reset_pwd:reset_pwd,power_reset_pwd:power_reset_pwd,power_data_view:power_data_view,power_log_view:power_log_view},
             success: function (res) {
                 switch (res) {
                     case '1':
