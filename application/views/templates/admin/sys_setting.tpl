@@ -99,7 +99,8 @@
             success: function (res) {
                 switch (res) {
                     case '1':
-                        $('#header_tips').html('<div class="alert alert-success fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>提示：</strong>系统参数保存成功!</div>');
+                        $('#header_tips').html('<div id="tips_msg" class="alert alert-success fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>消息：</strong>系统参数保存成功!</div>');
+                        $('#tips_msg').fadeOut(3000);
                         break;
                     default :
                         my_dialog('提示', '操作失败', false);
