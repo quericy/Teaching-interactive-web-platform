@@ -33,7 +33,7 @@
             <label for="web_name">站点名称:</label>
             <span class="glyphicon glyphicon-question-sign" style="color:#A7A7A7;"
                   data-toggle="tooltip" data-placement="right" title="前台显示的站点用户名称"></span>
-            <input id="web_name" type="text" class="form-control" placeholder="请输入站点名称">
+            <input id="web_name" type="text" class="form-control" placeholder="请输入站点名称" value="<{$web_name}>">
         </div>
         <div class="form-group">
             <label for="cookie_time">用户记住密码有效期:</label>
@@ -41,7 +41,7 @@
                   data-toggle="tooltip" data-placement="right" title="单位为天,过大会导致浏览器无法记录"></span>
 
             <div class="input-group">
-                <input id="cookie_time" type="number" min="0" max="365" class="form-control" placeholder="请输入天数" value="7">
+                <input id="cookie_time" type="number" min="0" max="365" class="form-control" placeholder="请输入天数" value="<{$cookie_time}>">
                 <span class="input-group-addon">天</span>
             </div>
         </div>
@@ -49,18 +49,21 @@
             <label for="reset_pwd">重置默认密码:</label>
             <span class="glyphicon glyphicon-question-sign" style="color:#A7A7A7;"
                   data-toggle="tooltip" data-placement="right" title="管理员重置用户密码时,赋予用户的初始密码"></span>
-            <input id="reset_pwd" type="text" class="form-control" placeholder="请输入默认密码">
+            <input id="reset_pwd" type="text" class="form-control" placeholder="请输入默认密码" value="<{$reset_pwd}>">
         </div>
         <div class="form-group">
             <label>教师权限设置:</label>
             <span class="glyphicon glyphicon-question-sign" style="color:#A7A7A7;"
                   data-toggle="tooltip" data-placement="right" title="设置赋予普通教师的权限"></span>
 
-            <p>&emsp;&emsp;<input id="power_reset_pwd" type="checkbox">&emsp;重置学生密码</p>
+            <p>&emsp;&emsp;<input id="power_reset_pwd" type="checkbox" <{if $power_reset_pwd==1}>checked<{/if}>>
+                &emsp;重置学生密码</p>
 
-            <p>&emsp;&emsp;<input id="power_data_view" type="checkbox">&emsp;查看汇总数据</p>
+            <p>&emsp;&emsp;<input id="power_data_view" type="checkbox" <{if $power_data_view==1}>checked<{/if}>>
+                &emsp;查看汇总数据</p>
 
-            <p>&emsp;&emsp;<input id="power_log_view" type="checkbox">&emsp;查看日志</p>
+            <p>&emsp;&emsp;<input id="power_log_view" type="checkbox" <{if $power_log_view==1}>checked<{/if}>>
+                &emsp;查看日志</p>
         </div>
         <hr/>
         <div class="form-group">
@@ -100,6 +103,14 @@
                 switch (res) {
                     case '1':
                         $('#header_tips').html('<div id="tips_msg" class="alert alert-success fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>消息：</strong>系统参数保存成功!</div>');
+                        $('#tips_msg').fadeOut(3000);
+                        break;
+                    case '-2':
+                        $('#header_tips').html('<div id="tips_msg" class="alert alert-danger fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>提示：</strong>记住密码时间必须是大于等于0的数字!</div>');
+                        $('#tips_msg').fadeOut(3000);
+                        break;
+                    case '-3':
+                        $('#header_tips').html('<div id="tips_msg" class="alert alert-danger fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>提示：</strong>默认密码不能为空!</div>');
                         $('#tips_msg').fadeOut(3000);
                         break;
                     default :

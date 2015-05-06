@@ -29,7 +29,7 @@ class setting extends CI_Model
         $this->db->select('value')->from($this->table_name)->where(array('key'=>$key));
         $query = $this->db->get();
         $res=$query->row_array();
-        return $res;
+        return $res['value'];
     }
 
     /**
@@ -52,7 +52,7 @@ class setting extends CI_Model
         if(!$this->is_exist($key)){
             $this->add_setting($key,$value);//不存在时添加一条新的键记录
         }else{
-            $this->db->update($this->table_name,array('key'=>$key,'value'=>$value));
+            $this->db->update($this->table_name,array('value'=>''.$value),array('key'=>$key));
         }
     }
 
