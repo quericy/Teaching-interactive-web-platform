@@ -95,11 +95,16 @@
         power_reset_pwd=power_reset_pwd==true?1:0;
         power_data_view=power_data_view==true?1:0;
         power_log_view=power_log_view==true?1:0;
+
+        $('#save_sys_setting').html('正在保存');
+        $('#save_sys_setting').attr('disabled',"disabled");
         $.ajax({
             type: 'post',
             url: '<{$smarty.const._admin_domain}><{$controller_name}>/save_setting/',
             data:{web_name:web_name,cookie_time:cookie_time,reset_pwd:reset_pwd,power_reset_pwd:power_reset_pwd,power_data_view:power_data_view,power_log_view:power_log_view},
             success: function (res) {
+                $('#save_sys_setting').html('保存');
+                $('#save_sys_setting').removeAttr('disabled');
                 switch (res) {
                     case '1':
                         $('#header_tips').html('<div id="tips_msg" class="alert alert-success fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>消息：</strong>系统参数保存成功!</div>');
