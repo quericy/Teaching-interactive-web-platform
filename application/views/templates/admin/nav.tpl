@@ -77,7 +77,7 @@
                 <li><a href="<{$smarty.const._admin_domain}>user_list"><span class="glyphicon glyphicon-triangle-right"></span> 学生管理</a></li>
                 <li><a href="<{$smarty.const._admin_domain}>admin_list"><span class="glyphicon glyphicon-triangle-right"></span> 教师管理</a></li>
                 <li><a href="<{$smarty.const._admin_domain}>sys_setting"><span class="glyphicon glyphicon-triangle-right"></span> 系统参数</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 日志记录</a></li>
+                <li><a href="<{$smarty.const._admin_domain}>log_list"><span class="glyphicon glyphicon-triangle-right"></span> 日志记录</a></li>
             </ul></li>
     </ul>
 </div>
