@@ -18,19 +18,6 @@ class Log extends CI_Model
 
 
     /**
-     * 查询一条日志记录
-     * @param $fields 查询字段
-     * @param $cond 条件
-     * @return mixed
-     */
-    function get_one_log($fields, $cond)
-    {
-        $this->db->select($fields)->from($this->table_name)->where($cond);
-        $query = $this->db->get();
-        return $query->row_array();
-    }
-
-    /**
      * 获得日志列表
      * @param int $page 页数
      * @param int $per_page 每页条数(默认15)
@@ -58,23 +45,22 @@ class Log extends CI_Model
 
 
     /**
-     * 添加管理员
-     * @param $user_name 用户名
-     * @param $password 密码
-     * @param $user_type 用户类型(2管理员,1普通教师)
-     * @param $user_status 用户状态(1启用,0禁用)
-     * @return bool
+     * 添加日志记录
+     * @param $content 日志内容
+     * @param $type 模块名称
+     * @return object
      */
-    function add_admin($user_name, $password, $user_type, $user_status)
+    function add_log($content, $type)
     {
-        return $this->db->insert($this->table_name, array('user_name' => $user_name,
-            'user_pwd' => $this->super_md5($password),
-            'type' => $user_type,
-            'status' => $user_status));
+        return $this->db->insert($this->table_name, array('content' => $content,
+            'type' => $type,
+            'tid' => 1,//管理员id(需要登录模块)
+            'log_time' => time()
+        ));
     }
 
     /**
-     * 符合条件的管理员数量
+     * 符合条件的日志数量
      * @param $cond 指定条件
      * @return int 数量
      */
