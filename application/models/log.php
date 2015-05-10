@@ -29,6 +29,7 @@ class Log extends CI_Model
         $offset = $per_page * ($page - 1);
         $offset = $offset > 0 ? $offset : 0;
         $this->db->join('admin', 'admin.tid = log.tid');
+        $this->db->select('log.*,admin.user_name');
         $query = $this->db->get($this->table_name, $per_page, $offset);
         return $this->security->xss_clean($query->result_array());
     }

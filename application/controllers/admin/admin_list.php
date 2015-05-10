@@ -58,6 +58,7 @@ class Admin_list extends CI_Controller
         if ($this->admin_cls->get_counts('user_name = \'' . $user_name . '\'') > 0) {
             return -4;
         }
+        $this->log->add_log('添加教师(教师用户名:' . $user_name . ')', $this->assign_arr['web_title']);
         $res = $this->admin_cls->add_admin($user_name, $password, $user_type, $user_status);
         echo $res == true ? 1 : -1;
     }
@@ -90,6 +91,7 @@ class Admin_list extends CI_Controller
             return;
         }
         /***密码策略(未完成)***/
+        $this->log->add_log('修改教师(教师id:' . $tid . ')', $this->assign_arr['web_title']);
         $res = $this->admin_cls->update_admin($tid, $user_name, $password, $user_type, $user_status);
         echo $res == true ? 1 : -1;
     }
@@ -102,6 +104,7 @@ class Admin_list extends CI_Controller
     {
         /****权限判断(未完成)*****/
         $tid = intval($tid);
+        $this->log->add_log('删除教师(教师id:' . $tid . ')', $this->assign_arr['web_title']);
         $this->admin_cls->del_admin_by_tid($tid);
         echo 1;
     }
@@ -123,8 +126,9 @@ class Admin_list extends CI_Controller
             $tid_arr[$k] = intval($v);
         }
         $status = $status == '1' ? 1 : 0;
+        $status_tips = $status == '1' ? '启用' : '禁用';
+        $this->log->add_log('修改教师(教师id:' . implode(',', $tid_arr) . ')状态为:' . $status_tips, $this->assign_arr['web_title']);
         $this->admin_cls->change_admin_status($tid_arr, $status);
-
         echo 1;
     }
 }
