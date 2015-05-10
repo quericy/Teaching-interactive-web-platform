@@ -34,8 +34,6 @@ class Log_list extends CI_Controller
         $this->load->library('page_cls');
         $this->assign_arr['page_string'] = $this->page_cls->get_page_config($this, $this->log_cls->get_log_count(), true, $per_page);
         //页面展示
-
-
         $this->smarty->view('admin/log_list.tpl', $this->assign_arr);
     }
 }

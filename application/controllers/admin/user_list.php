@@ -45,6 +45,7 @@ class User_list extends CI_Controller
     {
         /****权限判断(未完成)*****/
         $uid = intval($uid);
+        $this->log->add_log('删除用户(用户id:' . $uid . ')', $this->assign_arr['web_title']);
         $this->user_cls->del_user_by_uid($uid);
         echo 1;
     }
@@ -52,7 +53,8 @@ class User_list extends CI_Controller
     public function reset_pwd($uid)
     {
         /****权限判断(未完成)*****/
-        $uid=intval($uid);
+        $uid = intval($uid);
+        $this->log->add_log('重置用户(用户id:' . $uid . ')密码', $this->assign_arr['web_title']);
         $this->user_cls->reset_user_pwd($uid);
         echo 1;
     }
@@ -74,6 +76,8 @@ class User_list extends CI_Controller
             $uid_arr[$k] = intval($v);
         }
         $status = $status == '1' ? 1 : 0;
+        $status_tips = $status == '1' ? '启用' : '禁用';
+        $this->log->add_log('修改用户(用户id:' . implode(',', $uid_arr) . ')状态为:' . $status_tips, $this->assign_arr['web_title']);
         $this->user_cls->change_user_status($uid_arr, $status);
 
         echo 1;
