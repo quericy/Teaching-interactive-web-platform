@@ -9,7 +9,6 @@
     <link type="text/css" rel="stylesheet" href="<{$smarty.const._site_css}>bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="<{$smarty.const._site_css}>iCheck_square_blue.css"/>
     <link type="text/css" rel="stylesheet" href="<{$smarty.const._admin_css}>default.css"/>
-    <link type="text/css" rel="stylesheet" href="<{$smarty.const._admin_css}><{$controller_name}>.css"/>
     <!--IE8 css query-->
     <script src="<{$smarty.const._site_js}>respond.min.js"></script>
 </head>
@@ -52,12 +51,14 @@
                 </td>
                 <td class="text-center">
                     <div class="btn-group" role="group">
-                        <a href="<{$smarty.const._admin_domain}>course_edit/<{$val.did}>"
+                        <a href="<{$smarty.const._admin_domain}>course_edit/index/<{$val.did}>"
                            class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>
                             编辑
                         </a>
                         <a href="#" class="del_btn btn btn-default btn-sm"
                            data-did="<{$val.did}>" data-title="<{$val.title}>">
+                            <span class="glyphicon glyphicon-trash"></span>
                             删除
                         </a>
                     </div>
