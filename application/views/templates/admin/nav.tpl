@@ -56,7 +56,7 @@
                 <i class="glyphicon glyphicon-folder-open"></i>&nbsp;课件资料<i class="fa-collapse glyphicon"></i>
             </a></li>
         <li><ul class="data-menu nav nav-list collapse <{if $nav_show=='data'}>in<{/if}>">
-                <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 课件列表</a></li>
+                <li><a href="<{$smarty.const._admin_domain}>course_list"><span class="glyphicon glyphicon-triangle-right"></span> 课件列表</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 资料列表</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 文件上传</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 统计汇总</a></li>
