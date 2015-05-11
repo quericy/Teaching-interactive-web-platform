@@ -12,6 +12,10 @@
     <link type="text/css" rel="stylesheet" href="<{$smarty.const._admin_css}><{$controller_name}>.css"/>
     <!--IE8 css query-->
     <script src="<{$smarty.const._site_js}>respond.min.js"></script>
+
+    <!-- UEditor -->
+    <script type="text/javascript" src="<{$smarty.const._site_third_party}>ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="<{$smarty.const._site_third_party}>ueditor/ueditor.all.js"></script>
 </head>
 <body>
 <{include file="admin/nav.tpl"}>
@@ -61,7 +65,7 @@
                     <tr>
                         <td class="text-center"><label for="content_area">正文内容:</label></td>
                         <td class="text-left">
-                            <textarea id="content_area" class="form-control"></textarea>
+                            <textarea id="content_area" class=""></textarea>
                         </td>
                     </tr>
                 </table>
@@ -84,7 +88,9 @@
 
 <{include file="admin/footer.tpl"}>
 <script type="text/javascript">
-
+    var ue = UE.getEditor('content_area',{
+        initialFrameHeight : 300
+    });
 </script>
 </body>
 </html>

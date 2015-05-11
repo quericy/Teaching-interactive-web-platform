@@ -16,6 +16,7 @@ if(isset($_SERVER['RUNTIME_DOMAIN'])&&!empty($_SERVER['RUNTIME_DOMAIN'])){
 //前台全局参数
 define('_site_css',_site_domain.'css/');
 define('_site_js',_site_domain.'js/');
+define('_site_third_party',_site_domain.'third_party/');
 define('_site_images',_site_domain.'images/');
 //后台全局参数
 define('_admin_domain',_site_domain.'admin/');
