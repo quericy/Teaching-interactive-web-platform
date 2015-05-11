@@ -40,7 +40,7 @@
                                                disabled="disabled"></td>
                 <td class="text-left"><{$val.id}></td>
                 <td class="text-left"><{$val.user_name}></td>
-                <td class="text-center"><{$val.content}></td>
+                <td class="text-center" style="width: 50%;"><{$val.content}></td>
                 <td class="text-center">
                     <{if !empty($val.log_time)}>
                     <{$val.log_time|date_format:'%Y-%m-%d %H:%M:%S'}>
