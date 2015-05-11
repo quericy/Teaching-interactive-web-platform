@@ -1,0 +1,6 @@
+#edit_table td{
+    vertical-align:middle;/*垂直居中*/
+}
+#edit_table #content_area{
+    min-height: 300px;
+}
