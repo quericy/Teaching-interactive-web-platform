@@ -65,8 +65,13 @@ class User extends CI_Model {
      */
     function reset_user_pwd($uid)
     {
+        //获得默认密码
+        $this->load->model('setting', 'setting_cls');
+        $reset_pwd=$this->setting_cls->get_setting('reset_pwd');
+        if(empty($reset_pwd))$reset_pwd='123456';
+
         $this->db->where_in('uid', $uid);
-        $this->db->update($this->table_name, array('user_pwd' => $this->user_md5('123456')));
+        $this->db->update($this->table_name, array('user_pwd' => $this->user_md5($reset_pwd)));
     }
 
     /**
