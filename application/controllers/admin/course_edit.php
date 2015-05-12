@@ -47,6 +47,10 @@ class Course_edit extends CI_Controller
     {
         $did = intval($this->input->post('did', true));
         $title = $this->input->post('title', true);
+        if(empty($title)){
+            echo -2;
+            return;
+        }
         $data_type = $this->input->post('data_type', true);
         $content_area = $this->input->post('content_area', false);//不使用CI框架自带过滤器
         //白名单过滤富文本内容

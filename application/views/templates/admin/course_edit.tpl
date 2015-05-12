@@ -91,16 +91,27 @@
 
 <{include file="admin/footer.tpl"}>
 <script type="text/javascript">
-    //初始化编辑器
-    var ue = UE.getEditor('content_area', {
-        initialFrameHeight: 220
-    });
-
+    var ua_str=navigator.userAgent;
+    var is_pc='1';
+    if(ua_str.match(/Android/i)||ua_str.match(/Windows Phone/i)||ua_str.match(/iPhone/i)||ua_str.match(/iPod/i)||ua_str.match(/iPad/i)){
+        is_pc='0';
+    }
+    if(is_pc=='1'){
+        //初始化编辑器
+        var ue = UE.getEditor('content_area', {
+            initialFrameHeight: 220
+        });
+    }
     //保存按钮ajax请求
     $(document).delegate('#save_btn', 'click', function () {
         var did = $(this).attr('data-did');
         var title = $('#title').val();
-        var content_area = ue.getContent();
+        if(is_pc=='1'){
+            var content_area = ue.getContent();
+        }else{
+            var content_area = $('#content_area').text();
+        }
+        alert(content_area);return;
         var data_type = 1;
         $("input[name='data_type']").each(function () {
             if (this.checked == true) {
@@ -133,7 +144,7 @@
                         my_dialog('提示', '系统繁忙,请重试!', false);
                         break;
                     case '-2':
-                        my_dialog('提示', '输入信息不完整!', false);
+                        my_dialog('提示', '请输入课件名称!', false);
                         break;
                     case '-3':
                         my_dialog('提示', '修改的课件不存在!', false);
