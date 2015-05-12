@@ -66,8 +66,9 @@
                 </tr>-->
                 <tr>
                     <td class="text-center"><label for="content_area">正文内容:</label></td>
-                    <td class="text-left">
+                    <td id="area_td" class="text-left">
                         <textarea id="content_area"><{if isset($data_info)}><{$data_info.content}><{/if}></textarea>
+                        <a id="show_editor_btn" style="display: none;" href="javascript:void(0)">点击使用高级编辑器</a>
                     </td>
                 </tr>
             </table>
@@ -91,24 +92,34 @@
 
 <{include file="admin/footer.tpl"}>
 <script type="text/javascript">
-    var ua_str=navigator.userAgent;
-    var is_pc='1';
-    if(ua_str.match(/Android/i)||ua_str.match(/Windows Phone/i)||ua_str.match(/iPhone/i)||ua_str.match(/iPod/i)||ua_str.match(/iPad/i)){
-        is_pc='0';
+    var ua_str = navigator.userAgent;
+    var is_pc = '1';
+    if (ua_str.match(/Android/i) || ua_str.match(/Windows Phone/i) || ua_str.match(/iPhone/i) || ua_str.match(/iPod/i) || ua_str.match(/iPad/i)) {
+        is_pc = '0';
     }
-    if(is_pc=='1'){
+    if (is_pc == '1') {
         //初始化编辑器
         var ue = UE.getEditor('content_area', {
             initialFrameHeight: 220
         });
+    } else {
+        $('#show_editor_btn').css('display', 'block');//移动端默认不显示编辑器
     }
+    $(document).delegate('#show_editor_btn', 'click', function () {
+        $('#show_editor_btn').css('display', 'none');
+        var ue = UE.getEditor('content_area', {
+            initialFrameHeight: 220
+        });
+        ue.setShow();
+
+    });
     //保存按钮ajax请求
     $(document).delegate('#save_btn', 'click', function () {
         var did = $(this).attr('data-did');
         var title = $('#title').val();
-        if(is_pc=='1'){
+        if (is_pc == '1') {
             var content_area = ue.getContent();
-        }else{
+        } else {
             var content_area = $('#content_area').text();
         }
         var data_type = 1;
