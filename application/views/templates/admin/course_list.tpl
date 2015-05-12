@@ -28,8 +28,8 @@
             <tr>
                 <th class="text-center"><input id="all_check" type="checkbox" disabled="disabled"></th>
                 <th class="text-left">ID</th>
-                <th class="text-left">上传教师</th>
                 <th class="text-center">标题</th>
+                <th class="text-center">上传教师</th>
                 <th class="text-center">类型</th>
                 <th class="text-center">最后编辑时间</th>
                 <th class="text-center">操作</th>
@@ -39,8 +39,8 @@
                 <td class="text-center"><input class="item_check" type="checkbox" data-did="<{$val.did}>"
                                                disabled="disabled"></td>
                 <td class="text-left"><{$val.did}></td>
-                <td class="text-left"><{$val.user_name}></td>
-                <td class="text-center"><{$val.title}></td>
+                <td class="text-center"><a href="#"><{$val.title}></a></td>
+                <td class="text-center"><{$val.user_name}></td>
                 <td class="text-center"><{if $val.type==1}>课件<{else}>资料<{/if}></td>
                 <td class="text-center">
                     <{if !empty($val.edit_time)}>

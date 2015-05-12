@@ -67,7 +67,7 @@
                 <tr>
                     <td class="text-center"><label for="content_area">正文内容:</label></td>
                     <td id="area_td" class="text-left">
-                        <textarea id="content_area"><{if isset($data_info)}><{$data_info.content}><{/if}></textarea>
+                        <textarea id="content_area" style="width:100%;"><{if isset($data_info)}><{$data_info.content}><{/if}></textarea>
                         <a id="show_editor_btn" style="display: none;" href="javascript:void(0)">点击使用高级编辑器</a>
                     </td>
                 </tr>
