@@ -93,31 +93,35 @@
 <{include file="admin/footer.tpl"}>
 <script type="text/javascript">
     var ua_str = navigator.userAgent;
-    var is_pc = '1';
+    var is_use_editor = '1';
+    var ue;//编辑器对象
     if (ua_str.match(/Android/i) || ua_str.match(/Windows Phone/i) || ua_str.match(/iPhone/i) || ua_str.match(/iPod/i) || ua_str.match(/iPad/i)) {
-        is_pc = '0';
+        is_use_editor = '0';//移动端访问,默认不显示编辑器
     }
-    if (is_pc == '1') {
+    if (is_use_editor == '1') {
         //初始化编辑器
-        var ue = UE.getEditor('content_area', {
+        ue = UE.getEditor('content_area', {
             initialFrameHeight: 220
         });
     } else {
-        $('#show_editor_btn').css('display', 'block');//移动端默认不显示编辑器
+        $('#show_editor_btn').css('display', 'block');//移动端显示"点击使用高级编辑器"按钮
     }
+    //点击显示高级编辑器
     $(document).delegate('#show_editor_btn', 'click', function () {
-        $('#show_editor_btn').css('display', 'none');
-        var ue = UE.getEditor('content_area', {
-            initialFrameHeight: 220
-        });
-        ue.setShow();
-
+        if(is_use_editor=='0'){
+            $('#show_editor_btn').css('display', 'none');
+            is_use_editor='1';
+            ue = UE.getEditor('content_area', {
+                initialFrameHeight: 220
+            });
+            ue.setShow();
+        }
     });
     //保存按钮ajax请求
     $(document).delegate('#save_btn', 'click', function () {
         var did = $(this).attr('data-did');
         var title = $('#title').val();
-        if (is_pc == '1') {
+        if (is_use_editor == '1') {
             var content_area = ue.getContent();
         } else {
             var content_area = $('#content_area').text();
@@ -128,7 +132,6 @@
                 data_type = $(this).val();
             }
         });
-        // alert(did+"|"+title+"|"+data_type+"|"+content_area);
         $('#save_btn').html('正在保存');
         $('#save_btn').attr('disabled', "disabled");
         $.ajax({
