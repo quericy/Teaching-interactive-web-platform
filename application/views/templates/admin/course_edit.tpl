@@ -111,7 +111,6 @@
         }else{
             var content_area = $('#content_area').text();
         }
-        alert(content_area);return;
         var data_type = 1;
         $("input[name='data_type']").each(function () {
             if (this.checked == true) {
