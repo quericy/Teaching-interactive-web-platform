@@ -12,10 +12,9 @@
     <link type="text/css" rel="stylesheet" href="<{$smarty.const._admin_css}><{$controller_name}>.css"/>
     <!--IE8 css query-->
     <script src="<{$smarty.const._site_js}>respond.min.js"></script>
-
     <!-- UEditor -->
     <script type="text/javascript" src="<{$smarty.const._site_third_party}>ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" src="<{$smarty.const._site_third_party}>ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" src="<{$smarty.const._site_third_party}>ueditor/ueditor.all.min.js"></script>
 </head>
 <body>
 <{include file="admin/nav.tpl"}>
@@ -35,52 +34,56 @@
             </h3>
         </div>
         <div class="panel-body">
-            <form action=""  method="POST" enctype="multipart/form-data">
-                <table id="edit_table" class="table table-striped table-hover table-condensed">
-                    <tr>
-                        <td class="text-center" style="width:100px;"><label>课件ID:</label></td>
-                        <td class="text-left">1</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><label for="title">课件名称:</label></td>
-                        <td class="text-left">
-                            <input id="title" type="text" class="form-control" placeholder="请输入课件名称"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><label>类型:</label></td>
-                        <td class="text-left">
-                            &nbsp;
-                            <span><input type="radio" name="type" value="1" checked>&nbsp;课件</span>
-                            &nbsp;&nbsp;&nbsp;
-                            <span><input type="radio" name="type" value="2">&nbsp;资料</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><label for="data_file">附件:</label></td>
-                        <td class="text-left">
-                            <input id="data_file" type="file" class="form-control"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><label for="content_area">正文内容:</label></td>
-                        <td class="text-left">
-                            <textarea id="content_area" class=""></textarea>
-                        </td>
-                    </tr>
-                </table>
-            </form>
+
+            <table id="edit_table" class="table table-striped table-hover table-condensed">
+                <tr>
+                    <td class="text-center" style="width:100px;"><label>课件ID:</label></td>
+                    <td class="text-left">
+                        <{if isset($data_info)}><{$data_info.did}><{else}>自动分配<{/if}>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center"><label for="title">课件名称:</label></td>
+                    <td class="text-left">
+                        <input id="title" type="text" class="form-control" placeholder="请输入课件名称"
+                               value="<{if isset($data_info)}><{$data_info.title}><{/if}>"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center"><label>类型:</label></td>
+                    <td class="text-left">
+                        &nbsp;
+                        <span><input type="radio" name="data_type" value="1" checked>&nbsp;课件</span>
+                        &nbsp;&nbsp;&nbsp;
+                        <span><input type="radio" name="data_type" value="2">&nbsp;资料</span>
+                    </td>
+                </tr>
+                <!--<tr>
+                    <td class="text-center"><label for="data_file">附件:</label></td>
+                    <td class="text-left">
+                        <input id="data_file" type="file" class="form-control"/>
+                    </td>
+                </tr>-->
+                <tr>
+                    <td class="text-center"><label for="content_area">正文内容:</label></td>
+                    <td class="text-left">
+                        <textarea id="content_area"><{if isset($data_info)}><{$data_info.content}><{/if}></textarea>
+                    </td>
+                </tr>
+            </table>
+
         </div>
     </div>
     <div class="container-fluid">
         <div class="row">
-            <button type="button" class="btn btn-success">
-                <span class="glyphicon glyphicon-floppy-disk"></span>
-                保存
+            <button id="save_btn" type="button" class="btn btn-success"
+                    data-did="<{if isset($data_info)}><{$data_info.did}><{else}>0<{/if}>">
+                <span class="glyphicon glyphicon-floppy-disk"></span>保存
             </button>
-            <button type="button" class="btn btn-primary">
+            <a href="<{$smarty.const._admin_domain}>course_list"
+               onclick="if(confirm('确定放弃编辑返回列表页面?')==false)return false;" class="btn btn-primary">
                 取消
-            </button>
+            </a>
         </div>
     </div>
 </div>
@@ -88,8 +91,59 @@
 
 <{include file="admin/footer.tpl"}>
 <script type="text/javascript">
-    var ue = UE.getEditor('content_area',{
-        initialFrameHeight : 300
+    //初始化编辑器
+    var ue = UE.getEditor('content_area', {
+        initialFrameHeight: 220
+    });
+
+    //保存按钮ajax请求
+    $(document).delegate('#save_btn', 'click', function () {
+        var did = $(this).attr('data-did');
+        var title = $('#title').val();
+        var content_area = ue.getContent();
+        var data_type = 1;
+        $("input[name='data_type']").each(function () {
+            if (this.checked == true) {
+                data_type = $(this).val();
+            }
+        });
+        // alert(did+"|"+title+"|"+data_type+"|"+content_area);
+        $('#save_btn').html('正在保存');
+        $('#save_btn').attr('disabled', "disabled");
+        $.ajax({
+            type: 'post',
+            url: '<{$smarty.const._admin_domain}><{$controller_name}>/save_course',
+            data:{did:did,title:title,data_type:data_type,content_area:content_area},
+            success: function (res) {
+                $('#save_btn').html('<span class="glyphicon glyphicon-floppy-disk"></span>保存');
+                $('#save_btn').removeAttr('disabled');
+                switch (res) {
+                    case '1':
+                        my_dialog('消息', '课件内容保存成功!', {
+                            btn_class: 'info',
+                            call_back: function () {
+                                location.reload();
+                            },
+                            cancel_call_back: function () {
+                                location.reload();
+                            }
+                        });
+                        break;
+                    case '-1':
+                        my_dialog('提示', '系统繁忙,请重试!', false);
+                        break;
+                    case '-2':
+                        my_dialog('提示', '输入信息不完整!', false);
+                        break;
+                    case '-3':
+                        my_dialog('提示', '修改的课件不存在!', false);
+                        break;
+                    default :
+                        my_dialog('提示', '操作失败', false);
+                        break;
+                }
+            }
+        });
     });
 </script>
 </body>

@@ -47,6 +47,55 @@ class Data extends CI_Model
     }
 
     /**
+     * 获得一条课件资料记录
+     * @param $fields 查询字段
+     * @param $cond 条件
+     * @return mixed
+     */
+    function get_one_data($fields, $cond)
+    {
+        $this->db->select($fields)->from($this->table_name)->where($cond);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    /**
+     * 添加一条课件资料记录
+     * @param $data_arr
+     * @return object
+     */
+    function add_one_data($data_arr)
+    {
+        return $this->db->insert($this->table_name, array(
+            'tid' => 1,//待完善登录
+            'title' => $data_arr['title'],
+            'type' => $data_arr['type'],
+            'edit_time' => time(),
+            'content' => $data_arr['content']
+        ));
+
+    }
+
+    /**
+     * 更新一条课件资料记录
+     * @param $did 课件资料did
+     * @param $data_arr
+     * @return object
+     */
+    function update_one_data($did, $data_arr)
+    {
+        $update_arr = array(
+            'tid' => 1,//待完善登录
+            'title' => $data_arr['title'],
+            'type' => $data_arr['type'],
+            'edit_time' => time(),
+            'content' => $data_arr['content']
+        );
+        $this->db->where_in('did', $did);
+        return $this->db->update($this->table_name, $update_arr);
+    }
+
+    /**
      * 删除课件资料
      * @param $did 课件资料id
      */
