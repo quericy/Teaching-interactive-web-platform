@@ -62,8 +62,10 @@ class Course_edit extends CI_Controller
             'content' => $content_area
         );
         if (empty($did)) {//新增记录
+            $this->log->add_log('新增课件(课件标题:' . $title . ')', $this->assign_arr['web_title']);
             $this->data_cls->add_one_data($save_arr);
         } else {//更新记录
+            $this->log->add_log('修改课件(课件id:' . $did . ')', $this->assign_arr['web_title']);
             $this->data_cls->update_one_data($did, $save_arr);
         }
         echo 1;
