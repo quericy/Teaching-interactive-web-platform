@@ -22,7 +22,7 @@
     </ol>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">课件列表</h3>
+            <h3 class="panel-title">资料列表</h3>
         </div>
         <table id="admin_table" class="table table-striped table-hover table-condensed">
             <tr>
@@ -34,7 +34,7 @@
                 <th class="text-center">最后编辑时间</th>
                 <th class="text-center">操作</th>
             </tr>
-            <{foreach from=$course_info_list item=val key=key}>
+            <{foreach from=$data_info_list item=val key=key}>
             <tr>
                 <td class="text-center"><input class="item_check" type="checkbox" data-did="<{$val.did}>"
                                                disabled="disabled"></td>
@@ -57,7 +57,7 @@
                 </td>
                 <td class="text-center">
                     <div class="btn-group" role="group">
-                        <a href="<{$smarty.const._admin_domain}>course_edit/index/<{$val.did}>"
+                        <a href="<{$smarty.const._admin_domain}>data_edit/index/<{$val.did}>"
                            class="btn btn-primary btn-sm">
                             <span class="glyphicon glyphicon-pencil"></span>
                             编辑
@@ -76,9 +76,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="pull-left">
-                <a href="<{$smarty.const._admin_domain}>course_edit/" class="btn btn-success" style="margin-top: 20px">
+                <a href="<{$smarty.const._admin_domain}>data_edit/" class="btn btn-success" style="margin-top: 20px">
                     <span class="glyphicon glyphicon-plus"></span>
-                    添加新课件
+                    添加新资料
                 </a>
                 &nbsp;&nbsp;
             </div>
@@ -94,11 +94,11 @@
 
 <{include file="admin/footer.tpl"}>
 <script type="text/javascript">
-    //删除课件
+    //删除资料
     $(document).delegate('.del_btn', 'click', function () {
         var did = $(this).data('did');
         var title = $(this).data('title');
-        my_dialog('确认删除', '确定要删除课件<span id="del_data_name" class="text-danger">' + title + '</span>吗?删除后将无法恢复!', {
+        my_dialog('确认删除', '确定要删除资料<span id="del_data_name" class="text-danger">' + title + '</span>吗?删除后将无法恢复!', {
             btn_text: '删除',
             btn_class: 'danger',
             show_cancel: true,
