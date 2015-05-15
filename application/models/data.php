@@ -105,6 +105,16 @@ class Data extends CI_Model
         $this->db->delete($this->table_name, array('did' => $did));
     }
 
+    /**
+     * 获得课程资料记录中,不同教师tid的数量
+     * @param $cond 筛选条件
+     * @return int 教师数量
+     */
+    function get_tid_count($cond)
+    {
+        $this->db->select('tid')->distinct()->from($this->table_name)->where($cond);
+        return $this->db->get()->num_rows();//返回get结果的行数
+    }
 
 }
 

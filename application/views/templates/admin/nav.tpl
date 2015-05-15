@@ -59,7 +59,7 @@
                 <li><a href="<{$smarty.const._admin_domain}>course_list"><span class="glyphicon glyphicon-triangle-right"></span> 课件列表</a></li>
                 <li><a href="<{$smarty.const._admin_domain}>data_list"><span class="glyphicon glyphicon-triangle-right"></span> 资料列表</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 文件上传</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 统计汇总</a></li>
+                <li><a href="<{$smarty.const._admin_domain}>data_statistics"><span class="glyphicon glyphicon-triangle-right"></span> 统计汇总</a></li>
             </ul></li>
 
         <li><a href="#" data-target=".answer-menu" class="nav-header <{if $nav_show!='answer'}>collapsed<{/if}>" data-toggle="collapse">
