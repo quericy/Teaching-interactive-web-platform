@@ -192,7 +192,8 @@ body {
     padding: .5em 0em 0em 0em;
 }
 
-.dialog .copy-right{
+.copy-right{
+    color:#fff;
     position:absolute;
     bottom:1px;
     right: 0px;

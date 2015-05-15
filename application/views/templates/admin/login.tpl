@@ -39,8 +39,9 @@
 
         <div id="login_tips">*用户名或密码错误!&nbsp;&nbsp;</div>
     </div>
-    <div class="copy-right">教学互动平台 © 2015 Powered By chenyi ,All Rights Reserved.</div>
+
 </div>
+<div class="copy-right">教学互动平台 © 2015 Powered By chenyi ,All Rights Reserved.</div>
 <script src="<{$smarty.const._site_js}>jquery.min.js"></script>
 <script src="<{$smarty.const._site_js}>bootstrap.min.js"></script>
 <script src="<{$smarty.const._site_js}>icheck.min.js"></script>
