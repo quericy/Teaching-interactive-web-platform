@@ -1,0 +1,202 @@
+/*后台登录页面css*/
+
+/********全局设置**********/
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: 'Open Sans', helvetica, arial, sans-serif;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+h1 {
+    color: #4d5b76;
+    font-size: 3em;
+}
+
+h2 {
+    font-size: 1.75em;
+    color: #3a4a53;
+}
+
+h3 {
+    font-size: 1.25em;
+}
+
+hr {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #fff;
+}
+
+label {
+    font-weight: normal;
+}
+
+.text-sm {
+    font-size: .8em;
+}
+
+.padding-top {
+    padding-top: 1em;
+}
+
+.padding-bottom {
+    padding-bottom: 1em;
+}
+
+.padding-right {
+    padding-right: 1em;
+}
+
+.padding-left {
+    padding-left: 1em;
+}
+
+.padding-top-small {
+    padding-top: .5em;
+}
+
+.padding-bottom-small {
+    padding-bottom: .5em;
+}
+
+.padding-right-small {
+    padding-right: .5em;
+}
+
+.padding-left-small {
+    padding-left: .5em;
+}
+
+.label.header-label {
+    display: block;
+    margin-bottom: 1em;
+}
+
+.label.img-label {
+    display: block;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.content {
+    position: relative;
+    min-height: 800px;
+    background: #fff;
+    margin-left: 240px;
+    border-left: 1px solid #cccccc;
+    padding: 15px 15px 0px 15px;
+}
+
+.header {
+    background: #fff;
+    border-bottom: 1px solid #cccccc;
+    border-bottom: 1px solid #eee;
+    border-left: 1px solid #ffffff;
+    padding: .5em 0em 1em 0em;
+    margin: 0px 0em 2em 0em;
+}
+
+.header h1 {
+    margin: 0em 0em .5em 0em;
+    padding: 0em;
+    line-height: 1em;
+    font-size: 1.5em;
+    font-weight: normal;
+}
+
+/********自定义设置**********/
+body {
+    background-repeat: no-repeat;
+    background-image: url('/images/login_bg.jpg');
+    background-attachment: fixed;
+
+}
+
+.dialog {
+    margin: 10em auto;
+    float: none;
+    max-width: 400px;
+    z-index: 1;
+    color: #fff;
+    background: url('/images/login_box_bg.png') repeat;
+    padding: 5px;
+    line-height: 45px;
+
+}
+
+.dialog .header-title{
+    font-family: "PetalaPro","Helvetica Neue",Helvetica,"Arial","Source Han Sans CN","Hiragino Sans GB","Microsoft YaHei","Microsoft JhengHei",sans-serif;
+    font-size: 20px;
+}
+
+.dialog label{
+    font-size: 15px;
+}
+
+.dialog .input-group-addon{
+    background-color:transparent;
+    color:#fff;
+    border: 1px solid #ccc;
+    border-right: 0;
+}
+
+.dialog input{
+    background-color: transparent;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    line-height: 1.2;
+    color: #fff;
+    padding: 20px 10px;
+    outline: none;
+}
+
+.dialog #login_btn{
+    margin: 12px 0;
+    background-color: transparent;
+    color: #fff;
+    border-color: #fff;
+}
+.dialog #login_btn:hover{
+    background-color: #fff;
+    color: #2489C5;
+}
+
+.dialog #login_tips{
+    float: right;
+}
+
+.dialog .alert {
+    margin-bottom: 1em;
+}
+
+.dialog form {
+    margin-bottom: 0px;
+}
+
+.dialog .remember-me {
+    padding: .5em 0em 0em 0em;
+}
+
+.dialog .copy-right{
+    position:absolute;
+    bottom:1px;
+    right: 0px;
+    text-align: right;
+    line-height: normal;
+
+}
