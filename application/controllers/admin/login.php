@@ -19,10 +19,21 @@ class Login extends CI_Controller
 
     public function index()
     {
-
-
         //页面展示
         $this->smarty->view('admin/login.tpl', $this->assign_arr);
+    }
+
+    /**
+     * 登录验证函数
+     */
+    public function login_check()
+    {
+        $power_reset_pwd = $this->input->post('check_name', true);
+        $power_reset_pwd = $this->input->post('check_pwd', true);
+        $auto_login = $this->input->post('auto_login', true);
+        sleep(2);
+        echo -1;
+
     }
 
 

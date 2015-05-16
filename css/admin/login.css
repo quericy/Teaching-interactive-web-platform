@@ -159,9 +159,9 @@ body {
     background-color: transparent;
     border: 1px solid #fff;
     border-radius: 3px;
-    line-height: 1.2;
+    /*line-height: 1.2;*/
     color: #fff;
-    padding: 20px 10px;
+    /*padding: 20px 10px;*/
     outline: none;
 }
 
