@@ -141,9 +141,10 @@
             success: function (res) {
                 $('#save_btn').html('<span class="glyphicon glyphicon-floppy-disk"></span>保存');
                 $('#save_btn').removeAttr('disabled');
-                switch (res) {
+                var return_arr = eval('(' + res + ')');
+                switch (return_arr.status) {
                     case '1':
-                        my_dialog('消息', '课件内容保存成功!', {
+                        my_dialog('消息', return_arr.msg, {
                             btn_class: 'info',
                             call_back: function () {
                                 location.reload();
@@ -154,16 +155,10 @@
                         });
                         break;
                     case '-1':
-                        my_dialog('提示', '系统繁忙,请重试!', false);
-                        break;
-                    case '-2':
-                        my_dialog('提示', '请输入课件名称!', false);
-                        break;
-                    case '-3':
-                        my_dialog('提示', '修改的课件不存在!', false);
+                        my_dialog('提示', return_arr.msg, false);
                         break;
                     default :
-                        my_dialog('提示', '操作失败', false);
+                        my_dialog('提示', '操作失败:'+return_arr.msg, false);
                         break;
                 }
             }

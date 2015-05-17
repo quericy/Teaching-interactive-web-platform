@@ -14,6 +14,7 @@ class Course_edit extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->common_cls->is_login_alert();
         $this->load->model('data', 'data_cls');
         $this->assign_arr['controller_name'] = $this->router->class;
         $this->assign_arr['web_title'] = '编辑课件';
@@ -48,7 +49,7 @@ class Course_edit extends CI_Controller
         $did = intval($this->input->post('did', true));
         $title = $this->input->post('title', true);
         if(empty($title)){
-            echo -2;
+            echo $this->common_cls->json_output('-1','请输入课件名称!');
             return;
         }
         $data_type = $this->input->post('data_type', true);
@@ -64,11 +65,12 @@ class Course_edit extends CI_Controller
         if (empty($did)) {//新增记录
             $this->log->add_log('新增课件(课件标题:' . $title . ')', $this->assign_arr['web_title']);
             $this->data_cls->add_one_data($save_arr);
+            echo $this->common_cls->json_output('1','添加新课件成功!');
         } else {//更新记录
             $this->log->add_log('修改课件(课件id:' . $did . ')', $this->assign_arr['web_title']);
             $this->data_cls->update_one_data($did, $save_arr);
+            echo $this->common_cls->json_output('1','课件内容修改成功!');
         }
-        echo 1;
     }
 }
 
