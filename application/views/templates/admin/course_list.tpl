@@ -107,9 +107,10 @@
                     type: 'post',
                     url: '<{$smarty.const._admin_domain}><{$controller_name}>/del/' + did,
                     success: function (res) {
-                        switch (res) {
+                        var return_arr = eval('(' + res + ')');
+                        switch (return_arr.status) {
                             case '1':
-                                my_dialog('提示', '删除成功!', {
+                                my_dialog('消息', return_arr.msg, {
                                     btn_class: 'info',
                                     call_back: function () {
                                         location.reload();
@@ -120,7 +121,7 @@
                                 });
                                 break;
                             default :
-                                my_dialog('提示', '操作失败', false);
+                                my_dialog('提示', '操作失败:'+return_arr.msg, false);
                                 break;
                         }
                     }

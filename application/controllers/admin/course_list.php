@@ -14,6 +14,7 @@ class Course_list extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->common_cls->is_login_alert();
         $this->load->model('data', 'data_cls');
         $this->assign_arr['controller_name'] = $this->router->class;
         $this->assign_arr['web_title'] = '课件管理';
@@ -38,7 +39,7 @@ class Course_list extends CI_Controller
         $did = intval($did);
         $this->log->add_log('删除课件(课件id:' . $did . ')', $this->assign_arr['web_title']);
         $this->data_cls->del_by_did($did);
-        echo 1;
+        echo $this->common_cls->json_output('1','课件删除成功!');
     }
 
 }
