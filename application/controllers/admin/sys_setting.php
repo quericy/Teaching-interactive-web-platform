@@ -14,7 +14,7 @@ class sys_setting extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-
+        $this->common_cls->is_login_alert();
         $this->load->model('setting', 'setting_cls');
         $this->assign_arr['controller_name'] = $this->router->class;
         $this->assign_arr['web_title'] = '系统参数';
@@ -60,11 +60,11 @@ class sys_setting extends CI_Controller
         $power_data_view = $this->input->post('power_data_view', true);
         $power_log_view = $this->input->post('power_log_view', true);
         if (!is_numeric($cookie_time) || $cookie_time < 0) {
-            echo -2;//记住密码时间必须是大于等于0的数字
+            echo $this->common_cls->json_output('-2','记住密码时间必须是大于等于0的数字!');
             return;
         }
         if (empty($reset_pwd)) {
-            echo -3;//默认密码不能为空
+            echo $this->common_cls->json_output('-3','默认密码不能为空!');
             return;
         }
         $power_reset_pwd = $power_reset_pwd == '1' ? '1' : '0';
@@ -80,7 +80,7 @@ class sys_setting extends CI_Controller
         $this->setting_cls->update_setting('power_reset_pwd', $power_reset_pwd);
         $this->setting_cls->update_setting('power_data_view', $power_data_view);
         $this->setting_cls->update_setting('power_log_view', $power_log_view);
-        echo 1;
+        echo $this->common_cls->json_output('1','系统参数保存成功!');
     }
 
 

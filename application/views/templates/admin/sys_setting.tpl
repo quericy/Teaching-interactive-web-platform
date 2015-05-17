@@ -105,21 +105,19 @@
             success: function (res) {
                 $('#save_sys_setting').html('保存');
                 $('#save_sys_setting').removeAttr('disabled');
-                switch (res) {
+                var return_arr = eval('(' + res + ')');
+                switch (return_arr.status) {
                     case '1':
-                        $('#header_tips').html('<div id="tips_msg" class="alert alert-success fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>消息：</strong>系统参数保存成功!</div>');
+                        $('#header_tips').html('<div id="tips_msg" class="alert alert-success fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>消息：</strong>'+return_arr.msg+'</div>');
                         $('#tips_msg').fadeOut(3000);
                         break;
                     case '-2':
-                        $('#header_tips').html('<div id="tips_msg" class="alert alert-danger fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>提示：</strong>记住密码时间必须是大于等于0的数字!</div>');
-                        $('#tips_msg').fadeOut(3000);
-                        break;
                     case '-3':
-                        $('#header_tips').html('<div id="tips_msg" class="alert alert-danger fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>提示：</strong>默认密码不能为空!</div>');
+                        $('#header_tips').html('<div id="tips_msg" class="alert alert-danger fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>提示：</strong>'+return_arr.msg+'</div>');
                         $('#tips_msg').fadeOut(3000);
                         break;
                     default :
-                        my_dialog('提示', '操作失败', false);
+                        my_dialog('提示', '操作失败:'+return_arr.msg, false);
                         break;
                 }
             }
