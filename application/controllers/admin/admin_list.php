@@ -84,9 +84,9 @@ class Admin_list extends CI_Controller
             echo -2;
             return;
         }
-        //用户名判断(包括自己的用户名)
-        $user_info = $this->admin_cls->get_one_admin('user_name', 'tid = ' . $tid);
-        if (!empty($user_info) && $user_info['user_name'] != $user_name) {
+        //用户名判断(阻止已存在且与自己的用户名不同的)
+        $user_info = $this->admin_cls->get_one_admin('tid', array('user_name'=>$user_name));
+        if (!empty($user_info) && $user_info['tid'] != $tid) {
             echo -4;
             return;
         }
