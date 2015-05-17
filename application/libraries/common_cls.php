@@ -80,13 +80,30 @@ class Common_Cls
     public function is_login_alert()
     {
         if(!$this->is_login()){
+            $this->login_out();
             echo '<script>alert("您未登录或已掉线!");location.href=\''._admin_domain.'login\'</script>';
             exit;
         }
     }
 
-
-
-
-
+    /**
+     * 登出函数
+     * @param string $auto_navigate 自动跳转页面
+     */
+    public function login_out($auto_navigate='')
+    {
+        $expire_time=time()- 3600;
+        setcookie('id', '', $expire_time, '/');
+        setcookie('user_name', '', $expire_time, '/');
+        setcookie('type', '', $expire_time, '/');
+        setcookie('status', '', $expire_time, '/');
+        setcookie('login_ip', '', $expire_time, '/');
+        setcookie('token', '', $expire_time, '/');
+        setcookie('login_time', '', $expire_time, '/');
+        setcookie('last_login_time', '', $expire_time, '/');
+        if(!empty($auto_navigate)){
+            header('location:' . $auto_navigate);
+            exit;
+        }
+    }
 }

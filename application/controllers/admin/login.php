@@ -63,6 +63,14 @@ class Login extends CI_Controller
         echo $this->common_cls->json_output('1','ok',$token_arr);
     }
 
+    /**
+     * 退出登录
+     */
+    public function out()
+    {
+        $this->common_cls->login_out(_admin_domain.'login');
+    }
+
 
 }
 
