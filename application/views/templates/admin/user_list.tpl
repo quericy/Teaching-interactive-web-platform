@@ -112,9 +112,10 @@
                    type:'post',
                     url:'<{$smarty.const._admin_domain}><{$controller_name}>/reset_pwd/'+uid,
                     success: function (res) {
-                        switch (res){
+                        var return_arr = eval('(' + res + ')');
+                        switch (return_arr.status) {
                             case '1':
-                                my_dialog('提示', '重置密码成功!', {
+                                my_dialog('提示', return_arr.msg, {
                                     btn_class: 'info',
                                     call_back: function () {
                                         location.reload();

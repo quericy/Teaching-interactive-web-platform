@@ -315,6 +315,7 @@
                 switch (return_arr.status) {
                     case '1':
                         my_dialog('消息', return_arr.msg, {
+                            btn_class: 'info',
                             call_back: function () {
                                 location.reload();
                             },
