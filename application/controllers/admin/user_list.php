@@ -14,6 +14,7 @@ class User_list extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->common_cls->is_login_alert();
         $this->load->model('user', 'user_cls');
         $this->assign_arr['controller_name'] = $this->router->class;
         $this->assign_arr['web_title'] = '学生管理';
@@ -47,7 +48,7 @@ class User_list extends CI_Controller
         $uid = intval($uid);
         $this->log->add_log('删除用户(用户id:' . $uid . ')', $this->assign_arr['web_title']);
         $this->user_cls->del_user_by_uid($uid);
-        echo $this->common_cls->json_output('1','!');
+        echo $this->common_cls->json_output('1', '删除用户成功!');
     }
 
     /**
@@ -60,7 +61,7 @@ class User_list extends CI_Controller
         $uid = intval($uid);
         $this->log->add_log('重置用户(用户id:' . $uid . ')密码', $this->assign_arr['web_title']);
         $this->user_cls->reset_user_pwd($uid);
-        echo $this->common_cls->json_output('1','重置密码成功!');
+        echo $this->common_cls->json_output('1', '重置密码成功!');
     }
 
     /**
@@ -73,7 +74,7 @@ class User_list extends CI_Controller
         $uid_str = $this->input->post('uid_str', true);
         $uid_arr = explode(',', $uid_str);
         if (empty($uid_str) || count($uid_arr) == 0) {
-            echo $this->common_cls->json_output('-1','!');
+            echo $this->common_cls->json_output('-1', '请至少勾选一个用户!');
             return;
         }
         foreach ($uid_arr as $k => $v) {
@@ -84,7 +85,7 @@ class User_list extends CI_Controller
         $this->log->add_log('修改用户(用户id:' . implode(',', $uid_arr) . ')状态为:' . $status_tips, $this->assign_arr['web_title']);
         $this->user_cls->change_user_status($uid_arr, $status);
 
-        echo $this->common_cls->json_output('1','!');
+        echo $this->common_cls->json_output('1', $status_tips . '用户成功!');
     }
 
 }

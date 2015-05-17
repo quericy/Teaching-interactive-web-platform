@@ -100,22 +100,22 @@
 <{include file="admin/footer.tpl"}>
 <script type="text/javascript">
     //重置密码
-    $(document).delegate('.reset_btn','click',function(){
-        var uid=$(this).data('uid');
-        var u_name=$(this).data('user-name');
-        my_dialog('重置用户密码','确定要重置用户<span  class="text-danger">'+u_name+'</span>的密码吗?<br>重置的用户密码将以系统设定的默认密码为准',{
-            btn_text:'重置',
-            btn_class:'info',
-            show_cancel:true,
-            call_back:function(){
+    $(document).delegate('.reset_btn', 'click', function () {
+        var uid = $(this).data('uid');
+        var u_name = $(this).data('user-name');
+        my_dialog('重置用户密码', '确定要重置用户<span  class="text-danger">' + u_name + '</span>的密码吗?<br>重置的用户密码将以系统设定的默认密码为准', {
+            btn_text: '重置',
+            btn_class: 'info',
+            show_cancel: true,
+            call_back: function () {
                 $.ajax({
-                   type:'post',
-                    url:'<{$smarty.const._admin_domain}><{$controller_name}>/reset_pwd/'+uid,
+                    type: 'post',
+                    url: '<{$smarty.const._admin_domain}><{$controller_name}>/reset_pwd/' + uid,
                     success: function (res) {
                         var return_arr = eval('(' + res + ')');
                         switch (return_arr.status) {
                             case '1':
-                                my_dialog('提示', return_arr.msg, {
+                                my_dialog('消息', return_arr.msg, {
                                     btn_class: 'info',
                                     call_back: function () {
                                         location.reload();
@@ -126,7 +126,7 @@
                                 });
                                 break;
                             default :
-                                my_dialog('提示', '操作失败', false);
+                                my_dialog('提示', '操作失败:'+return_arr.msg, false);
                                 break;
                         }
                     }
@@ -148,9 +148,10 @@
                     type: 'post',
                     url: '<{$smarty.const._admin_domain}><{$controller_name}>/del/' + uid,
                     success: function (res) {
-                        switch (res) {
+                        var return_arr = eval('(' + res + ')');
+                        switch (return_arr.status) {
                             case '1':
-                                my_dialog('提示', '删除成功!', {
+                                my_dialog('消息', return_arr.msg, {
                                     btn_class: 'info',
                                     call_back: function () {
                                         location.reload();
@@ -161,7 +162,7 @@
                                 });
                                 break;
                             default :
-                                my_dialog('提示', '操作失败', false);
+                                my_dialog('提示', '操作失败:'+return_arr.msg, false);
                                 break;
                         }
                     }
@@ -179,7 +180,6 @@
     });
     //更改用户状态
     function change_status(status) {
-        var status_text = status == '1' ? '启用' : '禁用';
         var check_arr = new Array();
         $(".item_check:checkbox").each(function () {
             if (this.checked == true) {
@@ -196,9 +196,11 @@
             url: '<{$smarty.const._admin_domain}><{$controller_name}>/status_change/' + status,
             data:{uid_str:uid_str},
             success: function (res) {
-                switch (res) {
+                var return_arr = eval('(' + res + ')');
+                switch (return_arr.status) {
                     case '1':
-                        my_dialog('提示', status_text + '用户成功!', {
+                        my_dialog('消息', return_arr.msg, {
+                            btn_class: 'info',
                             call_back: function () {
                                 location.reload();
                             },
@@ -208,10 +210,10 @@
                         });
                         break;
                     case '-1':
-                        my_dialog('提示', '请至少勾选一个用户', false);
+                        my_dialog('提示', return_arr.msg, false);
                         break;
                     default :
-                        my_dialog('提示', '操作失败', false);
+                        my_dialog('提示', '操作失败:'+return_arr.msg, false);
                         break;
                 }
             }
