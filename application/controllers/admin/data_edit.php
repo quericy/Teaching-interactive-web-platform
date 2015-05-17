@@ -7,12 +7,14 @@
  * Time: 13:08
  */
 
-class Data_Edit extends CI_Controller {
+class Data_Edit extends CI_Controller
+{
     private $assign_arr = array();
 
     public function __construct()
     {
         parent::__construct();
+        $this->common_cls->is_login_alert();
         $this->load->model('data', 'data_cls');
         $this->assign_arr['controller_name'] = $this->router->class;
         $this->assign_arr['web_title'] = '编辑资料';
@@ -47,7 +49,7 @@ class Data_Edit extends CI_Controller {
         $did = intval($this->input->post('did', true));
         $title = $this->input->post('title', true);
         if(empty($title)){
-            echo -2;
+            echo $this->common_cls->json_output('-1','请输入资料名称!');
             return;
         }
         $data_type = $this->input->post('data_type', true);
@@ -63,11 +65,12 @@ class Data_Edit extends CI_Controller {
         if (empty($did)) {//新增记录
             $this->log->add_log('新增资料(资料标题:' . $title . ')', $this->assign_arr['web_title']);
             $this->data_cls->add_one_data($save_arr);
+            echo $this->common_cls->json_output('1','添加新资料<label>'.$title.'</label>成功!');
         } else {//更新记录
             $this->log->add_log('修改资料(资料id:' . $did . ')', $this->assign_arr['web_title']);
             $this->data_cls->update_one_data($did, $save_arr);
+            echo $this->common_cls->json_output('1','资料<label>'.$title.'</label>内容修改成功!');
         }
-        echo 1;
     }
 }
 
