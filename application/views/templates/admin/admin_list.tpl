@@ -277,7 +277,7 @@
                                 });
                                 break;
                             default :
-                                my_dialog('提示', '操作失败', false);
+                                my_dialog('提示', '操作失败:'+return_arr.msg, false);
                                 break;
                         }
                     }
@@ -328,7 +328,7 @@
                         my_dialog('提示', return_arr.msg, false);
                         break;
                     default :
-                        my_dialog('提示', '操作失败', false);
+                        my_dialog('提示', '操作失败:'+return_arr.msg, false);
                         break;
                 }
             }
