@@ -121,7 +121,7 @@
                                 });
                                 break;
                             default :
-                                my_dialog('提示', '操作失败:'+return_arr.msg, false);
+                                my_dialog('提示', '操作失败:' + return_arr.msg, false);
                                 break;
                         }
                     }
