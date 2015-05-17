@@ -266,7 +266,7 @@
                         var return_arr = eval('(' + res + ')');
                         switch (return_arr.status) {
                             case '1':
-                                my_dialog('提示', return_arr.msg, {
+                                my_dialog('消息', return_arr.msg, {
                                     btn_class: 'info',
                                     call_back: function () {
                                         location.reload();
@@ -314,7 +314,7 @@
                 var return_arr = eval('(' + res + ')');
                 switch (return_arr.status) {
                     case '1':
-                        my_dialog('提示', return_arr.msg, {
+                        my_dialog('消息', return_arr.msg, {
                             call_back: function () {
                                 location.reload();
                             },
