@@ -49,7 +49,7 @@ class Admin_list extends CI_Controller
         $user_type = $this->input->post('user_type', true);
         $user_status = $this->input->post('user_status', true);
         if (empty($user_name) || empty($password)) {
-            echo -2;
+            echo $this->common_cls->json_output('-2','输入信息不完整!');
             return;
         }
         /***密码策略(未完成)***/
@@ -57,11 +57,16 @@ class Admin_list extends CI_Controller
         $user_status = $user_status == '1' ? '1' : '0';
         //用户名已存在
         if ($this->admin_cls->get_counts('user_name = \'' . $user_name . '\'') > 0) {
-            return -4;
+            echo $this->common_cls->json_output('-4','该用户名已存在!');
+            return;
         }
         $this->log->add_log('添加教师(教师用户名:' . $user_name . ')', $this->assign_arr['web_title']);
         $res = $this->admin_cls->add_admin($user_name, $password, $user_type, $user_status);
-        echo $res == true ? 1 : -1;
+        if($res==true){
+            echo $this->common_cls->json_output('1','教师<label>'.$user_name.'</label>添加成功!');
+        }else{
+            echo $this->common_cls->json_output('-1','系统繁忙,请重试!');
+        }
     }
 
     /**
@@ -78,23 +83,27 @@ class Admin_list extends CI_Controller
         $user_status = $this->input->post('user_status', true);
         //检查教师是否不存在
         if ($this->admin_cls->get_counts('tid = ' . $tid) == 0) {
-            echo -3;
+            echo $this->common_cls->json_output('-3','该教师不存在!');
             return;
         }
         if (empty($user_name)) {
-            echo -2;
+            echo $this->common_cls->json_output('-2','输入信息不完整!');
             return;
         }
         //用户名判断(阻止已存在且与自己的用户名不同的)
         $user_info = $this->admin_cls->get_one_admin('tid', array('user_name'=>$user_name));
         if (!empty($user_info) && $user_info['tid'] != $tid) {
-            echo -4;
+            echo $this->common_cls->json_output('-4','该用户名已存在!');
             return;
         }
         /***密码策略(未完成)***/
         $this->log->add_log('修改教师(教师id:' . $tid . ')', $this->assign_arr['web_title']);
         $res = $this->admin_cls->update_admin($tid, $user_name, $password, $user_type, $user_status);
-        echo $res == true ? 1 : -1;
+        if($res==true){
+            echo $this->common_cls->json_output('1','教师<label>'.$user_name.'</label>修改成功!');
+        }else{
+            echo $this->common_cls->json_output('-1','系统繁忙,请重试!');
+        }
     }
 
     /**
@@ -107,7 +116,7 @@ class Admin_list extends CI_Controller
         $tid = intval($tid);
         $this->log->add_log('删除教师(教师id:' . $tid . ')', $this->assign_arr['web_title']);
         $this->admin_cls->del_admin_by_tid($tid);
-        echo 1;
+        echo $this->common_cls->json_output('1','删除教师成功!');
     }
 
     /**
@@ -120,7 +129,7 @@ class Admin_list extends CI_Controller
         $tid_str = $this->input->post('tid_str', true);
         $tid_arr = explode(',', $tid_str);
         if (empty($tid_str) || count($tid_arr) == 0) {
-            echo -1;
+            echo $this->common_cls->json_output('-1','请至少勾选一个教师!');
             return;
         }
         foreach ($tid_arr as $k => $v) {
@@ -130,7 +139,7 @@ class Admin_list extends CI_Controller
         $status_tips = $status == '1' ? '启用' : '禁用';
         $this->log->add_log('修改教师(教师id:' . implode(',', $tid_arr) . ')状态为:' . $status_tips, $this->assign_arr['web_title']);
         $this->admin_cls->change_admin_status($tid_arr, $status);
-        echo 1;
+        echo $this->common_cls->json_output('1',$status_tips.'教师成功!');
     }
 }
 

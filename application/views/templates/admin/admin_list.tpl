@@ -221,19 +221,18 @@
 
         if (tid > 0) {
             var ajax_url = 'edit/' + tid;
-            var add_edit_text = "编辑";
         } else {
             var ajax_url = 'add/';
-            var add_edit_text = "添加";
         }
         $.ajax({
             type: 'post',
             url: '<{$smarty.const._admin_domain}><{$controller_name}>/' + ajax_url,
             data:{user_name:user_name_input,password_input:password_input,user_type:user_type,user_status:user_status},
             success: function (res) {
-                switch (res) {
+                var return_arr = eval('(' + res + ')');
+                switch (return_arr.status) {
                     case '1':
-                        my_dialog('消息', '教师' + add_edit_text + '成功!', {
+                        my_dialog('消息', return_arr.msg, {
                             btn_class: 'info',
                             call_back: function () {
                                 location.reload();
@@ -243,20 +242,8 @@
                             }
                         });
                         break;
-                    case '-1':
-                        my_dialog('提示', '系统繁忙,请重试!', false);
-                        break;
-                    case '-2':
-                        my_dialog('提示', '输入信息不完整!', false);
-                        break;
-                    case '-3':
-                        my_dialog('提示', '该教师不存在!', false);
-                        break;
-                    case '-4':
-                        my_dialog('提示', '该用户名已存在!', false);
-                        break;
                     default :
-                        my_dialog('提示', '操作失败', false);
+                        my_dialog('提示', return_arr.msg, false);
                         break;
                 }
             }
@@ -276,9 +263,10 @@
                     type: 'post',
                     url: '<{$smarty.const._admin_domain}><{$controller_name}>/del/' + tid,
                     success: function (res) {
-                        switch (res) {
+                        var return_arr = eval('(' + res + ')');
+                        switch (return_arr.status) {
                             case '1':
-                                my_dialog('提示', '删除成功!', {
+                                my_dialog('提示', return_arr.msg, {
                                     btn_class: 'info',
                                     call_back: function () {
                                         location.reload();
@@ -307,7 +295,6 @@
     });
     //更改教师状态
     function change_status(status) {
-        var status_text = status == '1' ? '启用' : '禁用';
         var check_arr = new Array();
         $(".item_check:checkbox").each(function () {
             if (this.checked == true) {
@@ -324,9 +311,10 @@
             url: '<{$smarty.const._admin_domain}><{$controller_name}>/status_change/' + status,
             data:{tid_str:tid_str},
             success: function (res) {
-                switch (res) {
+                var return_arr = eval('(' + res + ')');
+                switch (return_arr.status) {
                     case '1':
-                        my_dialog('提示', status_text + '教师成功!', {
+                        my_dialog('提示', return_arr.msg, {
                             call_back: function () {
                                 location.reload();
                             },
@@ -336,7 +324,7 @@
                         });
                         break;
                     case '-1':
-                        my_dialog('提示', '请至少勾选一个教师', false);
+                        my_dialog('提示', return_arr.msg, false);
                         break;
                     default :
                         my_dialog('提示', '操作失败', false);
