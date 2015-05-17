@@ -24,7 +24,7 @@ class User extends CI_Model {
     function user_md5($pwd_str)
     {
         $this->load->library('encrypt');
-        return md5($this->encrypt->encode(md5($pwd_str).'user_key'));
+        return md5(md5($pwd_str).'user_key');
     }
 
     /**

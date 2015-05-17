@@ -8,7 +8,7 @@
  */
 class Admin extends CI_Model
 {
-    private $table_name='admin';//表名
+    private $table_name = 'admin';//表名
 
     function __construct()
     {
@@ -24,7 +24,7 @@ class Admin extends CI_Model
     function super_md5($pwd_str)
     {
         $this->load->library('encrypt');
-        return md5($this->encrypt->encode(md5($pwd_str).'admin_key'));
+        return md5(md5($pwd_str) . 'admin_key');
     }
 
     /**
@@ -142,6 +142,19 @@ class Admin extends CI_Model
         $this->db->where($cond);
         return $this->db->count_all_results();
     }
+
+    /**
+     * 教师登录验证函数
+     * @param $user_name 用户名
+     * @param $user_pwd 密码
+     */
+    function admin_login($user_name, $user_pwd)
+    {
+        $this->db->select('tid,user_name,email,type,status,login_time,login_ip')->from($this->table_name);
+        $this->db->where(array('user_name' => $user_name, 'user_pwd' => $this->super_md5($user_pwd)));
+        return $this->db->get()->row_array();
+    }
+
 }
 /* End of file admin.php */
 /* Location: ./application/models/admin.php */

@@ -80,15 +80,16 @@
             success: function (res) {
                 $('#login_btn').html('登&nbsp;录');
                 $('#login_btn').removeAttr('disabled');
-                switch (res) {
+                $return_arr = eval('(' + res + ')');
+                switch ($return_arr.status) {
                     case '1':
                         alert('ok');
                         break;
                     case '-1':
-                        $('#login_tips').html('*账号或密码错误!&nbsp;&nbsp;');
+                        $('#login_tips').html('*'+$return_arr.msg+'!&nbsp;&nbsp;');
                         break;
                     case '-2':
-                        $('#login_tips').html('*输入信息不完整!&nbsp;&nbsp;');
+                        $('#login_tips').html('*'+$return_arr.msg+'!&nbsp;&nbsp;');
                         break;
                     default :
                         $('#login_tips').html('*服务器繁忙&nbsp;&nbsp;');
