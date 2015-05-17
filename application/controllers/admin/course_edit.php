@@ -65,11 +65,11 @@ class Course_edit extends CI_Controller
         if (empty($did)) {//新增记录
             $this->log->add_log('新增课件(课件标题:' . $title . ')', $this->assign_arr['web_title']);
             $this->data_cls->add_one_data($save_arr);
-            echo $this->common_cls->json_output('1','添加新课件成功!');
+            echo $this->common_cls->json_output('1','添加新课件<label>'.$title.'</label>成功!');
         } else {//更新记录
             $this->log->add_log('修改课件(课件id:' . $did . ')', $this->assign_arr['web_title']);
             $this->data_cls->update_one_data($did, $save_arr);
-            echo $this->common_cls->json_output('1','课件内容修改成功!');
+            echo $this->common_cls->json_output('1','课件<label>'.$title.'</label>内容修改成功!');
         }
     }
 }

@@ -147,7 +147,7 @@
                         my_dialog('消息', return_arr.msg, {
                             btn_class: 'info',
                             call_back: function () {
-                                location.reload();
+                                location.href='<{$smarty.const._admin_domain}>course_list';
                             },
                             cancel_call_back: function () {
                                 location.reload();
