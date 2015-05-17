@@ -80,16 +80,28 @@
             success: function (res) {
                 $('#login_btn').html('登&nbsp;录');
                 $('#login_btn').removeAttr('disabled');
-                $return_arr = eval('(' + res + ')');
-                switch ($return_arr.status) {
+                var return_arr = eval('(' + res + ')');
+                switch (return_arr.status) {
                     case '1':
-                        alert('ok');
+                        var expire=null;
+                        if(return_arr.data.auto_login=='1'){
+                            expire=7;
+                        }
+                        setCookie('id',return_arr.data.id,expire);
+                        setCookie('user_name',return_arr.data.user_name,expire);
+                        setCookie('type',return_arr.data.type,expire);
+                        setCookie('status',return_arr.data.status,expire);
+                        setCookie('login_ip',return_arr.data.login_ip,expire);
+                        setCookie('last_login_time',return_arr.data.last_login_time,expire);
+                        setCookie('login_time',return_arr.data.login_time,expire);
+                        setCookie('token',return_arr.data.token,expire);
+                        location.href ='<{$smarty.const._admin_domain}>';
                         break;
                     case '-1':
-                        $('#login_tips').html('*'+$return_arr.msg+'!&nbsp;&nbsp;');
+                        $('#login_tips').html('*'+return_arr.msg+'!&nbsp;&nbsp;');
                         break;
                     case '-2':
-                        $('#login_tips').html('*'+$return_arr.msg+'!&nbsp;&nbsp;');
+                        $('#login_tips').html('*'+return_arr.msg+'!&nbsp;&nbsp;');
                         break;
                     default :
                         $('#login_tips').html('*服务器繁忙&nbsp;&nbsp;');
@@ -102,6 +114,24 @@
     //trim修复(IE)
     String.prototype.trim = function () {
         return this.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+    }
+    function getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            c_start = document.cookie.indexOf(c_name + "=")
+            if (c_start != -1) {
+                c_start = c_start + c_name.length + 1
+                c_end = document.cookie.indexOf(";", c_start)
+                if (c_end == -1) c_end = document.cookie.length
+                return unescape(document.cookie.substring(c_start, c_end))
+            }
+        }
+        return ""
+    }
+    function setCookie(c_name, value, expiredays) {
+        var exdate = new Date()
+        exdate.setDate(exdate.getDate() + expiredays)
+        document.cookie = c_name + "=" + escape(value) +
+        ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString())+";path=/";
     }
 </script>
 </body>

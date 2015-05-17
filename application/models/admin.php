@@ -23,7 +23,6 @@ class Admin extends CI_Model
      */
     function super_md5($pwd_str)
     {
-        $this->load->library('encrypt');
         return md5(md5($pwd_str) . 'admin_key');
     }
 
@@ -154,7 +153,6 @@ class Admin extends CI_Model
         $this->db->where(array('user_name' => $user_name, 'user_pwd' => $this->super_md5($user_pwd)));
         return $this->db->get()->row_array();
     }
-
 }
 /* End of file admin.php */
 /* Location: ./application/models/admin.php */

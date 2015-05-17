@@ -14,6 +14,7 @@ class Admin_list extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->common_cls->is_login_alert();
         $this->load->model('admin', 'admin_cls');
         $this->assign_arr['controller_name'] = $this->router->class;
         $this->assign_arr['web_title'] = '教师管理';
