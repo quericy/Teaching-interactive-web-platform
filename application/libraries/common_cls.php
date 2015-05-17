@@ -59,7 +59,7 @@ class Common_Cls
         $token = urldecode($CI->input->cookie('token', false));//unicode解码
         $CI->load->library('encrypt');
         $token = $CI->encrypt->decode($token);
-        if(empty($token)){
+        if (empty($token)) {
             return false;
         }
         $check_info['id'] = $CI->input->cookie('id', TRUE);
@@ -67,25 +67,31 @@ class Common_Cls
         $check_info['type'] = $CI->input->cookie('type', TRUE);
         $check_info['status'] = $CI->input->cookie('status', TRUE);
         $check_info['login_ip'] = $CI->input->cookie('login_ip', TRUE);
-        if($check_info['type']=='1'||$check_info['type']=='2' ){//教师
+        if ($check_info['type'] == '1' || $check_info['type'] == '2') {//教师
             return $this->get_admin_token_str($check_info) === $token;
-        }else{//学生
+        } else {//学生
             return false;
         }
     }
 
     /**
      * 登录检测函数,未通过弹窗提示且跳转
-     * @param bool $show_json_tips 是否只显示json的未登录提示(适用于ajax)
+     * @param bool $show_json_tips 是否适配ajax显示json的未登录提示
      */
-    public function is_login_alert($show_json_tips=false)
+    public function is_login_alert($show_json_tips = true)
     {
-        if(!$this->is_login()){
+        if (!$this->is_login()) {
             $this->login_out();
-            if($show_json_tips==true){
-                $this->json_output('-99','您未登录或已掉线!');
-            }else{
-                echo '<script>alert("您未登录或已掉线!");location.href=\''._admin_domain.'login\'</script>';
+            if ($show_json_tips == true) {
+                if (isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUESTED_WITH"]) == "xmlhttprequest") {
+                    // ajax 请求的处理方式
+                    echo $this->json_output('-99', '您未登录或已掉线!');
+                } else {
+                    // 正常请求的处理方式
+                    echo '<script>alert("您未登录或已掉线!");location.href=\'' . _admin_domain . 'login\'</script>';
+                };
+            } else {
+                echo '<script>alert("您未登录或已掉线!");location.href=\'' . _admin_domain . 'login\'</script>';
             }
             exit;
         }
@@ -95,9 +101,9 @@ class Common_Cls
      * 登出函数
      * @param string $auto_navigate 自动跳转页面
      */
-    public function login_out($auto_navigate='')
+    public function login_out($auto_navigate = '')
     {
-        $expire_time=time()- 3600;
+        $expire_time = time() - 3600;
         setcookie('id', '', $expire_time, '/');
         setcookie('user_name', '', $expire_time, '/');
         setcookie('type', '', $expire_time, '/');
@@ -106,7 +112,7 @@ class Common_Cls
         setcookie('token', '', $expire_time, '/');
         setcookie('login_time', '', $expire_time, '/');
         setcookie('last_login_time', '', $expire_time, '/');
-        if(!empty($auto_navigate)){
+        if (!empty($auto_navigate)) {
             header('location:' . $auto_navigate);
             exit;
         }
