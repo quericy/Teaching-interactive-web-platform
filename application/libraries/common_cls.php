@@ -76,12 +76,17 @@ class Common_Cls
 
     /**
      * 登录检测函数,未通过弹窗提示且跳转
+     * @param bool $show_json_tips 是否只显示json的未登录提示(适用于ajax)
      */
-    public function is_login_alert()
+    public function is_login_alert($show_json_tips=false)
     {
         if(!$this->is_login()){
             $this->login_out();
-            echo '<script>alert("您未登录或已掉线!");location.href=\''._admin_domain.'login\'</script>';
+            if($show_json_tips==true){
+                $this->json_output('-99','您未登录或已掉线!');
+            }else{
+                echo '<script>alert("您未登录或已掉线!");location.href=\''._admin_domain.'login\'</script>';
+            }
             exit;
         }
     }
