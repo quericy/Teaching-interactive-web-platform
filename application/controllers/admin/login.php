@@ -24,7 +24,7 @@ class Login extends CI_Controller
     }
 
     /**
-     * 登录验证函数
+     * 登录触发函数
      */
     public function login_check()
     {
