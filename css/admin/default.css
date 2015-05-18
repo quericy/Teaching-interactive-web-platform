@@ -40,6 +40,10 @@ footer p{
         margin: 0;
     }
 }
+/*顶部侧导航栏css*/
+.top-navbar .dropdown{
+    min-width: 160px;
+}
 /*左侧导航栏css*/
 .sidebar-nav {
     width: 240px;

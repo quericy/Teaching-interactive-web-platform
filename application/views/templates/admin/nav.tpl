@@ -1,5 +1,5 @@
 <!--顶部导航begin-->
-<div class="navbar navbar-default" style="margin-bottom: 0;" role="navigation">
+<div class="top-navbar navbar navbar-default" style="margin-bottom: 0;" role="navigation">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">导航栏</span>
@@ -18,7 +18,7 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <span class="glyphicon glyphicon-user" style="position:relative;top: 3px;"></span>
-                    管理员
+                    <{if isset($smarty.cookies.user_name)}><{$smarty.cookies.user_name}><{/if}>
                     <i class="glyphicon glyphicon-triangle-bottom"></i>
                 </a>
                 <ul class="dropdown-menu">
