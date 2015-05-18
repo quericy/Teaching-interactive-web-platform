@@ -111,6 +111,13 @@
         });
 
     });
+
+    // 绑定回车事件
+    $(document).keypress(function(e) {
+        if(e.which == 13) {
+           $('#login_btn').click();
+        }
+    });
     //trim修复(IE)
     String.prototype.trim = function () {
         return this.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
