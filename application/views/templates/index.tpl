@@ -311,6 +311,8 @@
     });
     if (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/8./i) == "8.") {
         //IE8 不调用渐显
+    }else if(navigator.uerAgent.match(/Windows Phone/i)){
+        //wp 测试
     } else {
         //元素渐显
         $('.plan').smoove({
