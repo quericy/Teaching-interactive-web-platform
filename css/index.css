@@ -66,6 +66,10 @@ a, a:hover {
     color: #fff;
 }
 
+.navbar-collapse{
+    z-index: 5;
+}
+
 .navbar-default a {
     color: #52b6ec;
     -webkit-transition: 300ms;
