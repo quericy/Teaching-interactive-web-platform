@@ -331,14 +331,14 @@
 <script src="<{$smarty.const._site_js}>smoothscroll.js"></script>
 <script src="<{$smarty.const._site_js}>jquery.smoove.min.js"></script>
 <script type="text/javascript">
-//    //平滑滚动
-//    $('.smooth-div > div').click(function (event) {
-//        event.preventDefault();
-//        var target = $(this).find('>a').prop('hash');
-//        $('html, body').animate({
-//            scrollTop: $(target).offset().top
-//        }, 500);
-//    });
+    //平滑滚动
+    $('.smooth-div > div').click(function (event) {
+        event.preventDefault();
+        var target = $(this).find('>a').prop('hash');
+        $('html, body').animate({
+            scrollTop: $(target).offset().top
+        }, 500);
+    });
     if (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/8./i) == "8.") {
         //IE8 不调用渐显
     } else {
