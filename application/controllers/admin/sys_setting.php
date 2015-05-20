@@ -80,6 +80,7 @@ class sys_setting extends CI_Controller
         $this->setting_cls->update_setting('power_reset_pwd', $power_reset_pwd);
         $this->setting_cls->update_setting('power_data_view', $power_data_view);
         $this->setting_cls->update_setting('power_log_view', $power_log_view);
+        $this->cache_cls->del('sys_setting');//清除缓存
         echo $this->common_cls->json_output('1','系统参数保存成功!');
     }
 

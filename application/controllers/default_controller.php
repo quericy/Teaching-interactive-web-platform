@@ -14,7 +14,9 @@ class Default_controller extends CI_Controller
     {
         parent::__construct();
         $this->assign_arr['controller_name'] = $this->router->class;
-        $this->assign_arr['web_title'] = '教学互动平台';
+        //系统设置缓存
+        $sys_setting= $this->cache_cls->get_sys_cache();
+        $this->assign_arr['web_title'] = $sys_setting['web_name'];//站点名称
     }
 
     public function index()

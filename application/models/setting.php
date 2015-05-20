@@ -33,6 +33,20 @@ class setting extends CI_Model
     }
 
     /**
+     * 返回所有系统设置的数组
+     * @return array 系统设置键值对数组
+     */
+    function get_all_setting()
+    {
+        $result_arr=$this->db->get($this->table_name)->result_array();
+        $return_arr=array();
+        foreach($result_arr as $each){
+            $return_arr[$each['key']]=$each['value'];
+        }
+        return $return_arr;
+    }
+
+    /**
      * 添加一条设置记录
      * @param $key 设置键名
      * @param $value 设置键值
