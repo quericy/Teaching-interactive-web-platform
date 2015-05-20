@@ -22,7 +22,7 @@ class Course_Data_List extends CI_Controller
     public function index()
     {
         //页面展示
-        $this->smarty->view('index.tpl', $this->assign_arr);
+        $this->smarty->view('course_data_list.tpl', $this->assign_arr);
     }
 
 }

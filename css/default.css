@@ -1,0 +1,87 @@
+/*全局样式*/
+body {
+    background: #e5e5e5;
+    color: #999;
+    font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+.center {
+    text-align: center;
+}
+
+/*导航条样式*/
+.navbar-default {
+    background: #fff;
+    border-radius: 0 0 5px 5px;
+    border: 0;
+    padding: 0;
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2);
+    -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2);
+    overflow: hidden;
+}
+
+.navbar-default .first a {
+    border-radius: 0 0 0 5px;
+}
+
+.navbar-default .navbar-brand {
+    margin-right: 50px;
+    margin-left: 20px;
+    width: 200px;
+    height: 78px;
+    /*background: url(../images/logo.png) no-repeat 0 50%;*/
+}
+
+.navbar-default .navbar-nav > li {
+    /*margin-left: 1px;*/
+}
+
+.navbar-default .navbar-nav > li > a {
+    padding: 30px 25px;
+    font-size: 16px;
+    line-height: 18px;
+    color: #999;
+}
+
+.navbar-default .navbar-nav > li > a > i {
+    display: inline-block;
+}
+
+.navbar-default .navbar-nav > li.active > a,
+.navbar-default .navbar-nav > li.active:focus > a,
+.navbar-default .navbar-nav > li.active:hover > a,
+.navbar-default .navbar-nav > li:hover > a,
+.navbar-default .navbar-nav > li:focus > a,
+.navbar-default .navbar-nav > li.active > a:focus,
+.navbar-default .navbar-nav > li.active:focus > a:focus,
+.navbar-default .navbar-nav > li.active:hover > a:focus,
+.navbar-default .navbar-nav > li:hover > a:focus,
+.navbar-default .navbar-nav > li:focus > a:focus {
+    background-color: #52b6ec;
+    color: #fff;
+}
+
+.navbar-collapse{
+    z-index: 5;
+}
+
+.navbar-default a {
+    color: #52b6ec;
+    -webkit-transition: 300ms;
+    -moz-transition: 300ms;
+    -o-transition: 300ms;
+    transition: 300ms;
+}
+
+/*导航分割线*/
+.navbar-default .divider {
+    height: 1px;
+    margin: 9px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
