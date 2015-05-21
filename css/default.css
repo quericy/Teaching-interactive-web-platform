@@ -3,6 +3,7 @@ body {
     background: #e5e5e5;
     color: #999;
     font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+    padding-top: 100px; /*导航条内补*/
 }
 
 a, a:hover {
@@ -11,6 +12,11 @@ a, a:hover {
 
 .center {
     text-align: center;
+}
+
+.auto-center {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /*导航条样式*/
@@ -66,7 +72,7 @@ a, a:hover {
     color: #fff;
 }
 
-.navbar-collapse{
+.navbar-collapse {
     z-index: 5;
 }
 
@@ -84,4 +90,14 @@ a, a:hover {
     margin: 9px 0;
     overflow: hidden;
     background-color: #e5e5e5;
+}
+
+/*页脚*/
+#footer {
+    margin: 0;
+    margin-top: 70px;
+    background: #fff;
+
+    color: #ccc;
+
 }
