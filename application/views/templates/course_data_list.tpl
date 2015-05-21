@@ -20,7 +20,8 @@
         <div class="col-md-8">
             <div class=" panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><span class="glyphicon glyphicon-file" style="color:#999;"></span>&nbsp;课件列表</h3>
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-file" style="color:#999;"></span>&nbsp;课件列表
+                    </h3>
                 </div>
                 <div class="panel-body">
                     <div class="list-group">
@@ -37,7 +38,8 @@
             </div>
             <div class=" panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><span class="glyphicon glyphicon-book" style="color:#999;"></span>&nbsp;资料列表</h3>
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-book" style="color:#999;"></span>&nbsp;资料列表
+                    </h3>
                 </div>
                 <div class="panel-body">
                     <div class="list-group">
@@ -71,7 +73,8 @@
             </div>
             <div class=" panel panel-default">
                 <div class="panel-heading">
-                    <h5 class="panel-title">最新发布</h5>
+                    <h5 class="panel-title"><span class="glyphicon glyphicon-fire" style="color:#999;"></span>&nbsp;最新发布
+                    </h5>
                 </div>
                 <div class="list-group">
                     <a href="#" class="list-group-item">
