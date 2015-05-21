@@ -25,14 +25,18 @@
                 </div>
                 <div class="panel-body">
                     <div class="list-group">
+                        <{foreach  from=$course_info_list item=val key=key}>
                         <a href="#" class="list-group-item">
-                            Cras justo odio
+                            <{$val.title|truncate:30:"..."}>
+                            <{if !empty($val.edit_time)}>
+                            <span class="pull-right"
+                                  style="color:#ccc;"><{$val.edit_time|date_format:'%Y-%m-%d %H:%M:%S'}></span>
+                            <{/if}>
                         </a>
-                        <a href="#" class="list-group-item">Dapibus ac facilisis inDapibus ac facilisis in<span
-                                    class="pull-right" style="color:#ccc;">2015-03-23</span></a>
-                        <a href="#" class="list-group-item">Morbi leo risus</a>
-                        <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                        <a href="#" class="list-group-item">Vestibulum at eros</a>
+                        <{/foreach}>
+                        <div class="pull-right">
+                            <{$course_page_string}>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -43,13 +47,18 @@
                 </div>
                 <div class="panel-body">
                     <div class="list-group">
+                        <{foreach  from=$data_info_list item=val key=key}>
                         <a href="#" class="list-group-item">
-                            Cras justo odio
+                            <{$val.title|truncate:25:"..."}>
+                            <{if !empty($val.edit_time)}>
+                            <span class="pull-right"
+                                  style="color:#ccc;"><{$val.edit_time|date_format:'%Y-%m-%d %H:%M:%S'}></span>
+                            <{/if}>
                         </a>
-                        <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                        <a href="#" class="list-group-item">Morbi leo risus</a>
-                        <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                        <a href="#" class="list-group-item">Vestibulum at eros</a>
+                        <{/foreach}>
+                        <div class="pull-right">
+                            <{$data_page_string}>
+                        </div>
                     </div>
                 </div>
             </div>

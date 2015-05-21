@@ -15,10 +15,13 @@ class Page_cls
      * @param $total_rows 总记录数
      * @param bool $is_admin 是否是后台分页(默认true)
      * @param int $per_page 每页记录数(默认15条)
+     * @param int $uri_segment 当前页路由变量位置
+     * @param string $suffix 分页链接后缀
+     * @param string $base_url 分页链接(为空将使用默认指定)
      * @param int $num_links 当前页前后预留页数(默认3)
      * @return mixed
      */
-    function get_page_config($this_obj, $total_rows, $is_admin = 0, $per_page = 15, $num_links = 3)
+    function get_page_config($this_obj, $total_rows, $is_admin = 0, $per_page = 15, $uri_segment = 3, $suffix = '', $base_url = '', $num_links = 3)
     {
         //引入分页类和uri类
         $this_obj->load->library('pagination');
@@ -32,8 +35,18 @@ class Page_cls
             $config['uri_segment'] = 4;
             $config['base_url'] = base_url() . '/admin/' . $this_obj->uri->segment(2) . '/' . ($this_obj->uri->segment(3) ? $this_obj->uri->segment(3) : 'index') . '/';
         } else {
-            $config['uri_segment'] = 3;
-            $config['base_url'] = base_url() . '/' . $this_obj->uri->segment(1) . '/' . ($this_obj->uri->segment(2) ? $this_obj->uri->segment(2) : 'index') . '/';
+            if (!empty($suffix)) {
+                $config['suffix'] = $suffix;//添加后缀
+            } else {
+                $config['suffix'] = null;
+            }
+            $config['uri_segment'] = $uri_segment;
+            if (!empty($base_url)) {
+                $config['base_url'] = $base_url;
+            } else {
+                $config['base_url'] = base_url() . '/' . $this_obj->uri->segment(1) . '/' . ($this_obj->uri->segment(2) ? $this_obj->uri->segment(2) : 'index') . '/';
+            }
+
         }
         //bootstrap样式设置
         $config['page_query_string'] = FALSE;
