@@ -10,10 +10,9 @@
     </div>
     <div class="navbar-collapse collapse" style="height: 1px;">
         <ul id="main-menu" class="nav navbar-nav navbar-left">
-            <li class="active"><a href="<{$smarty.const._site_domain}>"><span class="glyphicon glyphicon-home"></span>&nbsp;主页</a>
+            <li <{if $nav_show=='index'}>class="active"<{/if}>><a href="<{$smarty.const._site_domain}>"><span class="glyphicon glyphicon-home"></span>&nbsp;主页</a>
             </li>
-            <li><a href="<{$smarty.const._site_domain}>course_data_list#course">课件</a></li>
-            <li><a href="<{$smarty.const._site_domain}>course_data_list#data">资料</a></li>
+            <li <{if $nav_show=='course_data'}>class="active"<{/if}>><a href="<{$smarty.const._site_domain}>course_data_list">课件资料</a></li>
             <li><a href="#">作业</a></li>
             <li><a href="#">答疑</a></li>
             <li><a href="#">关于</a></li>

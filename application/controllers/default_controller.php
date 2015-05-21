@@ -17,6 +17,7 @@ class Default_controller extends CI_Controller
         //系统设置缓存
         $sys_setting= $this->cache_cls->get_sys_cache();
         $this->assign_arr['web_title'] = $sys_setting['web_name'];//站点名称
+        $this->assign_arr['nav_show'] = 'index';
     }
 
     public function index()
