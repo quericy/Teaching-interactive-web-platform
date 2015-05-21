@@ -25,8 +25,18 @@ class Course_Data_List extends CI_Controller
     public function index($course_page=1,$data_page=1)
     {
         $per_page = 5;//每页10条数据
-        $course_page=intval($course_page);
-        $data_page=intval($data_page);
+        preg_match('/(\d+)/',$course_page,$course_page_arr);//正则匹配课件页码数字
+        preg_match('/(\d+)/',$data_page,$data_page_arr);//正则匹配资料页码数字
+        if(!empty($course_page_arr)){
+            $course_page=$course_page_arr[0];
+        }else{
+            $course_page=1;
+        }
+        if(!empty($data_page_arr)){
+            $data_page=$data_page_arr[0];
+        }else{
+            $data_page=1;
+        }
         $this->load->library('page_cls');
         //获取课件列表
         $course_list = $this->data_cls->get_list(1, $course_page, $per_page);
