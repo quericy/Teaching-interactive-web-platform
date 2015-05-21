@@ -212,86 +212,8 @@
     </div>
 </div>
 <!--作业栏end-->
-
-
-<div id="UpCourseWare">
-    <div class="container">
-        <div class="box center">
-            <h2>课件资料</h2>
-
-            <p class="lead">最新的课件和资料均由教师上传，同学们可自行查阅和下载。</p>
-
-            <div id="pricing-table" class="row">
-                <div class="col-sm-4 ">
-                    <ul class="plan">
-                        <li class="plan-name">最新课件</li>
-                        <li><a href="">关于某课题的课件</a></li>
-                        <li><a href="">关于某课题的课件</a></li>
-                        <li><a href="">关于某课题的课件</a></li>
-                        <li><a href="">关于某课题的课件</a></li>
-                        <li><a href="">关于某课题的课件</a></li>
-                        <li><a href="">关于某课题的课件</a></li>
-                        <li><a href="">关于某课题的课件</a></li>
-                        <li class="plan-action"><a href="#" class="btn btn-primary btn-lg">更多</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-4">
-                    <ul class="plan featured">
-                        <li class="plan-name">课件资料</li>
-                        <li class="plan-price"><span class="glyphicon  glyphicon-cloud-upload"></span>上传</li>
-                        <li>
-                            <h1><a class="btn  btn-lg btn-primary" href="#" role="button">教师课件</a></h1>
-                        </li>
-                        <li>
-                            <h1><a class="btn  btn-lg btn-success" href="#" role="button">教学资料</a></h1>
-                        </li>
-                        <li class=""><br>注意: <br>课件和资料的上传均由教师操作，同学们如有疑问，可以在每个课件和资料下方留言。</li>
-                    </ul>
-                </div>
-                <div class="col-sm-4 ">
-                    <ul class="plan">
-                        <li class="plan-name">最新资料</li>
-                        <li><a href="">资料:课程设计资料列表</a></li>
-                        <li><a href="">资料:课程设计资料列表</a></li>
-                        <li><a href="">资料:课程设计资料列表</a></li>
-                        <li><a href="">资料:课程设计资料列表</a></li>
-                        <li><a href="">资料:课程设计资料列表</a></li>
-                        <li><a href="">资料:课程设计资料列表</a></li>
-                        <li><a href="">资料:课程设计资料列表</a></li>
-                        <li class="plan-action"><a href="#" class="btn btn-primary btn-lg">更多</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script src="<{$smarty.const._site_js}>jquery.min.js"></script>
-<script src="<{$smarty.const._site_js}>bootstrap.min.js"></script>
-<script src="<{$smarty.const._site_js}>smoothscroll.js"></script>
-<script src="<{$smarty.const._site_js}>jquery.smoove.min.js"></script>
+<{include file="footer.tpl"}>
 <script type="text/javascript">
-    //平滑滚动
-    $('.smooth-div > div').click(function (event) {
-        event.preventDefault();
-        var target = $(this).find('>a').prop('hash');
-        $('html, body').animate({
-            scrollTop: $(target).offset().top
-        }, 500);
-    });
-    if (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/8./i) == "8.") {
-        //IE8 不调用渐显
-    } else {
-        //元素渐显
-        $('.plan').smoove({
-//            offset  : '15%',
-//            moveY   : '100px'
-        });
-        $('.smoove-up-div').smoove({
-            moveY: '100px'
-        });
-    }
 
 </script>
 </body>

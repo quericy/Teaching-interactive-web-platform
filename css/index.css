@@ -6,6 +6,7 @@
     background-position: 50% 50%;
     background-repeat: no-repeat;
     padding: 200px 0;
+    margin-top: -100px;/*巨幕抵消内补*/
     color: #fff;
 }
 
