@@ -31,6 +31,7 @@ a, a:hover {
     overflow: hidden;
 }
 
+
 .navbar-default .first a {
     border-radius: 0 0 0 5px;
 }
@@ -83,6 +84,35 @@ a, a:hover {
     -o-transition: 300ms;
     transition: 300ms;
 }
+/*首页按钮*/
+.index-link{
+    position: relative;
+    display: inline-block;
+    padding: 30px 25px;
+    font-size: 16px;
+    line-height: 18px;
+    color: #999!important;
+}
+.index-link-active{
+    background-color: #52b6ec;
+    color: #fff!important;
+}
+.index-link:hover,.index-link:focus {
+    background-color: #52b6ec;
+    color: #fff!important;
+}
+/*css query查询*/
+@media (max-width: 767px) {
+    .index-link {
+        padding: 15px 20px;
+    }
+    .index-link-active{
+        background-color: inherit;
+        color: #999!important;
+    }
+}
+
+
 
 /*导航分割线*/
 .navbar-default .divider {
