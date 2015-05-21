@@ -51,6 +51,10 @@ class Course_Data_List extends CI_Controller
         $base_url=base_url() . '/' . $this->uri->segment(1) . '/' . ($this->uri->segment(2) ? $this->uri->segment(2) : 'index') . '/'.$course_page.'/';
         //资料列表分页
         $this->assign_arr['data_page_string'] = $this->page_cls->get_page_config($this, $this->data_cls->get_counts(array('type' => '2')), false, $per_page,4,'',$base_url);
+
+        //获取最新课件资料
+        $this->assign_arr['recent_data_list']=$this->data_cls->get_recent_list(5);
+
         //页面展示
         $this->smarty->view('course_data_list.tpl', $this->assign_arr);
     }

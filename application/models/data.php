@@ -47,6 +47,18 @@ class Data extends CI_Model
     }
 
     /**
+     * 获取最近几条记录
+     * @param $top_count 最近的条数
+     * @return mixed
+     */
+    function get_recent_list($top_count=5)
+    {
+        $this->db->order_by('edit_time desc');
+        $query = $this->db->get($this->table_name, $top_count,0 );
+        return $this->security->xss_clean($query->result_array());
+    }
+
+    /**
      * 获得一条课件资料记录
      * @param $fields 查询字段
      * @param $cond 条件

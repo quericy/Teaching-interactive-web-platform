@@ -86,13 +86,12 @@
                     </h5>
                 </div>
                 <div class="list-group">
+                    <{foreach  from=$recent_data_list item=val key=key}>
                     <a href="#" class="list-group-item">
-                        Cras justo odio
+                        <{$val.title|truncate:15:'...'}>
+                        <span class="badge"><{if $val.type=='1'}>课件<{else}>资料<{/if}></span>
                     </a>
-                    <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                    <a href="#" class="list-group-item">Morbi leo risus</a>
-                    <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                    <a href="#" class="list-group-item">Vestibulum at eros</a>
+                    <{/foreach}>
                 </div>
 
             </div>
