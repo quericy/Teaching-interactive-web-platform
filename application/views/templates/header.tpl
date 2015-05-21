@@ -1,5 +1,5 @@
 <!--导航begin-->
-<div  class="top-navbar navbar navbar-default navbar-fixed-top container"   role="navigation">
+<div  class="top-navbar navbar navbar-default navbar-fixed-top container nav-container"   role="navigation">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">导航栏</span>

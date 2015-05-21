@@ -31,7 +31,6 @@ a, a:hover {
     overflow: hidden;
 }
 
-
 .navbar-default .first a {
     border-radius: 0 0 0 5px;
 }
@@ -84,35 +83,58 @@ a, a:hover {
     -o-transition: 300ms;
     transition: 300ms;
 }
+
 /*首页按钮*/
-.index-link{
+.index-link {
     position: relative;
     display: inline-block;
     padding: 30px 25px;
     font-size: 16px;
     line-height: 18px;
-    color: #999!important;
+    color: #999 !important;
 }
-.index-link-active{
+
+.index-link-active {
     background-color: #52b6ec;
-    color: #fff!important;
+    color: #fff !important;
 }
-.index-link:hover,.index-link:focus {
+
+.index-link:hover, .index-link:focus {
     background-color: #52b6ec;
-    color: #fff!important;
+    color: #fff !important;
 }
+
 /*css query查询*/
 @media (max-width: 767px) {
+    /*首页按钮*/
     .index-link {
         padding: 15px 20px;
     }
-    .index-link-active{
+    .index-link-active {
         background-color: inherit;
-        color: #999!important;
+        color: #999 !important;
+    }
+    /*导航条宽度修正*/
+    .nav-container{
+        padding-right: 15px;
+        padding-left: 15px;
     }
 }
-
-
+@media (min-width: 768px) {
+    .nav-container {
+        width: 720px;
+    }
+}
+@media (min-width: 992px) {
+    .nav-container {
+        width: 940px;
+    }
+}
+@media (min-width: 1200px) {
+    .nav-container {
+        width: 1140px;
+    }
+}
 
 /*导航分割线*/
 .navbar-default .divider {
