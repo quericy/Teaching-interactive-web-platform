@@ -59,6 +59,8 @@ class Login extends CI_Controller
         //生成token
         $token_arr['token']=$this->common_cls->get_admin_token($token_arr);
         $token_arr['auto_login']=$auto_login;
+        //更新登录信息
+        $this->admin_cls->update_login_time($user_arr['tid'],$now_time,$ip);
         //输出登录成功信息
         echo $this->common_cls->json_output('1','ok',$token_arr);
     }

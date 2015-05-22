@@ -153,6 +153,18 @@ class Admin extends CI_Model
         $this->db->where(array('user_name' => $user_name, 'user_pwd' => $this->super_md5($user_pwd)));
         return $this->db->get()->row_array();
     }
+
+    function update_login_time($tid,$time,$ip)
+    {
+        $update_arr = array(
+            'login_time' =>$time,
+            'login_ip' => $ip
+        );
+
+        $this->db->where_in('tid', $tid);
+        return $this->db->update($this->table_name, $update_arr);
+
+    }
 }
 /* End of file admin.php */
 /* Location: ./application/models/admin.php */
