@@ -23,7 +23,7 @@
                     <h3 class="panel-title"><span class="glyphicon glyphicon-file" style="color:#999;"></span>&nbsp;课件列表
                     </h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" style="min-height:300px;">
                     <div class="list-group">
                         <{foreach  from=$course_info_list item=val key=key}>
                         <a href="<{$smarty.const._site_domain}>course_data/index/<{$val.did}>" class="list-group-item">
@@ -45,7 +45,7 @@
                     <h3 class="panel-title"><span class="glyphicon glyphicon-book" style="color:#999;"></span>&nbsp;资料列表
                     </h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" style="min-height:300px;">
                     <div class="list-group">
                         <{foreach  from=$data_info_list item=val key=key}>
                         <a href="<{$smarty.const._site_domain}>course_data/index/<{$val.did}>" class="list-group-item">

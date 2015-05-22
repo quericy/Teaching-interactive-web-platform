@@ -6,8 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><{$web_title}></title>
     <!--ueditor-->
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <script src="<{$smarty.const._site_third_party}>ueditor/ueditor.parse.js"></script>
+    <link href="<{$smarty.const._site_third_party}>/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css"
+          rel="stylesheet" type="text/css"/>
+    <script type="text/javascript"
+            src="<{$smarty.const._site_third_party}>/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
     <!-- Bootstrap -->
     <link href="<{$smarty.const._site_css}>bootstrap.min.css" rel="stylesheet">
     <link href="<{$smarty.const._site_css}>default.css" rel="stylesheet">
@@ -23,13 +27,26 @@
         <div class="col-md-8">
             <div class=" panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <{$course_data_arr.title}>
-                    </h3>
+                    <h5 class="panel-title" style="color:#999;">
+                        <a href="<{$smarty.const._site_domain}>course_data_list"><{if $course_data_arr.type=='1'}>课件<{else}>资料<{/if}>列表</a>
+                        > 查看<{if $course_data_arr.type=='1'}>课件<{else}>资料<{/if}>
+                    </h5>
                 </div>
-                <div class="panel-body">
-                    <div id="page_content">
-                    <{$course_data_arr.content}>
+                <div class="panel-body" style="min-height: 700px;">
+                    <div class="row">
+                        <h4 class="left col-sm-10" style="color:#000;"><{$course_data_arr.title}></h4>
+                    </div>
+                    <div class="row">
+                        <p class="left col-sm-10">
+                            <{$course_data_arr.user_name}>&nbsp;&nbsp;
+                            最后编辑于:<{$course_data_arr.edit_time|date_format:'%Y-%m-%d %H:%M:%S'}>&nbsp;&nbsp;
+
+                        </p>
+                    </div>
+
+                    <hr/>
+                    <div id="page_content" style="width: 100%;overflow-x: auto;">
+                        <{$course_data_arr.content}>
                     </div>
                 </div>
             </div>

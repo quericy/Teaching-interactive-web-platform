@@ -66,7 +66,8 @@ class Data extends CI_Model
      */
     function get_one_data($fields, $cond)
     {
-        $this->db->select($fields)->from($this->table_name)->where($cond);
+        $this->db->join('admin', 'admin.tid=data.tid');
+        $this->db->select($fields.',admin.user_name')->from($this->table_name)->where($cond);
         $query = $this->db->get();
         return $query->row_array();
     }
