@@ -39,7 +39,7 @@
                 <td class="text-center"><input class="item_check" type="checkbox" data-did="<{$val.did}>"
                                                disabled="disabled"></td>
                 <td class="text-left"><{$val.did}></td>
-                <td class="text-center"><a href="#"><{$val.title}></a></td>
+                <td class="text-center"><a target="_blank" href="<{$smarty.const._site_domain}>course_data/index/<{$val.did}>"><{$val.title}></a></td>
                 <td class="text-center"><{$val.user_name}></td>
                 <td class="text-center">
                     <{if $val.type==1}>

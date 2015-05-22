@@ -78,7 +78,9 @@ class XssHtml
                 }
             }
         }
-        return strip_tags($this->m_dom->saveHTML(), '<' . implode('><', $this->m_AllowTag) . '>');
+        $return_str= strip_tags($this->m_dom->saveHTML(), '<' . implode('><', $this->m_AllowTag) . '>');
+        $return_str = preg_replace("/http\:\/\/\//", "/", $return_str);//修正Ueditor上传路径bug
+        return $return_str;
     }
 
     private function __true_url($url)

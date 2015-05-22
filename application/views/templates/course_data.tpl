@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><{$web_title}></title>
+    <!--ueditor-->
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <script src="<{$smarty.const._site_third_party}>ueditor/ueditor.parse.js"></script>
     <!-- Bootstrap -->
     <link href="<{$smarty.const._site_css}>bootstrap.min.css" rel="stylesheet">
     <link href="<{$smarty.const._site_css}>default.css" rel="stylesheet">
@@ -20,45 +23,13 @@
         <div class="col-md-8">
             <div class=" panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><span class="glyphicon glyphicon-file" style="color:#999;"></span>&nbsp;课件列表
+                    <h3 class="panel-title">
+                        <{$course_data_arr.title}>
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <div class="list-group">
-                        <{foreach  from=$course_info_list item=val key=key}>
-                        <a href="<{$smarty.const._site_domain}>course_data/index/<{$val.did}>" class="list-group-item">
-                            <{$val.title|truncate:30:"..."}>
-                            <{if !empty($val.edit_time)}>
-                            <span class="pull-right"
-                                  style="color:#ccc;"><{$val.edit_time|date_format:'%Y-%m-%d %H:%M:%S'}></span>
-                            <{/if}>
-                        </a>
-                        <{/foreach}>
-                        <div class="pull-right">
-                            <{$course_page_string}>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class=" panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><span class="glyphicon glyphicon-book" style="color:#999;"></span>&nbsp;资料列表
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <div class="list-group">
-                        <{foreach  from=$data_info_list item=val key=key}>
-                        <a href="<{$smarty.const._site_domain}>course_data/index/<{$val.did}>" class="list-group-item">
-                            <{$val.title|truncate:25:"..."}>
-                            <{if !empty($val.edit_time)}>
-                            <span class="pull-right"
-                                  style="color:#ccc;"><{$val.edit_time|date_format:'%Y-%m-%d %H:%M:%S'}></span>
-                            <{/if}>
-                        </a>
-                        <{/foreach}>
-                        <div class="pull-right">
-                            <{$data_page_string}>
-                        </div>
+                    <div id="page_content">
+                    <{$course_data_arr.content}>
                     </div>
                 </div>
             </div>
@@ -102,7 +73,7 @@
 <!--列表end-->
 <{include file="footer.tpl"}>
 <script type="text/javascript">
-
+    uParse('#page_content');
 </script>
 </body>
 </html>
