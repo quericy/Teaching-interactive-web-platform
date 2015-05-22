@@ -154,13 +154,20 @@ class Admin extends CI_Model
         return $this->db->get()->row_array();
     }
 
+
+    /**
+     * 更新教师登录时间和ip
+     * @param $tid 教师id
+     * @param $time 时间
+     * @param $ip id
+     * @return object
+     */
     function update_login_time($tid,$time,$ip)
     {
         $update_arr = array(
             'login_time' =>$time,
             'login_ip' => $ip
         );
-
         $this->db->where_in('tid', $tid);
         return $this->db->update($this->table_name, $update_arr);
 

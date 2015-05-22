@@ -9,6 +9,13 @@
  */
 class Common_Cls
 {
+    private $CI;
+
+    function __construct()
+    {
+        $this->CI =& get_instance();
+    }
+
     /**
      * 统一输出json数据
      * @param $status 状态码
@@ -28,23 +35,44 @@ class Common_Cls
 
     /**
      * 后台数字签名生成函数
-     * @param $user_info 用户必要信息(id,用户名,类型,状态,登录ip)
+     * @param $user_info 教师必要信息(id,用户名,类型,状态,登录ip)
      * @return string 加密后的token
      */
     function get_admin_token($check_info)
     {
-        $CI =& get_instance();
         $str = $this->get_admin_token_str($check_info);
-        $CI->load->library('encrypt');
-        return urlencode($CI->encrypt->encode($str));//token进行Unicode转码
+        $this->CI->load->library('encrypt');
+        return urlencode($this->CI->encrypt->encode($str));//token进行Unicode转码
     }
 
     /**
      * 后台数字签名信息构造
-     * @param $check_info
-     * @return string
+     * @param $check_info 验证信息
+     * @return string 构造token
      */
     protected function get_admin_token_str($check_info)
+    {
+        return $str = md5($check_info['id'] . $check_info['user_name'] . $check_info['type'] . $check_info['status'] . $check_info['login_ip']);
+    }
+
+
+    /**前台数字签名生成函数
+     * @param $check_info 用户必要信息(id,用户名,类型,状态,登录ip)
+     * @return string 加密后的token
+     */
+    function get_user_token($check_info)
+    {
+        $str = $this->get_user_token_str($check_info);
+        $this->CI->load->library('encrypt');
+        return urlencode($this->CI->encrypt->encode($str));//token进行Unicode转码
+    }
+
+    /**
+     * 前台数字签名信息构造
+     * @param $check_info 验证信息
+     * @return string 构造token
+     */
+    protected function get_user_token_str($check_info)
     {
         return $str = md5($check_info['id'] . $check_info['user_name'] . $check_info['type'] . $check_info['status'] . $check_info['login_ip']);
     }
@@ -55,44 +83,47 @@ class Common_Cls
      */
     public function is_login()
     {
-        $CI =& get_instance();
-        $token = urldecode($CI->input->cookie('token', false));//unicode解码
-        $CI->load->library('encrypt');
-        $token = $CI->encrypt->decode($token);
+        $token = urldecode($this->CI->input->cookie('token', false));//unicode解码
+        $this->CI->load->library('encrypt');
+        $token = $this->CI->encrypt->decode($token);
         if (empty($token)) {
             return false;
         }
-        $check_info['id'] = $CI->input->cookie('id', TRUE);
-        $check_info['user_name'] = $CI->input->cookie('user_name', TRUE);
-        $check_info['type'] = $CI->input->cookie('type', TRUE);
-        $check_info['status'] = $CI->input->cookie('status', TRUE);
-        $check_info['login_ip'] = $CI->input->cookie('login_ip', TRUE);
+        $check_info['id'] = $this->CI->input->cookie('id', TRUE);
+        $check_info['user_name'] = $this->CI->input->cookie('user_name', TRUE);
+        $check_info['type'] = $this->CI->input->cookie('type', TRUE);
+        $check_info['status'] = $this->CI->input->cookie('status', TRUE);
+        $check_info['login_ip'] = $this->CI->input->cookie('login_ip', TRUE);
         if ($check_info['type'] == '1' || $check_info['type'] == '2') {//教师
             return $this->get_admin_token_str($check_info) === $token;
         } else {//学生
-            return false;
+            return $this->get_user_token_str($check_info) === $token;
         }
     }
 
     /**
-     * 登录检测函数,未通过弹窗提示且跳转
-     * @param bool $show_json_tips 是否适配ajax显示json的未登录提示
+     * 登录检测并提示或跳转
+     * @param bool $show_tips 是否显示未登录提示
+     * @param bool $is_admin 是否是后台页面
+     * @param bool $need_navigate 是否需要跳转
      */
-    public function is_login_alert($show_json_tips = true)
+    public function is_login_alert($show_tips = true, $is_admin = true, $need_navigate = true)
     {
         if (!$this->is_login()) {
             $this->login_out();
-            if ($show_json_tips == true) {
-                if (isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUESTED_WITH"]) == "xmlhttprequest") {
-                    // ajax 请求的处理方式
-                    echo $this->json_output('-99', '您未登录或已掉线!');
-                } else {
-                    // 正常请求的处理方式
-                    echo '<script>alert("您未登录或已掉线!");location.href=\'' . _admin_domain . 'login\'</script>';
-                };
-            } else {
-                echo '<script>alert("您未登录或已掉线!");location.href=\'' . _admin_domain . 'login\'</script>';
-            }
+            // ajax 请求的处理方式
+            if (isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUESTED_WITH"]) == "xmlhttprequest") {
+                echo $this->json_output('-99', '您未登录或已掉线!');
+            } else {// 正常请求的处理方式
+                if ($need_navigate == true) {//需要跳转
+                    $jump_url = $is_admin == true ? _admin_domain . 'login' : _site_domain . 'user_login';
+                    if ($show_tips == true) {//显示提示再跳转
+                        echo '<script>alert("您未登录或已掉线!");location.href=\'' . $jump_url . '\'</script>';
+                    } else {
+                        header('location:' . $jump_url);
+                    }
+                }
+            };
             exit;
         }
     }

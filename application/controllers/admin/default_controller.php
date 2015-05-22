@@ -12,7 +12,7 @@ class Default_controller extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->common_cls->is_login_alert();
+        $this->common_cls->is_login_alert(false);
     }
 
     public function index()

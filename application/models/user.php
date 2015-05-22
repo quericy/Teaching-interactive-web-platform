@@ -83,6 +83,18 @@ class User extends CI_Model {
         $this->db->where_in('uid', $uid_arr);
         $this->db->update($this->table_name, array('status' => $status));
     }
+
+    /**
+     * 用户登录验证函数
+     * @param $user_name 用户名
+     * @param $user_pwd 密码
+     */
+    function user_login($user_name,$user_pwd)
+    {
+        $this->db->select('uid,user_name,email,status,login_time,login_ip')->from($this->table_name);
+        $this->db->where(array('user_name' => $user_name, 'user_pwd' => $this->user_md5($user_pwd)));
+        return $this->db->get()->row_array();
+    }
 }
 
 /* End of file user.php */
