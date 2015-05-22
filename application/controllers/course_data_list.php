@@ -41,16 +41,18 @@ class Course_Data_List extends CI_Controller
         //获取课件列表
         $course_list = $this->data_cls->get_list(1, $course_page, $per_page);
         $this->assign_arr['course_info_list'] = $course_list;
+        //指定分页链接
+        $base_url=base_url() . '/' . $this->uri->segment(1) . '/' . ($this->uri->segment(2) ? $this->uri->segment(2) : 'index') . '/'.$course_page.'/';
+        $first_link_url_suffix=base_url() . '/' . $this->uri->segment(1) . '/' . ($this->uri->segment(2) ? $this->uri->segment(2) : 'index') . '/';
         //课件列表分页
-        $this->assign_arr['course_page_string'] = $this->page_cls->get_page_config($this, $this->data_cls->get_counts(array('type' => '1')), false, $per_page,3,'/'.$data_page );
+        $this->assign_arr['course_page_string'] = $this->page_cls->get_page_config($this, $this->data_cls->get_counts(array('type' => '1')), false, $per_page,3,'/'.$data_page ,'',$first_link_url_suffix.'1'.'/'.$data_page);
 
         //获取资料列表
         $data_list = $this->data_cls->get_list(2, $data_page, $per_page);
         $this->assign_arr['data_info_list'] = $data_list;
-        //指定分页链接
-        $base_url=base_url() . '/' . $this->uri->segment(1) . '/' . ($this->uri->segment(2) ? $this->uri->segment(2) : 'index') . '/'.$course_page.'/';
+
         //资料列表分页
-        $this->assign_arr['data_page_string'] = $this->page_cls->get_page_config($this, $this->data_cls->get_counts(array('type' => '2')), false, $per_page,4,'',$base_url);
+        $this->assign_arr['data_page_string'] = $this->page_cls->get_page_config($this, $this->data_cls->get_counts(array('type' => '2')), false, $per_page,4,'',$base_url,$first_link_url_suffix.$course_page.'/1');
 
         //获取最新课件资料
         $this->assign_arr['recent_data_list']=$this->data_cls->get_recent_list(5);

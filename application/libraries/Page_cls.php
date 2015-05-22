@@ -21,7 +21,7 @@ class Page_cls
      * @param int $num_links 当前页前后预留页数(默认3)
      * @return mixed
      */
-    function get_page_config($this_obj, $total_rows, $is_admin = 0, $per_page = 15, $uri_segment = 3, $suffix = '', $base_url = '', $num_links = 3)
+    function get_page_config($this_obj, $total_rows, $is_admin = 0, $per_page = 15, $uri_segment = 3, $suffix = '', $base_url = '', $first_link_url = '', $num_links = 3)
     {
         //引入分页类和uri类
         $this_obj->load->library('pagination');
@@ -45,6 +45,9 @@ class Page_cls
                 $config['base_url'] = $base_url;
             } else {
                 $config['base_url'] = base_url() . '/' . $this_obj->uri->segment(1) . '/' . ($this_obj->uri->segment(2) ? $this_obj->uri->segment(2) : 'index') . '/';
+            }
+            if (!empty($first_link_url)) {
+                $config['first_url'] = $first_link_url;
             }
 
         }

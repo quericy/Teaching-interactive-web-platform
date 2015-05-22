@@ -160,7 +160,10 @@ class CI_Pagination {
 
 				// Prep the current page - no funny business!
 				$this->cur_page = (int) $this->cur_page;
+			}else{
+				$this->cur_page = 1;//修正单页面多个分页时cur_page出错的问题
 			}
+
 		}
 		
 		// Set current page to 1 if using page numbers instead of offset
