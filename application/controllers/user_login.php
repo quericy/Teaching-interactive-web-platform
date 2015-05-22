@@ -44,7 +44,7 @@ class User_Login extends CI_Controller
         $this->load->model('user', 'user_cls');
         $user_arr = $this->user_cls->user_login($user_name, $user_pwd);
         if (empty($user_arr)) {
-            echo $this->common_cls->json_output('-1', '账号或密码错误');
+            echo $this->common_cls->json_output('-1', '用户名或密码错误');
             return;
         }
         if ($user_arr['status'] != '1') {
@@ -61,9 +61,10 @@ class User_Login extends CI_Controller
         //生成token
         $token_arr['token'] = $this->common_cls->get_user_token($token_arr);
         $token_arr['auto_login'] = $auto_login;
-        $token_arr['cookie_time']=$this->cache_cls->get_sys_cache()['cookie_time'];
+        $cookie_time=$this->cache_cls->get_sys_cache();
+        $token_arr['cookie_time']=$cookie_time['cookie_time'];
         //更新登录信息
-        $this->user_cls->update_login_time($user_arr['tid'],$now_time,$ip);
+        $this->user_cls->update_login_time($user_arr['uid'],$now_time,$ip);
         //输出登录成功信息
         echo $this->common_cls->json_output('1', 'ok', $token_arr);
 

@@ -154,7 +154,6 @@ class Admin extends CI_Model
         return $this->db->get()->row_array();
     }
 
-
     /**
      * 更新教师登录时间和ip
      * @param $tid 教师id
@@ -170,7 +169,6 @@ class Admin extends CI_Model
         );
         $this->db->where_in('tid', $tid);
         return $this->db->update($this->table_name, $update_arr);
-
     }
 }
 /* End of file admin.php */

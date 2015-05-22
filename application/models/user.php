@@ -95,6 +95,23 @@ class User extends CI_Model {
         $this->db->where(array('user_name' => $user_name, 'user_pwd' => $this->user_md5($user_pwd)));
         return $this->db->get()->row_array();
     }
+
+    /**
+     * 更新学生登录时间和ip
+     * @param $uid 学生id
+     * @param $time 时间
+     * @param $ip id
+     * @return object
+     */
+    function update_login_time($uid,$time,$ip)
+    {
+        $update_arr = array(
+            'login_time' =>$time,
+            'login_ip' => $ip
+        );
+        $this->db->where_in('uid', $uid);
+        return $this->db->update($this->table_name, $update_arr);
+    }
 }
 
 /* End of file user.php */

@@ -79,9 +79,10 @@ class Common_Cls
 
     /**
      * 登录检测
+     * @param bool $is_admin 是否是后台登录校验
      * @return bool 是否登录
      */
-    public function is_login()
+    public function is_login($is_admin=true)
     {
         $token = urldecode($this->CI->input->cookie('token', false));//unicode解码
         $this->CI->load->library('encrypt');
@@ -92,6 +93,9 @@ class Common_Cls
         $check_info['id'] = $this->CI->input->cookie('id', TRUE);
         $check_info['user_name'] = $this->CI->input->cookie('user_name', TRUE);
         $check_info['type'] = $this->CI->input->cookie('type', TRUE);
+        if($is_admin==true){
+            if($check_info['type']!='1'&&$check_info['type']!='2')return false;
+        }
         $check_info['status'] = $this->CI->input->cookie('status', TRUE);
         $check_info['login_ip'] = $this->CI->input->cookie('login_ip', TRUE);
         if ($check_info['type'] == '1' || $check_info['type'] == '2') {//教师
@@ -109,7 +113,7 @@ class Common_Cls
      */
     public function is_login_alert($show_tips = true, $is_admin = true, $need_navigate = true)
     {
-        if (!$this->is_login()) {
+        if (!$this->is_login($is_admin)) {
             $this->login_out();
             // ajax 请求的处理方式
             if (isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUESTED_WITH"]) == "xmlhttprequest") {
