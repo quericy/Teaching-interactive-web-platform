@@ -18,6 +18,7 @@ class Page_cls
      * @param int $uri_segment 当前页路由变量位置
      * @param string $suffix 分页链接后缀
      * @param string $base_url 分页链接(为空将使用默认指定)
+     * @param string $first_link_url 第一页的链接(为空将使用CI默认)
      * @param int $num_links 当前页前后预留页数(默认3)
      * @return mixed
      */

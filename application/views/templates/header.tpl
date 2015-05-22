@@ -20,7 +20,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="divider"></li>
-            <li><a href="#">登录</a></li>
+            <li><a href="<{$smarty.const._site_domain}>user_login">登录</a></li>
             <li><a href="#">注册</a></li>
             <li><span>&nbsp;&nbsp;</span></li>
         </ul>
