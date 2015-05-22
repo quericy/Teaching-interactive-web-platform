@@ -1,10 +1,14 @@
 <!--页脚begin-->
 <div id="footer" class="row">
-    <div  >
+    <div>
         <div class="center">
-            教学互动平台 Version: 1.0.0
+            <p>
+                教学互动平台 Version: 1.0.0
+                <br/>
+                <a href="#">关于</a>&nbsp;·&nbsp;<a href="<{$smarty.const._admin_domain}>login">教师登录</a>
+            </p>
         </div>
-        <p class="pull-right">© 2015 Powered By chenyi	 ,All Rights Reserved.</p>
+        <p class="pull-right">© 2015 Powered By chenyi ,All Rights Reserved.</p>
     </div>
 </div>
 <!--页脚end-->

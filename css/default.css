@@ -149,7 +149,10 @@ a, a:hover {
     margin: 0;
     /*margin-top: 70px;*/
     background: #fff;
-
     color: #ccc;
-
+}
+/**/
+#footer p a{
+    color:#ccc;
+    font-size: 13px;
 }

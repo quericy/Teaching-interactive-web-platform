@@ -77,7 +77,11 @@
                     <{foreach  from=$recent_data_list item=val key=key}>
                     <a href="<{$smarty.const._site_domain}>course_data/index/<{$val.did}>" class="list-group-item">
                         <{$val.title|truncate:15:'...'}>
-                        <span class="badge"><{if $val.type=='1'}>课件<{else}>资料<{/if}></span>
+                        <{if $val.type=='1'}>
+                        <span class="badge alert-info">课件</span>
+                        <{else}>
+                        <span class="badge alert-success">资料</span>
+                        <{/if}>
                     </a>
                     <{/foreach}>
                 </div>
