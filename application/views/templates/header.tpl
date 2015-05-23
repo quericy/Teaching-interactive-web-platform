@@ -32,7 +32,7 @@
             <li><a href="<{$smarty.const._site_domain}>user_login/login_out">退出</a></li>
             <{else}>
             <li><a href="<{$smarty.const._site_domain}>user_login">登录</a></li>
-            <li><a href="#">注册</a></li>
+            <li><a href="<{$smarty.const._site_domain}>user_reg">注册</a></li>
             <{/if}>
             <li><span>&nbsp;&nbsp;</span></li>
         </ul>

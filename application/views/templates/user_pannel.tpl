@@ -40,7 +40,7 @@
         <label>教学互动平台</label>
     <hr/>
         <div class="center">
-            <div class=" btn btn-default">现在注册</div>
+            <a href="<{$smarty.const._site_domain}>user_reg" class="btn btn-default">现在注册</a>
         </div>
         <p></p>
 

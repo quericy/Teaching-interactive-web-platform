@@ -7,7 +7,6 @@
     <title><{$web_title}></title>
     <!-- Bootstrap -->
     <link href="<{$smarty.const._site_css}>bootstrap.min.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="<{$smarty.const._site_css}>iCheck_square_blue.css"/>
     <link href="<{$smarty.const._site_css}>default.css" rel="stylesheet">
     <!--IE8 css query-->
     <script src="<{$smarty.const._site_js}>respond.min.js"></script>
@@ -23,8 +22,7 @@
                 <div class="panel-heading">
                     <h5 class="panel-title">
                         <a href="<{$smarty.const._site_domain}>" style="color:#999;"><{$web_name}></a>
-                        &nbsp;›&nbsp;
-                        <span class="glyphicon glyphicon-lock" style="color:#000;"></span>&nbsp;学生登录
+                        &nbsp;›&nbsp;&nbsp;注册
                     </h5>
                 </div>
                 <div class="panel-body" style="min-height: 600px;">
@@ -45,20 +43,35 @@
                                 <input id="user_pwd" type="password" class="form-control">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="email">电子邮件:</label>
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-envelope"></span></span>
+                                <input id="email" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="verify_code">验证码:</label>
+
+                            <div class="input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                            </span>
+                                <input id="verify_code" type="text" class="form-control" placeholder="点击图片换一张">
+                            <span class="input-group-addon" style="padding: 0 10px;">
+                                <img src="<{$smarty.const._site_domain}>user_reg/get_varify_code" alt="看不清？点击更换"
+                                     onclick="this.src='<{$smarty.const._site_domain}>user_reg/get_varify_code?spam='+new Date().getTime()"/>
+                            </span>
+                            </div>
+                        </div>
                         <p>&nbsp;</p>
 
                         <div class="row container-fluid">
-                            <{if $cookie_time>0}>
-                            <div class="pull-left">
-                                <input id="remember_check_box" type="checkbox">
-                            </div>
-                            <div class="pull-left">
-                                &nbsp;&nbsp;<{$cookie_time}>天内自动登录
-                            </div>
-                            <{/if}>
-                            <div id="user_login_btn" class="pull-right btn btn-primary pull-right"
+                            <div id="user_login_btn" class="pull-right btn btn-success pull-right"
                                  style="margin-top: -6px;">
-                                登&nbsp;录
+                                注&nbsp;册
                             </div>
                             <div id="login_tips" class="pull-right text-danger"></div>
                         </div>
@@ -78,14 +91,7 @@
 <{include file="footer.tpl"}>
 <script src="<{$smarty.const._site_js}>icheck.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        //icheck初始化
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // 触摸扩展区域
-        });
-    });
+
     //登录按钮触发函数
     $(document).delegate('#user_login_btn', 'click', function () {
         $('#login_tips').html('&nbsp;&nbsp;');
