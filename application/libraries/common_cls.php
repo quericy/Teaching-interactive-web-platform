@@ -33,6 +33,21 @@ class Common_Cls
         return json_encode($return_arr);;
     }
 
+
+    /**
+     * 生成随机头像identicon
+     * @param $str 字符串
+     * @param int $size 大小
+     * @return string uri
+     */
+    function get_identicon($str, $size = 64)
+    {
+        require_once(APPPATH . 'third_party/identicon/autoload.php');
+        $identicon = new \Identicon\Identicon();
+        $imageDataUri = $identicon->getImageDataUri($str, $size);
+        return $imageDataUri;
+    }
+
     /**
      * 后台数字签名生成函数
      * @param $user_info 教师必要信息(id,用户名,类型,状态,登录ip)
@@ -82,7 +97,7 @@ class Common_Cls
      * @param bool $is_admin 是否是后台登录校验
      * @return bool 是否登录
      */
-    public function is_login($is_admin=true)
+    public function is_login($is_admin = true)
     {
         $token = urldecode($this->CI->input->cookie('token', false));//unicode解码
         $this->CI->load->library('encrypt');
@@ -93,8 +108,8 @@ class Common_Cls
         $check_info['id'] = $this->CI->input->cookie('id', TRUE);
         $check_info['user_name'] = $this->CI->input->cookie('user_name', TRUE);
         $check_info['type'] = $this->CI->input->cookie('type', TRUE);
-        if($is_admin==true){
-            if($check_info['type']!='1'&&$check_info['type']!='2')return false;
+        if ($is_admin == true) {
+            if ($check_info['type'] != '1' && $check_info['type'] != '2') return false;
         }
         $check_info['status'] = $this->CI->input->cookie('status', TRUE);
         $check_info['login_ip'] = $this->CI->input->cookie('login_ip', TRUE);
@@ -130,6 +145,24 @@ class Common_Cls
             };
             exit;
         }
+    }
+
+
+    /**
+     * 已登录用户展示
+     * @return mixed 待注册的登录信息数组
+     */
+    public function show_user_info()
+    {
+        $is_login = $this->is_login(false);
+        $assign_arr=array();
+        $assign_arr['is_login'] = $is_login;
+        if ($is_login == true) {
+            $assign_arr['user_name'] = $this->CI->input->cookie('user_name', TRUE);
+            $assign_arr['user_type'] = $this->CI->input->cookie('type', TRUE);
+            $assign_arr['user_logo_uri'] = $this->get_identicon($assign_arr['user_name'],48);//随机头像
+        }
+        return $assign_arr;
     }
 
     /**

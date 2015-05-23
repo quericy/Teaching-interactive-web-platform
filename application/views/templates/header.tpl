@@ -22,11 +22,11 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="divider"></li>
-            <{if isset($is_login)&&$is_login=='true'}>
+            <{if isset($user_info['is_login'])&&$user_info['is_login']=='true'}>
             <li>
                 <a href="">
                     <span class="glyphicon glyphicon-user"></span>&nbsp;
-                    <{if isset($user_name)}><{$user_name|truncate:10:'..'}><{/if}>
+                    <{if isset($user_info['user_name'])}><{$user_info['user_name']|truncate:10:'..'}><{/if}>
                 </a>
             </li>
             <li><a href="<{$smarty.const._site_domain}>user_login/login_out">退出</a></li>

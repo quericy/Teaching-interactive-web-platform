@@ -20,7 +20,7 @@ class Course_Data_List extends CI_Controller
         //课件资料模型
         $this->load->model('data', 'data_cls');
         $this->assign_arr['nav_show'] = 'course_data';
-        $this->show_user_center();
+        $this->assign_arr['user_info'] = $this->common_cls->show_user_info();//登录信息展示
     }
 
     public function index($course_page = 1, $data_page = 1)
@@ -62,18 +62,6 @@ class Course_Data_List extends CI_Controller
         $this->smarty->view('course_data_list.tpl', $this->assign_arr);
     }
 
-    /**
-     * 已登录用户展示
-     */
-    public function show_user_center()
-    {
-        $is_login = $this->common_cls->is_login(false);
-        $this->assign_arr['is_login'] = $is_login;
-        if ($is_login == true) {
-            $this->assign_arr['user_name'] = $this->input->cookie('user_name', TRUE);
-            $this->assign_arr['user_type'] = $this->input->cookie('type', TRUE);
-        }
-    }
 }
 
 /* End of file course_data_list.php */
