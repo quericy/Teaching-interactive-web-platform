@@ -65,20 +65,7 @@
         <!--左侧列表end-->
         <!--右侧列表begin-->
         <div class="col-md-4">
-            <div class=" panel panel-default">
-                <div class="panel-body">
-                    <label>教学互动平台</label>
-                    <hr/>
-                    <div class="center">
-                        <a href="<{$smarty.const._site_domain}>user_reg" class="btn btn-default">现在注册</a>
-                    </div>
-                    <p></p>
-
-                    <div class="center">
-                        <p>已注册同学请<a href="<{$smarty.const._site_domain}>user_login">登录</a></p>
-                    </div>
-                </div>
-            </div>
+            <{include file="user_pannel.tpl"}>
         </div>
         <!--右侧列表end-->
     </div>
@@ -124,7 +111,7 @@
                     case '1':
                         var expire = null;
                         if (return_arr.data.auto_login == '1') {
-                            expire = 7;
+                            expire = parseInt(return_arr.data.cookie_time);
                         }
                         setCookie('id', return_arr.data.id, expire);
                         setCookie('user_name', return_arr.data.user_name, expire);

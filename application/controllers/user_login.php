@@ -18,8 +18,9 @@ class User_Login extends CI_Controller
         $sys_setting = $this->cache_cls->get_sys_cache();
         $this->assign_arr['web_name'] = $sys_setting['web_name'];
         $this->assign_arr['cookie_time'] = $sys_setting['cookie_time'];
-        $this->assign_arr['web_title'] = '课件资料' . ' - ' . $sys_setting['web_name'];//站点名称
+        $this->assign_arr['web_title'] = '用户登录' . ' - ' . $sys_setting['web_name'];//站点名称
         $this->assign_arr['nav_show'] = '';
+        $this->assign_arr['user_info'] = $this->common_cls->show_user_info();//登录信息展示
     }
 
     public function index()
