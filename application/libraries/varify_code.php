@@ -24,8 +24,10 @@ class Varify_Code
 
     public function get_image($session_key = 'captcha')
     {
-       // header("Content-type:image/png");
-        session_start();
+        header("Content-type:image/png");
+        if(!isset($_SESSION)){
+            session_start();
+        }
         /*
         * 初始化
         */

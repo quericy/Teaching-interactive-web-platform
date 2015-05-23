@@ -34,7 +34,9 @@ class User_Reg extends CI_Controller
      */
     public function get_varify_code()
     {
-//        session_start();
+//        if(!isset($_SESSION)){
+//            session_start();
+//        }
 //        var_dump($_SESSION['captcha']);
         $this->load->library('varify_code');
         $this->varify_code->get_image();
