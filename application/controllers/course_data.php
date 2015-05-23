@@ -21,6 +21,7 @@ class Course_Data extends CI_Controller
         //课件资料模型
         $this->load->model('data', 'data_cls');
         $this->assign_arr['nav_show'] = 'course_data';
+        $this->assign_arr['user_info'] = $this->common_cls->show_user_info();//登录信息展示
     }
 
     public function index($did)
