@@ -1,5 +1,5 @@
 <!--导航begin-->
-<div  class="top-navbar navbar navbar-default navbar-fixed-top container nav-container"   role="navigation">
+<div class="top-navbar navbar navbar-default navbar-fixed-top container nav-container" role="navigation">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">导航栏</span>
@@ -13,15 +13,27 @@
     <div class="navbar-collapse collapse" style="height: 1px;">
         <ul id="main-menu" class="nav navbar-nav navbar-left">
 
-            <li <{if $nav_show=='course_data'}>class="active"<{/if}>><a href="<{$smarty.const._site_domain}>course_data_list">课件资料</a></li>
+            <li
+            <{if $nav_show=='course_data'}>class="active"<{/if}>><a
+                    href="<{$smarty.const._site_domain}>course_data_list">课件资料</a></li>
             <li><a href="#">作业</a></li>
             <li><a href="#">答疑</a></li>
             <li><a href="#">关于</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="divider"></li>
+            <{if isset($is_login)&&$is_login=='true'}>
+            <li>
+                <a href="">
+                    <span class="glyphicon glyphicon-user"></span>&nbsp;
+                    <{if isset($user_name)}><{$user_name|truncate:10:'..'}><{/if}>
+                </a>
+            </li>
+            <li><a href="<{$smarty.const._site_domain}>user_login/login_out">退出</a></li>
+            <{else}>
             <li><a href="<{$smarty.const._site_domain}>user_login">登录</a></li>
             <li><a href="#">注册</a></li>
+            <{/if}>
             <li><span>&nbsp;&nbsp;</span></li>
         </ul>
     </div>

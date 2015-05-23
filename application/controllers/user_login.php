@@ -67,7 +67,14 @@ class User_Login extends CI_Controller
         $this->user_cls->update_login_time($user_arr['uid'],$now_time,$ip);
         //输出登录成功信息
         echo $this->common_cls->json_output('1', 'ok', $token_arr);
+    }
 
+    /**
+     * 退出登录
+     */
+    public function login_out()
+    {
+        $this->common_cls->login_out(_site_domain);
     }
 }
 
