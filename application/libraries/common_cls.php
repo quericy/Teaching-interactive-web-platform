@@ -160,6 +160,8 @@ class Common_Cls
         if ($is_login == true) {
             $assign_arr['user_name'] = $this->CI->input->cookie('user_name', TRUE);
             $assign_arr['user_type'] = $this->CI->input->cookie('type', TRUE);
+            $assign_arr['login_time'] = $this->CI->input->cookie('login_time', TRUE);
+            $assign_arr['last_login_time'] = $this->CI->input->cookie('last_login_time', TRUE);
             $assign_arr['user_logo_uri'] = $this->get_identicon($assign_arr['user_name'],48);//随机头像
         }
         return $assign_arr;

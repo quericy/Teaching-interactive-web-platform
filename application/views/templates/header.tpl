@@ -24,7 +24,7 @@
             <li class="divider"></li>
             <{if isset($user_info['is_login'])&&$user_info['is_login']=='true'}>
             <li>
-                <a href="">
+                <a href="#">
                     <span class="glyphicon glyphicon-user"></span>&nbsp;
                     <{if isset($user_info['user_name'])}><{$user_info['user_name']|truncate:10:'..'}><{/if}>
                 </a>
