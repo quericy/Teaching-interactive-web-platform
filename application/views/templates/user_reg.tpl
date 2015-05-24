@@ -50,6 +50,11 @@
                                 <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-envelope"></span></span>
                                 <input id="email" type="text" class="form-control">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-question-sign" style=" "
+                                          data-toggle="tooltip" data-placement="right"
+                                          title="填写电子邮件便于找回密码"></span>
+                                </span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -61,7 +66,7 @@
                             </span>
                                 <input id="verify_code" type="text" class="form-control" placeholder="点击图片换一张">
                             <span class="input-group-addon" style="padding: 0 10px;">
-                                <img src="<{$smarty.const._site_domain}>user_reg/get_varify_code" alt="看不清？点击更换"
+                                <img id="verify_img" src="<{$smarty.const._site_domain}>user_reg/get_varify_code" alt="看不清？点击更换"
                                      onclick="this.src='<{$smarty.const._site_domain}>user_reg/get_varify_code?spam='+new Date().getTime()"/>
                             </span>
                             </div>
@@ -69,7 +74,7 @@
                         <p>&nbsp;</p>
 
                         <div class="row container-fluid">
-                            <div id="user_login_btn" class="pull-right btn btn-success pull-right"
+                            <div id="user_reg_btn" class="pull-right btn btn-success pull-right"
                                  style="margin-top: -6px;">
                                 注&nbsp;册
                             </div>
@@ -91,12 +96,17 @@
 <{include file="footer.tpl"}>
 <script src="<{$smarty.const._site_js}>icheck.min.js"></script>
 <script type="text/javascript">
-
+    $(document).ready(function () {
+        //提示工具栏
+        $('[data-toggle="tooltip"]').tooltip();
+    });
     //登录按钮触发函数
-    $(document).delegate('#user_login_btn', 'click', function () {
+    $(document).delegate('#user_reg_btn', 'click', function () {
         $('#login_tips').html('&nbsp;&nbsp;');
         var user_name = $('#user_name').val().trim();
         var user_pass = $('#user_pwd').val().trim();
+        var email = $('#email').val().trim();
+        var verify_code = $('#verify_code').val().trim();
         if (user_name == '') {
             $('#login_tips').html('*用户名不能为空!&nbsp;&nbsp;');
             return;
@@ -105,17 +115,30 @@
             $('#login_tips').html('*密码不能为空!&nbsp;&nbsp;');
             return;
         }
-        //自动登录
-        var auto_login = document.getElementById('remember_check_box').checked == true ? '1' : '0';
-        $('#user_login_btn').html('登录中');
-        $('#user_login_btn').attr('disabled', "disabled");
+        if (email == '') {
+            $('#login_tips').html('*邮箱不能为空!&nbsp;&nbsp;');
+            return;
+        }
+        var re = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if (!re.test(email)) {
+            $('#login_tips').html('*邮箱格式不对!&nbsp;&nbsp;');
+            return;
+        }
+        if (verify_code == '') {
+            $('#login_tips').html('*验证码错误!&nbsp;&nbsp;');
+            $('#verify_img').click();
+            return;
+        }
+        //注册请求
+        $('#user_reg_btn').html('正在注册');
+        $('#user_reg_btn').attr('disabled', "disabled");
         $.ajax({
             type: 'post',
-            url: '<{$smarty.const._site_domain}><{$controller_name}>/user_login_check/',
-            data:{user_name:user_name,user_pwd:user_pass,auto_login:auto_login},
+            url: '<{$smarty.const._site_domain}><{$controller_name}>/user_reg_check/',
+            data:{user_name:user_name,user_pwd:user_pass,email:email,verify_code:verify_code},
             success: function (res) {
-                $('#user_login_btn').html('登&nbsp;录');
-                $('#user_login_btn').removeAttr('disabled');
+                $('#user_reg_btn').html('注&nbsp;册');
+                $('#user_reg_btn').removeAttr('disabled');
                 var return_arr = eval('(' + res + ')');
                 switch (return_arr.status) {
                     case '1':
@@ -151,7 +174,7 @@
     // 绑定回车事件
     $(document).keypress(function (e) {
         if (e.which == 13) {
-            $('#user_login_btn').click();
+            $('#user_reg_btn').click();
         }
     });
     //trim修复(IE)
