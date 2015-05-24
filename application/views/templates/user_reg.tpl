@@ -41,6 +41,11 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                                 <input id="user_pwd" type="password" class="form-control">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-question-sign" style=" "
+                                          data-toggle="tooltip" data-placement="top"
+                                          title="注册密码长度应至少6个字符"></span>
+                                </span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -52,7 +57,7 @@
                                 <input id="email" type="text" class="form-control">
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-question-sign" style=" "
-                                          data-toggle="tooltip" data-placement="right"
+                                          data-toggle="tooltip" data-placement="top"
                                           title="填写电子邮件便于找回密码"></span>
                                 </span>
                             </div>
@@ -66,7 +71,8 @@
                             </span>
                                 <input id="verify_code" type="text" class="form-control" placeholder="点击图片换一张">
                             <span class="input-group-addon" style="padding: 0 10px;">
-                                <img id="verify_img" src="<{$smarty.const._site_domain}>user_reg/get_varify_code" alt="看不清？点击更换"
+                                <img id="verify_img" src="<{$smarty.const._site_domain}>user_reg/get_varify_code"
+                                     alt="看不清？点击更换"
                                      onclick="this.src='<{$smarty.const._site_domain}>user_reg/get_varify_code?spam='+new Date().getTime()"/>
                             </span>
                             </div>
@@ -158,6 +164,7 @@
                         break;
                     case '-1':
                         $('#login_tips').html('*' + return_arr.msg + '!&nbsp;&nbsp;');
+                        $('#verify_img').click();//刷新验证码
                         break;
                     case '-2':
                         $('#login_tips').html('*' + return_arr.msg + '!&nbsp;&nbsp;');

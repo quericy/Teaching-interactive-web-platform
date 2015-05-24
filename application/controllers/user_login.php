@@ -29,6 +29,9 @@ class User_Login extends CI_Controller
         $this->smarty->view('user_login.tpl', $this->assign_arr);
     }
 
+    /**
+     * 用户登录验证函数
+     */
     public function user_login_check()
     {
         $user_name = $this->input->post('user_name', true);

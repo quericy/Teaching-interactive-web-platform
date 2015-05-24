@@ -1,14 +1,15 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: 熠
  * Date: 2015/4/23 0023
  * Time: 23:31
  */
+class User extends CI_Model
+{
 
-class User extends CI_Model {
-
-    private $table_name='user';//表名
+    private $table_name = 'user';//表名
 
     function __construct()
     {
@@ -23,7 +24,7 @@ class User extends CI_Model {
      */
     function user_md5($pwd_str)
     {
-        return md5(md5($pwd_str).'user_key');
+        return md5(md5($pwd_str) . 'user_key');
     }
 
     /**
@@ -66,8 +67,8 @@ class User extends CI_Model {
     {
         //获得默认密码
         $this->load->model('setting', 'setting_cls');
-        $reset_pwd=$this->setting_cls->get_setting('reset_pwd');
-        if(empty($reset_pwd))$reset_pwd='123456';
+        $reset_pwd = $this->setting_cls->get_setting('reset_pwd');
+        if (empty($reset_pwd)) $reset_pwd = '123456';
 
         $this->db->where_in('uid', $uid);
         $this->db->update($this->table_name, array('user_pwd' => $this->user_md5($reset_pwd)));
@@ -89,7 +90,7 @@ class User extends CI_Model {
      * @param $user_name 用户名
      * @param $user_pwd 密码
      */
-    function user_login($user_name,$user_pwd)
+    function user_login($user_name, $user_pwd)
     {
         $this->db->select('uid,user_name,email,status,login_time,login_ip')->from($this->table_name);
         $this->db->where(array('user_name' => $user_name, 'user_pwd' => $this->user_md5($user_pwd)));
@@ -103,14 +104,42 @@ class User extends CI_Model {
      * @param $ip id
      * @return object
      */
-    function update_login_time($uid,$time,$ip)
+    function update_login_time($uid, $time, $ip)
     {
         $update_arr = array(
-            'login_time' =>$time,
+            'login_time' => $time,
             'login_ip' => $ip
         );
         $this->db->where_in('uid', $uid);
         return $this->db->update($this->table_name, $update_arr);
+    }
+
+    /**
+     * 符合条件的学生数量
+     * @param $cond 指定条件
+     * @return int 数量
+     */
+    function get_counts($cond)
+    {
+        $this->db->from($this->table_name);
+        $this->db->where($cond);
+        return $this->db->count_all_results();
+    }
+
+    /**
+     * 用户注册函数
+     * @param $user_name 用户名
+     * @param $password 密码
+     * @param $email 邮箱
+     * @param $user_status 用户状态
+     * @return object
+     */
+    function user_register($user_name, $password, $email, $user_status)
+    {
+        return $this->db->insert($this->table_name, array('user_name' => $user_name,
+            'user_pwd' => $this->user_md5($password),
+            'email' => $email,
+            'status' => $user_status));
     }
 }
 

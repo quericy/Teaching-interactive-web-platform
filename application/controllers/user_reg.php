@@ -41,6 +41,49 @@ class User_Reg extends CI_Controller
         $this->load->library('varify_code');
         $this->varify_code->get_image();
     }
+
+    /**
+     * 用户注册验证函数
+     */
+    public function user_reg_check()
+    {
+        $user_name = $this->input->post('user_name', true);
+        $user_pwd = $this->input->post('user_pwd', true);
+        $email = $this->input->post('email', true);
+        $verify_code = $this->input->post('verify_code', true);
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        if(empty($_SESSION['captcha'])){
+            echo $this->common_cls->json_output('-1', '验证码错误');
+            return;
+        }
+        if(mb_strtoupper($_SESSION['captcha'])!==mb_strtoupper($verify_code)){
+            $_SESSION['captcha']=null;//验证码错误直接失效
+            echo $this->common_cls->json_output('-1', '验证码错误');
+            return;
+        }
+        if(empty($user_name)||empty($user_pwd)||empty($email)){
+            echo $this->common_cls->json_output('-2', '注册信息填写不完整');
+            return;
+        }
+        if(strlen($user_pwd)<6){
+            echo $this->common_cls->json_output('-2', '密码至少需要6个字符长度');
+            return;
+        }
+        if (!preg_match('/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/',$email)){
+            echo $this->common_cls->json_output('-2', '邮箱格式不正确');
+            return;
+        }
+        $this->load->model('user','user_cls');
+        if($this->user_cls->get_counts(array('user_name'=>$user_name))>0){
+            echo $this->common_cls->json_output('-2', '用户名已存在');
+            return;
+        }
+        //注册用户
+        $this->user_cls->user_register($user_name,$user_pwd,$email,'1');
+        echo $this->common_cls->json_output('1', '注册成功');
+    }
 }
 
 /* End of file user_reg.php */
