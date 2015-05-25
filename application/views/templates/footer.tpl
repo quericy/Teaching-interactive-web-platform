@@ -17,6 +17,7 @@
 <script src="<{$smarty.const._site_js}>bootstrap.min.js"></script>
 <script src="<{$smarty.const._site_js}>smoothscroll.js"></script>
 <script src="<{$smarty.const._site_js}>jquery.smoove.min.js"></script>
+<script src="<{$smarty.const._site_js}>common.js"></script>
 <script type="text/javascript">
     //平滑滚动
     $('.smooth-div > div').click(function (event) {

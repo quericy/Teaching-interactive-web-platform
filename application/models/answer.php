@@ -43,4 +43,24 @@ class Answer extends CI_Model
         $query = $this->db->get($this->table_name);
         return $this->security->xss_clean($query->result_array());
     }
+
+    function add_reply($qid,$content,$add_time)
+    {
+        $this->load->library('user_agent');
+        $user_agent=$this->agent->agent_string();
+        $id=intval($this->input->cookie('id', TRUE));
+        $type=$this->input->cookie('type', TRUE);
+        if($type=='1'||$type=='2'){
+            $id_key='tid';
+        }else{
+            $id_key='uid';
+        }
+        return $this->db->insert($this->table_name, array(
+            'qid'=>$qid,
+            'content' => $content,
+            'sub_time' => $add_time,
+            'UA'=>$user_agent,
+            $id_key =>$id
+        ));
+    }
 }

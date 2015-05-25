@@ -53,8 +53,44 @@ class Question_Show extends CI_Controller
         }
 
         $this->assign_arr['answer_list'] = $answer_list;
+        $this->assign_arr['qid'] = $qid;
         //页面展示
         $this->smarty->view('question_show.tpl', $this->assign_arr);
+    }
+
+    /**
+     * 提交回复
+     */
+    public function reply()
+    {
+        $this->common_cls->is_login_alert(true,false);//登录校验
+        $qid = intval($this->input->post('qid', true));
+        $content = $this->input->post('reply_text', true);
+        //登录验证
+        $qid = intval($qid);
+        if(empty($qid)||empty($content)){
+            echo $this->common_cls->json_output('-1', '回复信息不完整');
+            return;
+        }
+        $now_time=time();
+        $this->load->model('answer', 'answer_cls');
+        $this->answer_cls->add_reply($qid,$content,$now_time);
+        //构造回复区块
+        $user_name=$this->input->cookie('user_name', TRUE);
+        $user_type=$this->input->cookie('type', TRUE);
+        if($user_type=='1'||$user_type=='2'){
+            $answer_type='1';
+        }else{
+            $answer_type='0';
+        }
+        $user_logo_uri=$this->common_cls->get_identicon($user_name, 48);
+        $return_data=array(
+            'user_name'=>$user_name,
+            'answer_type'=>$answer_type,//是否是教师回复
+            'sub_date_time'=>date("Y-m-d H:i:s",$now_time),
+            'user_logo_uri'=>$user_logo_uri
+        );
+        echo $this->common_cls->json_output('1', '回复成功',$return_data);
     }
 
 }
