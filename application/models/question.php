@@ -27,6 +27,7 @@ class question extends CI_Model
         $offset = $offset > 0 ? $offset : 0;
         $this->db->join('user', 'user.uid=question.uid');
         $this->db->select('question.*,user.user_name');
+        $this->db->order_by('sub_time desc');
         $query = $this->db->get($this->table_name, $per_page, $offset);
         return $this->security->xss_clean($query->result_array());
     }
@@ -38,6 +39,18 @@ class question extends CI_Model
     function get_question_count()
     {
         return $this->db->count_all($this->table_name);
+    }
+
+    /**
+     * 获取最近几条记录
+     * @param $top_count 最近的条数
+     * @return mixed
+     */
+    function get_recent_list($top_count=5)
+    {
+        $this->db->order_by('sub_time desc');
+        $query = $this->db->get($this->table_name, $top_count,0 );
+        return $this->security->xss_clean($query->result_array());
     }
 
     /**

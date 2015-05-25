@@ -35,6 +35,8 @@ class question_list extends CI_Controller
             $question_info_list[$key]['user_logo_uri'] = $this->common_cls->get_identicon($val['user_name'],48);//提问用户头像
         }
         $this->assign_arr['question_info_list'] = $question_info_list;
+        //获取最新提问
+        $this->assign_arr['recent_question_list'] =  $this->question_cls->get_recent_list(5);
         //分页
         $this->load->library('page_cls');
         $this->assign_arr['page_string'] = $this->page_cls->get_page_config($this, $this->question_cls->get_question_count(), false, $per_page);

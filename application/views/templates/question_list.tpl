@@ -44,17 +44,10 @@
                                         <span><{$val.user_name}>&nbsp;•&nbsp;<{$val.sub_time|date_format:'%Y-%m-%d %H:%M:%S'}> </span>
                                     </td>
                                     <td width="70" align="right" valign="middle">
-                                        <div class="badge">18</div>
+                                        <div class="badge"><{$val.answer_count}></div>
                                     </td>
                                 </tr>
-
                             </table>
-
-                            <!--<{$val.title|truncate:30:"..."}>
-                            <{if !empty($val.sub_time)}>
-                            <span class="pull-right"
-                                  style="color:#ccc;"><{$val.sub_time|date_format:'%Y-%m-%d %H:%M:%S'}></span>
-                            <{/if}>-->
                         </a>
                         <{/foreach}>
                         <div class="pull-right">
@@ -62,7 +55,6 @@
                         </div>
                     </div>
             </div>
-
         </div>
         <!--左侧列表end-->
         <!--右侧列表begin-->
@@ -74,17 +66,12 @@
                     </h5>
                 </div>
                 <div class="list-group">
-                    <!--<{foreach  from=$recent_data_list item=val key=key}>
-                    <a href="<{$smarty.const._site_domain}>course_data/index/<{$val.did}>" class="list-group-item">
+                     <{foreach  from=$recent_question_list item=val key=key}>
+                    <a href="<{$smarty.const._site_domain}>question_show/index/<{$val.qid}>" class="list-group-item">
                         <{$val.title|truncate:15:'...'}>
-                        <{if $val.type=='1'}>
-                        <span class="badge alert-info">课件</span>
-                        <{else}>
-                        <span class="badge alert-success">资料</span>
-                        <{/if}>
+                        <span class="badge"><{$val.answer_count}></span>
                     </a>
                     <{/foreach}>
-                    -->
                 </div>
             </div>
         </div>
