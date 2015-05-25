@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: 熠
  * Date: 2015/5/18 0018
  * Time: 14:30
  */
-
 class Question extends CI_Model
 {
     private $table_name = 'question';//表名
@@ -15,6 +15,7 @@ class Question extends CI_Model
         parent::__construct();
         $this->load->database();
     }
+
     /**
      * 获得问题列表
      * @param int $page 页数
@@ -46,12 +47,13 @@ class Question extends CI_Model
      * @param $top_count 最近的条数
      * @return mixed
      */
-    function get_recent_list($top_count=5)
+    function get_recent_list($top_count = 5)
     {
         $this->db->order_by('sub_time desc');
-        $query = $this->db->get($this->table_name, $top_count,0 );
+        $query = $this->db->get($this->table_name, $top_count, 0);
         return $this->security->xss_clean($query->result_array());
     }
+
     /**
      * 获得一条提问记录
      * @param $fields 查询字段
@@ -64,6 +66,46 @@ class Question extends CI_Model
         $this->db->select($fields . ',user.user_name')->from($this->table_name)->where($cond);
         $query = $this->db->get();
         return $query->row_array();
+    }
+
+    /**
+     * 添加问题
+     * @param $title 标题
+     * @param $content 正文
+     * @return $qid 插入数据库中的qid
+     */
+    function add_question($title, $content)
+    {
+        $this->db->insert($this->table_name, array(
+            'title' => $title,
+            'content' => $content,
+            'uid'=>$this->input->cookie('id', TRUE),
+            'sub_time' => time(),
+            'status' => '1'
+        ));
+       return $this->db->insert_id();
+    }
+
+    /**
+     * 更新问题内容
+     * @param $update_arr 更新数组
+     * @param $cond 条件
+     */
+    function update_question($update_arr, $cond)
+    {
+        $this->db->where($cond);
+        $this->db->update($this->table_name, $update_arr);
+    }
+
+    /**
+     * 更新问题的回复计数(自增1)
+     * @param int $qid 问题id
+     */
+    function update_answer_count($qid)
+    {
+        $this->db->where(array('qid' => $qid));
+        $this->db->set('answer_count', 'answer_count+1', FALSE);
+        $this->db->update($this->table_name);
     }
 
     /**

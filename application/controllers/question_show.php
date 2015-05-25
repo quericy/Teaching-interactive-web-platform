@@ -28,7 +28,7 @@ class Question_Show extends CI_Controller
     {
         $qid = intval($qid);
         //提问内容
-        $this->assign_arr['question_arr'] = $this->question_cls->get_one_data('*', array('qid' => $qid));
+        $this->assign_arr['question_arr'] = $this->question_cls->get_one_data('question.*', array('qid' => $qid));
         //提问者头像
         $this->assign_arr['question_arr']['user_logo_uri'] = $this->common_cls->get_identicon($this->assign_arr['question_arr']['user_name'], 72);
         //获取最新提问
@@ -63,34 +63,39 @@ class Question_Show extends CI_Controller
      */
     public function reply()
     {
-        $this->common_cls->is_login_alert(true,false);//登录校验
+        $this->common_cls->is_login_alert(true, false);//登录校验
         $qid = intval($this->input->post('qid', true));
         $content = $this->input->post('reply_text', true);
-        //登录验证
+        //回复内容验证
         $qid = intval($qid);
-        if(empty($qid)||empty($content)){
+        if (empty($qid) || empty($content)) {
             echo $this->common_cls->json_output('-1', '回复信息不完整');
             return;
         }
-        $now_time=time();
-        $this->load->model('answer', 'answer_cls');
-        $this->answer_cls->add_reply($qid,$content,$now_time);
-        //构造回复区块
-        $user_name=$this->input->cookie('user_name', TRUE);
-        $user_type=$this->input->cookie('type', TRUE);
-        if($user_type=='1'||$user_type=='2'){
-            $answer_type='1';
-        }else{
-            $answer_type='0';
+        $question_arr = $this->question_cls->get_one_data('question.*', array('qid' => $qid));
+        if ($question_arr['status'] != '1') {
+            echo $this->common_cls->json_output('-1', '该问题已经关闭,无法回复!');
+            return;
         }
-        $user_logo_uri=$this->common_cls->get_identicon($user_name, 48);
-        $return_data=array(
-            'user_name'=>$user_name,
-            'answer_type'=>$answer_type,//是否是教师回复
-            'sub_date_time'=>date("Y-m-d H:i:s",$now_time),
-            'user_logo_uri'=>$user_logo_uri
+        $now_time = time();
+        $this->load->model('answer', 'answer_cls');
+        $this->answer_cls->add_reply($qid, $content, $now_time);
+        //构造回复区块
+        $user_name = $this->input->cookie('user_name', TRUE);
+        $user_type = $this->input->cookie('type', TRUE);
+        if ($user_type == '1' || $user_type == '2') {
+            $answer_type = '1';
+        } else {
+            $answer_type = '0';
+        }
+        $user_logo_uri = $this->common_cls->get_identicon($user_name, 48);
+        $return_data = array(
+            'user_name' => $user_name,
+            'answer_type' => $answer_type,//是否是教师回复
+            'sub_date_time' => date("Y-m-d H:i:s", $now_time),
+            'user_logo_uri' => $user_logo_uri
         );
-        echo $this->common_cls->json_output('1', '回复成功',$return_data);
+        echo $this->common_cls->json_output('1', '回复成功', $return_data);
     }
 
 }

@@ -94,6 +94,7 @@
             <!--留言板begin-->
             <div class="panel panel-default">
                 <div class="panel-body">
+                    <{if $question_arr['status']=='1'}>
                     <{if isset($user_info['is_login'])&&$user_info['is_login']=='true'}>
                     <div class="col-md-12">
                         <div class="row">
@@ -102,8 +103,9 @@
                         </div>
                     </div>
                 <hr/>
-                    <textarea id="reply_area" style="width:100%;max-width:100%;min-height: 120px;"
+                    <textarea id="reply_area" class="form-control" style="width:100%;max-width:100%;min-height: 120px;"
                               placeholder="请尽量让自己的回复能够对别人有帮助"></textarea>
+                <br/>
                 <input id="reply_btn" type="button" class="btn btn-default" value="回复"/>
                     <{else}>
                     <div class="center">
@@ -111,6 +113,13 @@
                         <a href="<{$smarty.const._site_domain}>user_login">登录</a>
                         &nbsp;|&nbsp;
                         <a href="<{$smarty.const._site_domain}>user_reg">注册</a>
+                    </div>
+                    <{/if}>
+                    <{else}>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="center">该问题已经关闭,无法回复!</div>
+                        </div>
                     </div>
                     <{/if}>
                 </div>

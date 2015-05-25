@@ -22,6 +22,20 @@
         </div>
     <hr/>
         <div class="row container-fluid">
+            <{if $user_info['user_type']=='1'||$user_info['user_type']=='2'}>
+            <div>
+                <a href="<{$smarty.const._admin_domain}>" target="_blank">
+                    <span class="glyphicon glyphicon-list-alt"></span>&nbsp;管理后台
+                </a>
+            </div>
+            <{else}>
+            <div>
+                <a href="<{$smarty.const._site_domain}>question_add"><span class="glyphicon glyphicon-pencil"></span>&nbsp;提出问题</a>
+                &nbsp;|&nbsp;
+                <a href="#"><span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;上传作业</a>
+            </div>
+        <br/>
+            <{/if}>
             本次登录:
             <{if empty($user_info['login_time'])||$user_info['login_time']=='null'}>
             --

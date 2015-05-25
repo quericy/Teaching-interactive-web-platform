@@ -55,6 +55,8 @@ class Answer extends CI_Model
         }else{
             $id_key='uid';
         }
+        $this->load->model('question','question_cls');
+        $this->question_cls->update_answer_count($qid);//更新问题回复计数
         return $this->db->insert($this->table_name, array(
             'qid'=>$qid,
             'content' => $content,
