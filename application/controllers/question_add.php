@@ -27,8 +27,8 @@ class Question_Add extends CI_Controller
 
     public function index()
     {
-        //获取最新提问
-        $this->assign_arr['recent_question_list'] = $this->question_cls->get_recent_list(5);
+        //获取最热提问
+        $this->assign_arr['recent_question_list'] = $this->question_cls->get_host_list();
         //页面展示
         $this->smarty->view('question_add.tpl', $this->assign_arr);
     }

@@ -47,9 +47,9 @@ class Question extends CI_Model
      * @param $top_count 最近的条数
      * @return mixed
      */
-    function get_recent_list($top_count = 5)
+    function get_host_list($top_count = 5)
     {
-        $this->db->order_by('sub_time desc');
+        $this->db->order_by('answer_count desc,sub_time desc');
         $query = $this->db->get($this->table_name, $top_count, 0);
         return $this->security->xss_clean($query->result_array());
     }

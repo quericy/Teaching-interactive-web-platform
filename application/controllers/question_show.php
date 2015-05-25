@@ -31,8 +31,8 @@ class Question_Show extends CI_Controller
         $this->assign_arr['question_arr'] = $this->question_cls->get_one_data('question.*', array('qid' => $qid));
         //提问者头像
         $this->assign_arr['question_arr']['user_logo_uri'] = $this->common_cls->get_identicon($this->assign_arr['question_arr']['user_name'], 72);
-        //获取最新提问
-        $this->assign_arr['recent_question_list'] = $this->question_cls->get_recent_list(5);
+        //获取最热提问
+        $this->assign_arr['recent_question_list'] = $this->question_cls->get_host_list(5);
         //回答列表
         $this->load->model('answer', 'answer_cls');
         $answer_list = $this->answer_cls->get_list(array('qid' => '' . $qid));

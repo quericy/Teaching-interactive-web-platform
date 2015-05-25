@@ -132,7 +132,7 @@
             <{include file="user_pannel.tpl"}>
             <div class=" panel panel-default">
                 <div class="panel-heading">
-                    <h5 class="panel-title"><span class="glyphicon glyphicon-fire" style="color:#999;"></span>&nbsp;最新问题
+                    <h5 class="panel-title"><span class="glyphicon glyphicon-fire" style="color:#999;"></span>&nbsp;热门问题
                     </h5>
                 </div>
                 <div class="list-group">
