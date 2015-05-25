@@ -149,9 +149,6 @@
                 switch (return_arr.status) {
                     case '1':
                         var expire = null;
-                        if (return_arr.data.auto_login == '1') {
-                            expire = parseInt(return_arr.data.cookie_time);
-                        }
                         setCookie('id', return_arr.data.id, expire);
                         setCookie('user_name', return_arr.data.user_name, expire);
                         setCookie('type', return_arr.data.type, expire);

@@ -23,14 +23,14 @@
     <hr/>
         <div class="row container-fluid">
             本次登录:
-            <{if empty($user_info['login_time'])}>
+            <{if empty($user_info['login_time'])||$user_info['login_time']=='null'}>
             --
             <{else}>
             <{$user_info['login_time']|date_format:'%Y-%m-%d %H:%M:%S'}>
             <{/if}>
             <br/>
             上次登录:
-            <{if empty($user_info['last_login_time'])}>
+            <{if empty($user_info['last_login_time'])||$user_info['last_login_time']=='null'}>
             从未登录
             <{else}>
             <{$user_info['last_login_time']|date_format:'%Y-%m-%d %H:%M:%S'}>
