@@ -28,7 +28,7 @@ class Question_List extends CI_Controller
     public function index($page = 1)
     {
         $per_page = 10;//每页10条数据
-        //获取管理员列表
+        //获取提问列表
         $question_info_list = $this->question_cls->get_question_list($page, $per_page);
         $this->assign_arr['question_info_list'] = $question_info_list;
         //分页

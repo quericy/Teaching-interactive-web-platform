@@ -25,7 +25,7 @@ class Course_Data_List extends CI_Controller
 
     public function index($course_page = 1, $data_page = 1)
     {
-        $per_page = 5;//每页10条数据
+        $per_page = 5;//每页5条数据
         preg_match('/(\d+)/', $course_page, $course_page_arr);//正则匹配课件页码数字
         preg_match('/(\d+)/', $data_page, $data_page_arr);//正则匹配资料页码数字
         if (!empty($course_page_arr)) {
