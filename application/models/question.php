@@ -6,7 +6,7 @@
  * Time: 14:30
  */
 
-class question extends CI_Model
+class Question extends CI_Model
 {
     private $table_name = 'question';//表名
 
@@ -51,6 +51,19 @@ class question extends CI_Model
         $this->db->order_by('sub_time desc');
         $query = $this->db->get($this->table_name, $top_count,0 );
         return $this->security->xss_clean($query->result_array());
+    }
+    /**
+     * 获得一条提问记录
+     * @param $fields 查询字段
+     * @param $cond 条件
+     * @return mixed
+     */
+    function get_one_data($fields, $cond)
+    {
+        $this->db->join('user', 'user.uid=question.uid');
+        $this->db->select($fields . ',user.user_name')->from($this->table_name)->where($cond);
+        $query = $this->db->get();
+        return $query->row_array();
     }
 
     /**

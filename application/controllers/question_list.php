@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 答疑列表控制器
  * Created by PhpStorm.
@@ -6,8 +7,7 @@
  * Date: 2015/5/25 0025
  * Time: 14:08
  */
-
-class question_list extends CI_Controller
+class Question_List extends CI_Controller
 {
     private $assign_arr = array();
 
@@ -27,16 +27,18 @@ class question_list extends CI_Controller
     public function index($page = 1)
     {
         $per_page = 10;//每页10条数据
-        $page=intval($page);
+        $page = intval($page);
         $this->load->library('page_cls');
         //获取提问列表
         $question_info_list = $this->question_cls->get_question_list($page, $per_page);
-        foreach($question_info_list as $key=>$val){
-            $question_info_list[$key]['user_logo_uri'] = $this->common_cls->get_identicon($val['user_name'],48);//提问用户头像
+        if (!empty($question_info_list)) {
+            foreach ($question_info_list as $key => $val) {
+                $question_info_list[$key]['user_logo_uri'] = $this->common_cls->get_identicon($val['user_name'], 48);//提问用户头像
+            }
         }
         $this->assign_arr['question_info_list'] = $question_info_list;
         //获取最新提问
-        $this->assign_arr['recent_question_list'] =  $this->question_cls->get_recent_list(5);
+        $this->assign_arr['recent_question_list'] = $this->question_cls->get_recent_list(5);
         //分页
         $this->load->library('page_cls');
         $this->assign_arr['page_string'] = $this->page_cls->get_page_config($this, $this->question_cls->get_question_count(), false, $per_page);
