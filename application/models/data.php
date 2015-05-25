@@ -51,10 +51,10 @@ class Data extends CI_Model
      * @param $top_count 最近的条数
      * @return mixed
      */
-    function get_recent_list($top_count=5)
+    function get_recent_list($top_count = 5)
     {
         $this->db->order_by('edit_time desc');
-        $query = $this->db->get($this->table_name, $top_count,0 );
+        $query = $this->db->get($this->table_name, $top_count, 0);
         return $this->security->xss_clean($query->result_array());
     }
 
@@ -67,7 +67,7 @@ class Data extends CI_Model
     function get_one_data($fields, $cond)
     {
         $this->db->join('admin', 'admin.tid=data.tid');
-        $this->db->select($fields.',admin.user_name')->from($this->table_name)->where($cond);
+        $this->db->select($fields . ',admin.user_name')->from($this->table_name)->where($cond);
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -80,7 +80,7 @@ class Data extends CI_Model
     function add_one_data($data_arr)
     {
         return $this->db->insert($this->table_name, array(
-            'tid' => 1,//待完善登录
+            'tid' => $this->input->cookie('id', TRUE),
             'title' => $data_arr['title'],
             'type' => $data_arr['type'],
             'edit_time' => time(),
@@ -98,7 +98,7 @@ class Data extends CI_Model
     function update_one_data($did, $data_arr)
     {
         $update_arr = array(
-            'tid' => 1,//待完善登录
+            'tid' => $this->input->cookie('id', TRUE),
             'title' => $data_arr['title'],
             'type' => $data_arr['type'],
             'edit_time' => time(),

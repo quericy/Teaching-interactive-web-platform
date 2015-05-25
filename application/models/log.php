@@ -55,7 +55,7 @@ class Log extends CI_Model
     {
         return $this->db->insert($this->table_name, array('content' => $content,
             'type' => $type,
-            'tid' => 1,//管理员id(需要登录模块)
+            'tid' =>$this->input->cookie('id', TRUE),
             'log_time' => time()
         ));
     }
