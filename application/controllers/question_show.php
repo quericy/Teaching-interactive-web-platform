@@ -28,11 +28,16 @@ class Question_Show extends CI_Controller
     {
         $qid = intval($qid);
         //提问内容
-        $this->assign_arr['question_arr'] = $this->question_cls->get_one_data('question.*', array('qid' => $qid));
+        $question_arr = $this->question_cls->get_one_data('question.*', array('qid' => $qid));
+        if (empty($question_arr)) {
+            echo '<script>alert("该问题不存在或已被管理员删除!");location.href="' . _site_domain . 'question_list"</script>';
+            return;
+        }
+        $this->assign_arr['question_arr'] = $question_arr;
+
         //提问者头像
         $this->assign_arr['question_arr']['user_logo_uri'] = $this->common_cls->get_identicon($this->assign_arr['question_arr']['user_name'], 72);
-        //获取最热提问
-        $this->assign_arr['recent_question_list'] = $this->question_cls->get_host_list(5);
+
         //回答列表
         $this->load->model('answer', 'answer_cls');
         $answer_list = $this->answer_cls->get_list(array('qid' => '' . $qid));
@@ -53,7 +58,10 @@ class Question_Show extends CI_Controller
         }
 
         $this->assign_arr['answer_list'] = $answer_list;
+
         $this->assign_arr['qid'] = $qid;
+        //获取最热提问
+        $this->assign_arr['recent_question_list'] = $this->question_cls->get_host_list(5);
         //页面展示
         $this->smarty->view('question_show.tpl', $this->assign_arr);
     }
