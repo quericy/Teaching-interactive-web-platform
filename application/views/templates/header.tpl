@@ -12,12 +12,13 @@
     </div>
     <div class="navbar-collapse collapse" style="height: 1px;">
         <ul id="main-menu" class="nav navbar-nav navbar-left">
-
             <li
             <{if $nav_show=='course_data'}>class="active"<{/if}>>
             <a href="<{$smarty.const._site_domain}>course_data_list">课件资料</a>
             </li>
-            <li><a href="#">作业</a></li>
+            <li
+            <{if $nav_show=='work'}>class="active"<{/if}>>
+            <a href="<{$smarty.const._site_domain}>work_list">作业</a></li>
             <li
             <{if $nav_show=='question'}>class="active"<{/if}>>
             <a href="<{$smarty.const._site_domain}>question_list">答疑</a>

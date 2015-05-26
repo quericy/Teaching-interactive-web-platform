@@ -32,7 +32,7 @@
             <div>
                 <a href="<{$smarty.const._site_domain}>question_add"><span class="glyphicon glyphicon-pencil"></span>&nbsp;提出问题</a>
                 &nbsp;|&nbsp;
-                <a href="#"><span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;上传作业</a>
+                <a href="<{$smarty.const._site_domain}>work_list"><span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;上传作业</a>
             </div>
         <br/>
             <{/if}>
