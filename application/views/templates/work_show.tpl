@@ -56,7 +56,7 @@
             <!--上传版块begin-->
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <{if isset($user_info['is_login'])&&$user_info['is_login']=='true'}>
+                    <{if isset($user_info['is_login'])&&$user_info['is_login']=='true'&&$user_info['user_type']=='0'}>
                     <{if isset($user_process_arr)}>
                     <!--已上传过作业-->
                     <div class="text-success"><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;您已提交本次作业</div>
@@ -90,6 +90,8 @@
                         </div>
                     </div>
                     <{/if}>
+                    <{elseif isset($user_info['user_type'])&&$user_info['user_type']!='0'}>
+                    <div class="center">只有学生才需要提交作业,您可以在<a href="<{$smarty.const._admin_domain}>">管理后台</a>中执行批改作业等操作!</div>
                     <{else}>
                     <div class="center">
                         您需要登录后才可以提交作业&nbsp;&nbsp;
