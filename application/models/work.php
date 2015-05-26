@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: 熠
  * Date: 2015/5/26 0026
  * Time: 14:54
  */
-
 class Work extends CI_Model
 {
     private $table_name = 'work';//表名
@@ -60,7 +60,7 @@ class Work extends CI_Model
      * @param $cond 条件
      * @return mixed
      */
-    function get_one_data($fields, $cond)
+    function get_one_work($fields, $cond)
     {
         $this->db->join('admin', 'admin.tid=work.tid');
         $this->db->select($fields . ',admin.user_name')->from($this->table_name)->where($cond);
@@ -76,16 +76,53 @@ class Work extends CI_Model
      * @param $end_time 截止时间
      * @return $wid 插入数据库中的wid
      */
-    function add_work($title, $content,$start_time,$end_time)
+    function add_work($title, $content, $start_time, $end_time)
     {
         $this->db->insert($this->table_name, array(
             'title' => $title,
             'content' => $content,
-            'tid'=>$this->input->cookie('id', TRUE),
+            'tid' => $this->input->cookie('id', TRUE),
             'start_time' => $start_time,
             'end_time' => $end_time
         ));
         return $this->db->insert_id();
+    }
+
+
+    /**
+     * 添加一条作业记录
+     * @param $work_arr
+     * @return object
+     */
+    function add_one_work($work_arr)
+    {
+        return $this->db->insert($this->table_name, array(
+            'tid' => $this->input->cookie('id', TRUE),
+            'title' => $work_arr['title'],
+            'content' => $work_arr['content'],
+            'start_time' => $work_arr['start_time'],
+            'end_time' => $work_arr['end_time']
+        ));
+
+    }
+
+    /**
+     * 更新一条作业记录
+     * @param $wid 作业wid
+     * @param $work_arr
+     * @return object
+     */
+    function update_one_work($wid, $work_arr)
+    {
+        $update_arr = array(
+            'tid' => $this->input->cookie('id', TRUE),
+            'title' => $work_arr['title'],
+            'content' => $work_arr['content'],
+            'start_time' => $work_arr['start_time'],
+            'end_time' => $work_arr['end_time']
+        );
+        $this->db->where_in('wid', $wid);
+        return $this->db->update($this->table_name, $update_arr);
     }
 
     /**
