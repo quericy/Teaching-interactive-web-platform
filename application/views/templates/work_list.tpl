@@ -18,10 +18,10 @@
     <div class="row">
         <!--左侧列表begin-->
         <div class="col-md-8">
-            <div class=" panel panel-default">
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        <span class="glyphicon glyphicon-comment" style="color:#999;"></span>&nbsp;作业列表
+                        <span class="glyphicon glyphicon-edit" style="color:#999;"></span>&nbsp;作业列表
                     </h3>
                 </div>
                 <div class="list-group" style="min-height:600px;">
@@ -81,7 +81,7 @@
                     <{foreach  from=$recent_work_list item=val key=key}>
                     <a href="<{$smarty.const._site_domain}>work_show/index/<{$val.wid}>" class="list-group-item">
                         <{$val.title|truncate:15:'...'}>
-                        <{if  $smarty.now>$val.end_time}>
+                        <{if $smarty.now>$val.end_time}>
                         <div class="badge">已经截止</div>
                         <{elseif $smarty.now|date_format:'%Y-%m-%d'==$val.end_time|date_format:'%Y-%m-%d'}>
                         <div class="badge alert-danger">即将截止</div>

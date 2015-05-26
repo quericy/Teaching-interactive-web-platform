@@ -158,6 +158,7 @@ class Common_Cls
         $assign_arr=array();
         $assign_arr['is_login'] = $is_login;
         if ($is_login == true) {
+            $assign_arr['id'] = intval($this->CI->input->cookie('id', TRUE));
             $assign_arr['user_name'] = $this->CI->input->cookie('user_name', TRUE);
             $assign_arr['user_type'] = $this->CI->input->cookie('type', TRUE);
             $assign_arr['login_time'] = $this->CI->input->cookie('login_time', TRUE);
