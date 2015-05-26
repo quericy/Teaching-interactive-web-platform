@@ -47,7 +47,7 @@
                                       style="width:100%;max-width:100%;min-height: 300px;"
                                       placeholder="请在此处填写详细的需要答疑的问题信息"></textarea>
                     </div>
-                    <input id="submit_btn" type="button" class="btn btn-success" value="提交"/>
+                    <div id="submit_btn" class="btn btn-success">提交</div>
                 </div>
             </div>
         </div>

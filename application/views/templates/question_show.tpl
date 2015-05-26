@@ -106,7 +106,7 @@
                     <textarea id="reply_area" class="form-control" style="width:100%;max-width:100%;min-height: 120px;"
                               placeholder="请尽量让自己的回复能够对别人有帮助"></textarea>
                 <br/>
-                <input id="reply_btn" type="button" class="btn btn-default" value="回复"/>
+                <div id="reply_btn"   class="btn btn-default">回复</div>
                     <{else}>
                     <div class="center">
                         您需要登录后才可以回复&nbsp;&nbsp;
