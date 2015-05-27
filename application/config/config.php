@@ -13,6 +13,12 @@ if(isset($_SERVER['RUNTIME_DOMAIN'])&&!empty($_SERVER['RUNTIME_DOMAIN'])){
 }else{
     define('_site_domain',_site_protocol.$_SERVER['SERVER_NAME'].'/');
 }
+if($_SERVER['SERVER_NAME']=='teachtest.oschina.mopaas.com') {//演示平台数据库
+    define('_site_file_charset','UTF-8');//Linux上传文件转码成UTF-8
+}else{
+    define('_site_file_charset','GB2312');//win上传文件转码成GB2312
+
+}
 //前台全局参数
 define('_site_css',_site_domain.'css/');
 define('_site_js',_site_domain.'js/');

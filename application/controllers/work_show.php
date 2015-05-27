@@ -86,13 +86,17 @@ class work_show extends CI_Controller
         $config['encrypt_name'] = FALSE;
         $config['overwrite'] = TRUE;
         $this->load->library('upload', $config);
-        $file_name = $this->security->xss_clean($_FILES['file']['name']);//获得安全的文件名
-        if (isset($_FILES['file']['name'])) {//解决文件名中文乱码问题
-            $_FILES['file']['name'] = iconv("UTF-8", "GB2312//IGNORE", $_FILES['file']['name']);
+        if (!isset($_FILES['file']['name'])) {//解决文件名中文乱码问题
+            echo $this->common_cls->json_output('-1', '请选择要上传的文件!');
+            return;
         }
+        $file_name = $this->security->xss_clean($_FILES['file']['name']);//获得安全的文件名
+        $encode = mb_detect_encoding($_FILES['file']['name'], "UTF-8,GBK,GB2312,ASCII,CP936");
+        $_FILES['file']['name'] = @iconv($encode, _site_file_charset . "//IGNORE", $_FILES['file']['name']);//转码
+
 
         if (!$this->upload->do_upload('file')) {
-            echo $this->common_cls->json_output('-1', $_FILES['file']['name']);
+            echo $this->common_cls->json_output('-1', '文件不合法');
             return;
         } else {
             $data = $this->upload->data();
