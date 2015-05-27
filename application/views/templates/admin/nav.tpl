@@ -49,7 +49,7 @@
         <li><ul class="work-menu nav nav-list collapse <{if $nav_show=='work'}>in<{/if}>">
                 <li><a href="<{$smarty.const._admin_domain}>work_list"><span class="glyphicon glyphicon-triangle-right"></span> 作业列表</a></li>
                 <li><a href="<{$smarty.const._admin_domain}>work_edit"><span class="glyphicon glyphicon-triangle-right"></span> 添加作业</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 完成情况</a></li>
+                <!--<li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 完成情况</a></li>-->
             </ul></li>
 
         <li><a href="#" data-target=".data-menu" class="nav-header <{if $nav_show!='data'}>collapsed<{/if}>" data-toggle="collapse">
@@ -67,7 +67,7 @@
         <li><ul class="answer-menu nav nav-list collapse <{if $nav_show=='answer'}>in<{/if}>">
                 <li><a href="<{$smarty.const._admin_domain}>question_list"><span class="glyphicon glyphicon-triangle-right"></span> 提问列表</a></li>
                 <li><a href="<{$smarty.const._admin_domain}>answer_list"><span class="glyphicon glyphicon-triangle-right"></span> 答疑列表</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 统计汇总</a></li>
+                <!--<li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 统计汇总</a></li>-->
             </ul></li>
 
         <li><a href="#" data-target=".system-menu" class="nav-header <{if $nav_show!='system'}>collapsed<{/if}>" data-toggle="collapse">

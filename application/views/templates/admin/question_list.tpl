@@ -44,7 +44,11 @@
                 <td class="text-center"><input class="item_check" type="checkbox" data-qid="<{$val.qid}>"></td>
                 <td class="text-left"><{$val.qid}></td>
                 <td class="text-left"><{$val.user_name}></td>
-                <td class="text-center"><{$val.title}></td>
+                <td class="text-center">
+                    <a target="_blank" href="<{$smarty.const._site_domain}>question_show/index/<{$val.qid}>">
+                        <{$val.title}>
+                    </a>
+                </td>
                 <td class="text-center">
                     <{if !empty($val.sub_time)}>
                     <{$val.sub_time|date_format:'%Y-%m-%d %H:%M:%S'}>
@@ -57,7 +61,8 @@
                 </td>
                 <td class="text-center">
                     <div class="btn-group" role="group">
-                        <a href="<{$smarty.const._site_domain}>question_show/index/<{$val.qid}>" target="_blank" class="btn btn-primary btn-sm">查看
+                        <a href="<{$smarty.const._site_domain}>question_show/index/<{$val.qid}>" target="_blank"
+                           class="btn btn-primary btn-sm">查看
                         </a>
                         <a href="#" class="del_btn btn btn-default btn-sm"
                            data-qid="<{$val.qid}>" data-title="<{$val.title}>">
@@ -123,7 +128,7 @@
                                 });
                                 break;
                             default :
-                                my_dialog('提示', '操作失败:'+return_arr.msg, false);
+                                my_dialog('提示', '操作失败:' + return_arr.msg, false);
                                 break;
                         }
                     }
@@ -174,7 +179,7 @@
                         my_dialog('提示', return_arr.msg, false);
                         break;
                     default :
-                        my_dialog('提示', '操作失败:'+return_arr.msg, false);
+                        my_dialog('提示', '操作失败:' + return_arr.msg, false);
                         break;
                 }
             }
