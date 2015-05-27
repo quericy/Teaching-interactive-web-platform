@@ -21,12 +21,15 @@ class Default_controller extends CI_Controller
         $this->assign_arr['nav_show'] = 'index';
         $this->assign_arr['user_info'] = $this->common_cls->show_user_info();//登录信息展示
 
-
+        $this->load->model('data','data_cls');
     }
 
     public function index()
     {
-
+        //获取最新课件
+        $this->assign_arr['recent_course_list']=$this->data_cls->get_recent_list(7,array('type'=>'1'));
+        //获取最新资料
+        $this->assign_arr['recent_data_list']=$this->data_cls->get_recent_list(7,array('type'=>'2'));
         //页面展示
         $this->smarty->view('index.tpl', $this->assign_arr);
     }

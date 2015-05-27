@@ -26,12 +26,16 @@ class work_show extends CI_Controller
         $this->assign_arr['user_info'] = $this->common_cls->show_user_info();//登录信息展示
     }
 
-    public function index($wid)
+    public function index($wid=1)
     {
         $wid = intval($wid);
         $this->assign_arr['wid'] = $wid;
         //获取作业列表
         $this->assign_arr['work_arr'] = $this->work_cls->get_one_work('*', array('wid' => $wid));
+        if(empty($this->assign_arr['work_arr'])){
+            header('location:' . _site_domain.'work_list');
+            return;
+        }
         //获取最新作业
         $this->assign_arr['recent_work_list'] = $this->work_cls->get_recent_list();
         //获取用户完成该作业情况

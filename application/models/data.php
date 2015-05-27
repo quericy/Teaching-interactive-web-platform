@@ -49,10 +49,14 @@ class Data extends CI_Model
     /**
      * 获取最近几条记录
      * @param $top_count 最近的条数
+     * @param $cond 筛选条件
      * @return mixed
      */
-    function get_recent_list($top_count = 5)
+    function get_recent_list($top_count = 5, $cond = null)
     {
+        if (!empty($cond)) {
+            $this->db->where($cond);
+        }
         $this->db->order_by('edit_time desc');
         $query = $this->db->get($this->table_name, $top_count, 0);
         return $this->security->xss_clean($query->result_array());

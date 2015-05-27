@@ -111,40 +111,70 @@
                 <div class="col-sm-4 ">
                     <ul class="plan">
                         <li class="plan-name">最新课件</li>
-                        <li><a href="">关于某课题的课件</a></li>
-                        <li><a href="">关于某课题的课件</a></li>
-                        <li><a href="">关于某课题的课件</a></li>
-                        <li><a href="">关于某课题的课件</a></li>
-                        <li><a href="">关于某课题的课件</a></li>
-                        <li><a href="">关于某课题的课件</a></li>
-                        <li><a href="">关于某课题的课件</a></li>
-                        <li class="plan-action"><a href="#" class="btn btn-primary btn-lg">更多</a></li>
+                        <{if isset($recent_course_list)&&!empty($recent_course_list)}>
+                        <{foreach from=$recent_course_list item=val key=key}>
+                        <li>
+                            <a title="<{$val.title}>"
+                               href="<{$smarty.const._site_domain}>course_data/index/<{$val.did}>">
+                                <{$val.title|truncate:20:'...'}>
+                            </a>
+                        </li>
+                        <{/foreach}>
+                        <{/if}>
+                        <li class="plan-action">
+                            <a href="<{$smarty.const._site_domain}>course_data_list"
+                               class="btn btn-primary btn-lg">更多</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-sm-4">
                     <ul class="plan featured">
-                        <li class="plan-name">课件资料</li>
+                        <li class="plan-name">云平台</li>
                         <li class="plan-price"><span class="glyphicon  glyphicon-cloud-upload"></span>上传</li>
                         <li>
-                            <h1><a class="btn  btn-lg btn-primary" href="#" role="button">教师课件</a></h1>
+                            教师可即时上传教学所需的:
+                            <br/>
+
+                            <h1>
+                                <a class="btn btn-lg btn-primary"
+                                   href="<{$smarty.const._admin_domain}>login" role="button">教学课件</a>
+                            </h1>
+
+                            <h1>
+                                <a class="btn btn-lg btn-primary"
+                                   href="<{$smarty.const._admin_domain}>login" role="button">补充资料</a>
+                            </h1>
                         </li>
                         <li>
-                            <h1><a class="btn  btn-lg btn-success" href="#" role="button">教学资料</a></h1>
+                            学生能按时提交教师布置的:
+                            <br/>
+
+                            <h1>
+                                <a class="btn btn-lg btn-success" href="<{$smarty.const._site_domain}>work_list"
+                                   role="button">
+                                    提交作业
+                                </a>
+                            </h1>
                         </li>
-                        <li class=""><br>注意: <br>课件和资料的上传均由教师操作，同学们如有疑问，可以在每个课件和资料下方留言。</li>
                     </ul>
                 </div>
                 <div class="col-sm-4 ">
                     <ul class="plan">
                         <li class="plan-name">最新资料</li>
-                        <li><a href="">资料:课程设计资料列表</a></li>
-                        <li><a href="">资料:课程设计资料列表</a></li>
-                        <li><a href="">资料:课程设计资料列表</a></li>
-                        <li><a href="">资料:课程设计资料列表</a></li>
-                        <li><a href="">资料:课程设计资料列表</a></li>
-                        <li><a href="">资料:课程设计资料列表</a></li>
-                        <li><a href="">资料:课程设计资料列表</a></li>
-                        <li class="plan-action"><a href="#" class="btn btn-primary btn-lg">更多</a></li>
+                        <{if isset($recent_data_list)&&!empty($recent_data_list)}>
+                        <{foreach from=$recent_data_list item=val key=key}>
+                        <li>
+                            <a title="<{$val.title}>"
+                               href="<{$smarty.const._site_domain}>course_data/index/<{$val.did}>">
+                                <{$val.title|truncate:20:'...'}>
+                            </a>
+                        </li>
+                        <{/foreach}>
+                        <{/if}>
+                        <li class="plan-action">
+                            <a href="<{$smarty.const._site_domain}>course_data_list"
+                               class="btn btn-primary btn-lg">更多</a>
+                        </li>
                     </ul>
                 </div>
             </div>

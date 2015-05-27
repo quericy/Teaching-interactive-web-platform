@@ -24,11 +24,15 @@ class Course_Data extends CI_Controller
         $this->assign_arr['user_info'] = $this->common_cls->show_user_info();//登录信息展示
     }
 
-    public function index($did)
+    public function index($did=1)
     {
         $did=intval($did);
         //获取最新课件资料
         $this->assign_arr['course_data_arr']=$this->data_cls->get_one_data('*',array('did'=>$did));
+        if(empty($this->assign_arr['course_data_arr'])){
+            header('location:' . _site_domain.'course_data_list');
+            return;
+        }
         //获取最新课件资料
         $this->assign_arr['recent_data_list']=$this->data_cls->get_recent_list(5);
         //页面展示
