@@ -81,7 +81,7 @@
                     </div>
                     <{else}>
                     <div class="text-warning"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;您的作业等待教师批改中</div>
-                    <div>在教师批改前,您还可以继续附加作业:</div>
+                    <div>在教师批改前,如还未到截止日期,您仍可以继续附加作业:</div>
                 <br/>
                     <div id="uploader">
                         <div class="container-fluid">
@@ -127,6 +127,28 @@
                 </div>
             </div>
             <!--上传版块end-->
+            <!--用户附件版块begin-->
+            <{if isset($user_info['is_login'])&&$user_info['is_login']=='true'&&$user_info['user_type']=='0'}>
+            <{if isset($user_file_arr)&&!empty($user_file_arr)}>
+            <div class="panel panel-default">
+                    <table class="table table-condensed table-hover">
+                        <tr>
+                        <th>作业名称</th>
+                        <th>大小</th>
+                        <th>提交时间</th>
+                        </tr>
+                        <{foreach  from=$user_file_arr item=val key=key}>
+                        <tr>
+                            <td><{$val.file_name}></td>
+                            <td><{$val.size}>kb</td>
+                            <td><{$val.add_time|date_format:'%Y-%m-%d %H:%M:%S'}></td>
+                        </tr>
+                        <{/foreach}>
+                    </table>
+            </div>
+            <{/if}>
+            <{/if}>
+            <!--用户附件版块end-->
         </div>
         <!--左侧列表end-->
         <!--右侧列表begin-->
@@ -163,11 +185,14 @@
 <script type="text/javascript">
     //ueditor
     uParse('#page_content');
+    var upload_fail_msg = "";
     //webuploader
     var uploader = WebUploader.create({
         swf: '<{$smarty.const._site_js}>Uploader.swf',
         server: '<{$smarty.const._site_domain}>work_show/upload_work',
-        formData:{wid:123},
+        formData:{wid:<{$wid}>},
+        fileNumLimit: 10,
+        fileSizeLimit: 1024 * 1024 * 80,
         pick: '#picker',
         accept: {
             title: 'work_files',
@@ -182,7 +207,7 @@
                 'text/plain'
             ]
         },
-        resize: false // 不压缩image
+        compress: false
     });
     // 当有文件被添加进队列的时候
     uploader.on('fileQueued', function (file) {
@@ -213,21 +238,34 @@
         if (ret.status == '1') {
             return true;
         } else {
+            upload_fail_msg = ret.msg;
             return false;
         }
     });
-
     uploader.on('uploadSuccess', function (file, response) {
-        $('#' + file.id).find('p.state').html('<span class="glyphicon glyphicon-ok-sign"></span> '+response.msg);
+        $('#' + file.id).find('p.state').html('<span class="glyphicon glyphicon-ok-sign"></span> ' + response.msg);
     });
 
     uploader.on('uploadError', function (file) {
-        $('#' + file.id).find('p.state').html('<span class="glyphicon glyphicon-info-sign"></span> 上传失败!');
+        $('#' + file.id).find('p.state').html('<span class="glyphicon glyphicon-info-sign"></span> 上传失败!' + upload_fail_msg);
     });
-
+    uploader.on('error', function (err) {
+        switch (err) {
+            case 'Q_TYPE_DENIED':
+                my_dialog('提示', '只能上传文本,word,课件,电子表格和图片格式的课件', false);
+                break;
+            case 'Q_EXCEED_SIZE_LIMIT':
+                my_dialog('提示', '文件大小超过限制', false);
+                break;
+            case 'Q_EXCEED_NUM_LIMIT':
+                my_dialog('提示', '最多一次上传10个文件', false);
+                break;
+        }
+    });
     uploader.on('uploadComplete', function (file) {
         $('#' + file.id).find('.progress').fadeOut();
     });
+
     //上传按钮触发函数
     $(document).delegate('#ctlBtn', 'click', function () {
         uploader.upload();

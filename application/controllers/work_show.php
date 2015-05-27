@@ -21,6 +21,7 @@ class work_show extends CI_Controller
         //作业模型
         $this->load->model('work', 'work_cls');
         $this->load->model('work_process', 'work_process_cls');
+        $this->load->model('file', 'file_cls');
         $this->assign_arr['nav_show'] = 'work';
         $this->assign_arr['user_info'] = $this->common_cls->show_user_info();//登录信息展示
     }
@@ -28,34 +29,79 @@ class work_show extends CI_Controller
     public function index($wid)
     {
         $wid = intval($wid);
+        $this->assign_arr['wid'] = $wid;
         //获取作业列表
         $this->assign_arr['work_arr'] = $this->work_cls->get_one_work('*', array('wid' => $wid));
         //获取最新作业
         $this->assign_arr['recent_work_list'] = $this->work_cls->get_recent_list();
         //获取用户完成该作业情况
-        if($this->assign_arr['user_info']['is_login']=='true'){
-            $user_process_arr=$this->work_process_cls->get_one_user_process($wid,$this->assign_arr['user_info']['id']);
-            if(!empty($user_process_arr)){//存在完成记录
-                $this->assign_arr['user_process_arr']=$user_process_arr;
+        if ($this->assign_arr['user_info']['is_login'] == 'true') {
+            $user_process_arr = $this->work_process_cls->get_one_user_process($wid, $this->assign_arr['user_info']['id']);
+            if (!empty($user_process_arr)) {//存在完成记录
+                $this->assign_arr['user_process_arr'] = $user_process_arr;
             }
+            //获得该用户的所有附件信息
+            $this->assign_arr['user_file_arr'] = $this->file_cls->get_work_file_list($wid, $this->assign_arr['user_info']['id']);
         }
-        //页面展示
+
         $this->smarty->view('work_show.tpl', $this->assign_arr);
     }
+
     public function upload_work()
     {
         //登录校验
-        if(!$this->common_cls->is_login(false)){
+        if (!$this->common_cls->is_login(false)) {
             echo $this->common_cls->json_output('-99', '您未登录或已掉线!');
             return;
         }
-        if($this->input->cookie('type', TRUE)=='1'||$this->input->cookie('type', TRUE)=='2'){
+        if ($this->input->cookie('type', TRUE) == '1' || $this->input->cookie('type', TRUE) == '2') {
             echo $this->common_cls->json_output('-1', '教师无需提交作业!');
             return;
         }
         $wid = intval($this->input->post('wid', true));
         $id = intval($this->input->cookie('id', TRUE));
-        //echo  'wid:'.$wid.'||id:'.$id;
+        if (empty($wid) || empty($id)) {
+            echo $this->common_cls->json_output('-1', '用户信息出错,无法上传!');
+            return;
+        }
+        //获取作业列表
+        $work_arr = $this->work_cls->get_one_work('*', array('wid' => $wid));
+        if (empty($work_arr) || ((int)$work_arr['end_time']) < time()) {
+            echo $this->common_cls->json_output('-1', '作业已到截止日期,无法再提交!');
+            return;
+        }
+
+        $dir_name = './upload_files/work_file/' . $wid . '/' . $id;
+        //创建目录
+        if (!file_exists($dir_name) && !mkdir($dir_name, 0777, true)) {
+            echo $this->common_cls->json_output('-1', '权限不足,无法上传!');
+            return;
+        } else if (!is_writeable($dir_name)) {
+            echo $this->common_cls->json_output('-1', '权限不足,无法上传!');
+            return;
+        }
+        $config['upload_path'] = $dir_name;
+        $config['allowed_types'] = 'gif|jpg|jpeg|bmp|png|doc|docx|ppt|pptx|xls|txt';
+        $config['max_size'] = 1024 * 8;
+        $config['encrypt_name'] = FALSE;
+        $config['overwrite'] = TRUE;
+        $this->load->library('upload', $config);
+        $file_name = $this->security->xss_clean($_FILES['file']['name']);//获得安全的文件名
+        if (isset($_FILES['file']['name'])) {//解决文件名中文乱码问题
+            $_FILES['file']['name'] = iconv("UTF-8", "GB2312//IGNORE", $_FILES['file']['name']);
+        }
+
+        if (!$this->upload->do_upload('file')) {
+            echo $this->common_cls->json_output('-1', '作业文件不合法!');
+            return;
+        } else {
+            $data = $this->upload->data();
+            //更新作业进程信息
+            $this->work_process_cls->change_one_user_process($wid);
+            //添加附件记录
+            $this->file_cls->add_one($wid, $id, $file_name, $data['file_size']);
+
+        }
         echo $this->common_cls->json_output('1', '作业上传成功');
     }
 }
