@@ -35,7 +35,13 @@
                         > 查看作业
                     </h5>
                 </div>
-                <div class="panel-body" style="min-height: 300px;">
+                <div class="panel-body" style="
+                        <{if isset($user_info['is_login'])&&$user_info['is_login']=='true'&&$user_info['user_type']=='0'}>
+                        min-height: 300px;
+                        <{else}>
+                        min-height: 600px;
+                        <{/if}>
+                        ">
                     <div class="row">
                         <h4 class="left col-sm-10" style="color:#000;"><{$work_arr.title}></h4>
                     </div>
@@ -131,20 +137,20 @@
             <{if isset($user_info['is_login'])&&$user_info['is_login']=='true'&&$user_info['user_type']=='0'}>
             <{if isset($user_file_arr)&&!empty($user_file_arr)}>
             <div class="panel panel-default">
-                    <table class="table table-condensed table-hover">
-                        <tr>
+                <table class="table table-condensed table-hover">
+                    <tr>
                         <th>作业名称</th>
                         <th>大小</th>
                         <th>提交时间</th>
-                        </tr>
-                        <{foreach  from=$user_file_arr item=val key=key}>
-                        <tr>
-                            <td><{$val.file_name}></td>
-                            <td><{$val.size}>kb</td>
-                            <td><{$val.add_time|date_format:'%Y-%m-%d %H:%M:%S'}></td>
-                        </tr>
-                        <{/foreach}>
-                    </table>
+                    </tr>
+                    <{foreach  from=$user_file_arr item=val key=key}>
+                    <tr>
+                        <td><{$val.file_name}></td>
+                        <td><{$val.size}>kb</td>
+                        <td><{$val.add_time|date_format:'%Y-%m-%d %H:%M:%S'}></td>
+                    </tr>
+                    <{/foreach}>
+                </table>
             </div>
             <{/if}>
             <{/if}>

@@ -92,7 +92,7 @@ class work_show extends CI_Controller
         }
 
         if (!$this->upload->do_upload('file')) {
-            echo $this->common_cls->json_output('-1', '作业文件不合法!');
+            echo $this->common_cls->json_output('-1', $_FILES['file']['name']);
             return;
         } else {
             $data = $this->upload->data();

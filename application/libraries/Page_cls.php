@@ -34,23 +34,26 @@ class Page_cls
         //前后台路由处理
         if ($is_admin == true) {
             $config['uri_segment'] = 4;
-            $config['base_url'] = base_url() . '/admin/' . $this_obj->uri->segment(2) . '/' . ($this_obj->uri->segment(3) ? $this_obj->uri->segment(3) : 'index') . '/';
-        } else {
-            if (!empty($suffix)) {
-                $config['suffix'] = $suffix;//添加后缀
+            if (!empty($base_url)) {
+                $config['base_url'] = $base_url;
             } else {
-                $config['suffix'] = null;
+                $config['base_url'] = base_url() . '/admin/' . $this_obj->uri->segment(2) . '/' . ($this_obj->uri->segment(3) ? $this_obj->uri->segment(3) : 'index') . '/';
             }
+        } else {
             $config['uri_segment'] = $uri_segment;
             if (!empty($base_url)) {
                 $config['base_url'] = $base_url;
             } else {
                 $config['base_url'] = base_url() . '/' . $this_obj->uri->segment(1) . '/' . ($this_obj->uri->segment(2) ? $this_obj->uri->segment(2) : 'index') . '/';
             }
-            if (!empty($first_link_url)) {
-                $config['first_url'] = $first_link_url;
-            }
-
+        }
+        if (!empty($first_link_url)) {
+            $config['first_url'] = $first_link_url;
+        }
+        if (!empty($suffix)) {
+            $config['suffix'] = $suffix;//添加后缀
+        } else {
+            $config['suffix'] = null;
         }
         //bootstrap样式设置
         $config['page_query_string'] = FALSE;

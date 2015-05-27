@@ -19,15 +19,31 @@ class Work_Process extends CI_Model
     /**
      * 获得一份作业对应的完成记录列表
      * @param $fields 查询字段
-     * @param $cond 条件
+     * @param $page 页数
+     * @param $per_page 每页条书
      * @return mixed
      */
-    function get_work_process_list($wid, $fields)
+    function get_work_process_list($wid, $page = 1, $per_page = 15)
     {
-        $this->db->select($fields)->from($this->table_name)->where(array('wid' => $wid));
-        $this->db->order_by('id desc');
-        $query = $this->db->get();
+        $offset = $per_page * ($page - 1);
+        $offset = $offset > 0 ? $offset : 0;
+        $this->db->join('user','user.uid=work_process.uid');
+        $this->db->select('work_process.*,user.user_name')->where(array('wid' => $wid));
+        $this->db->order_by('id asc');
+        $query = $this->db->get($this->table_name, $per_page, $offset);
         return $this->security->xss_clean($query->result_array());
+    }
+
+    /**
+     * 符合条件的课件资料数量
+     * @param $cond 指定条件
+     * @return int 数量
+     */
+    function get_work_process_counts($cond)
+    {
+        $this->db->from($this->table_name);
+        $this->db->where($cond);
+        return $this->db->count_all_results();
     }
 
     /**

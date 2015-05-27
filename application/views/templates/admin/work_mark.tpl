@@ -18,52 +18,67 @@
     <ol class="breadcrumb">
         <li class="active"><a href="<{$smarty.const._admin_domain}>">管理后台</a></li>
         <li class="active">作业管理</li>
+        <li class="active"><a href="<{$smarty.const._admin_domain}>work_list">作业列表</a></li>
         <li><{$web_title}></li>
     </ol>
-    <div class="panel panel-default">
+    <div class="panel panel-default" style="min-width: 450px;">
         <div class="panel-heading">
-            <h3 class="panel-title">作业列表</h3>
+            <h3 class="panel-title">
+                作业"<span class="text-danger"><{$work_title}></span>"的完成情况
+            </h3>
         </div>
         <table id="admin_table" class="table table-striped table-hover table-condensed">
             <tr>
                 <th class="text-center"><input id="all_check" type="checkbox" disabled="disabled"></th>
-                <th class="text-left">ID</th>
-                <th class="text-center">标题</th>
-                <th class="text-center">布置教师</th>
-                <th class="text-center">开始时间</th>
-                <th class="text-center">结束时间</th>
+                <th class="text-center">学生</th>
+                <th class="text-center">完成时间</th>
+                <th class="text-center">状态</th>
+                <th class="text-center">分数</th>
+                <th class="text-center">批改时间</th>
+                <th class="text-center">上传作业</th>
                 <th class="text-center">操作</th>
             </tr>
             <{foreach from=$work_info_list item=val key=key}>
             <tr>
-                <td class="text-center"><input class="item_check" type="checkbox" data-wid="<{$val.wid}>"
+                <td class="text-center"><input class="item_check" type="checkbox" data-id="<{$val.id}>"
                                                disabled="disabled"></td>
-                <td class="text-left"><{$val.wid}></td>
-                <td class="text-center"><a target="_blank" href="<{$smarty.const._site_domain}>work_show/index/<{$val.wid}>"><{$val.title}></a></td>
                 <td class="text-center"><{$val.user_name}></td>
                 <td class="text-center">
-                    <{$val.start_time|date_format:'%Y-%m-%d %H:%M:%S'}>
+                    <{$val.submit_time|date_format:'%Y-%m-%d %H:%M:%S'}>
                 </td>
                 <td class="text-center">
-                    <{$val.end_time|date_format:'%Y-%m-%d %H:%M:%S'}>
+                    <{if $val.status=='1'}>
+                <span class="alert-danger">已上交</span>
+                    <{else}>
+                    <span class="alert-success">已批阅</span>
+                    <{/if}>
                 </td>
+                <td class="text-center">
+                    <{if empty($val.score)}>
+                    --
+                    <{else}>
+                    <span class="text-danger"><{$val.score}></span>
+                    <{/if}>
+                    分
+
+                </td>
+                <td class="text-center">
+                    <{if empty($val.score)}>
+                    --
+                    <{else}>
+                    <span class="text-danger"><{$val.score_time|date_format:'%Y-%m-%d %H:%M:%S'}></span>
+                    <{/if}>
+                </td>
+                <td class="text-center">
+                    <div class="show_file btn btn-default btn-sm" data-id="<{$val.id}>">点击查看</div>
+                </td>
+
                 <td class="text-center">
                     <div class="btn-group" role="group">
-                        <a href="<{$smarty.const._admin_domain}>work_mark/index/1/<{$val.wid}>"
-                           class="btn btn-success btn-sm">
-                            <span class="glyphicon glyphicon-eye-open"></span>
-                            批改
-                        </a>
-                        <a href="<{$smarty.const._admin_domain}>work_edit/index/<{$val.wid}>"
-                           class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                            编辑
-                        </a>
-                        <a href="#" class="del_btn btn btn-default btn-sm"
-                           data-wid="<{$val.wid}>" data-title="<{$val.title}>">
-                            <span class="glyphicon glyphicon-trash"></span>
-                            删除
-                        </a>
+                        <div class="btn btn-success btn-sm">
+                            <span class="glyphicon glyphicon-ok-circle"></span>
+                            打分
+                        </div>
                     </div>
                 </td>
             </tr>
@@ -73,10 +88,6 @@
     <div class="container-fluid">
         <div class="row">
             <div class="pull-left">
-                <a href="<{$smarty.const._admin_domain}>work_edit/" class="btn btn-success" style="margin-top: 20px">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    布置新作业
-                </a>
                 &nbsp;&nbsp;
             </div>
             <nav class="pull-right">

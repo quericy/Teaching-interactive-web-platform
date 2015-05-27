@@ -24,7 +24,7 @@ class Work_List extends CI_Controller
     public function index($page = 1)
     {
         $per_page = 10;//每页10条数据
-        //获取课件列表
+        //获取作业列表
         $work_list = $this->work_cls->get_work_list( $page, $per_page);
         $this->assign_arr['work_info_list'] = $work_list;
         //分页
