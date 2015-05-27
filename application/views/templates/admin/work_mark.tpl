@@ -70,7 +70,7 @@
                     <{/if}>
                 </td>
                 <td class="text-center">
-                    <div class="show_file btn btn-default btn-sm"
+                    <div class="show_file_btn btn btn-default btn-sm"
                          data-uid="<{$val.uid}>" data-wid="<{$val.wid}>">点击查看
                     </div>
                 </td>
@@ -104,7 +104,44 @@
 <{include file="admin/footer.tpl"}>
 <script type="text/javascript">
     //查看附件
-
+    $(document).delegate('.show_file_btn', 'click', function () {
+        var wid = $(this).data('wid');
+        var uid = $(this).data('uid');
+        var file_dialog_html = '<div id="file_list_div">正在获取附件列表...</div>';
+        my_dialog('该学生上交附件', file_dialog_html, false);
+        $.ajax({
+            type: 'post',
+            url: '<{$smarty.const._admin_domain}><{$controller_name}>/get_file_list',
+            data:{wid:wid,uid:uid},
+            success: function (res) {
+                var return_arr = eval('(' + res + ')');
+                switch (return_arr.status) {
+                    case '1':
+                        var data = return_arr.data;
+                        var file_list_html = '<table class="table table-condensed table-hover">';
+                        file_list_html += ' <tr><th>作业名称</th><th>大小</th><th>提交时间</th></tr>';
+                        for (var i = 0; i < data.length; i++) {
+                            file_list_html += '<tr><td><a target="_blank" href="' + data[i].file_uri + '">' + data[i].file_name + '</a></td><td>' + data[i].size + 'kb</td><td>' + data[i].add_time + '</td></tr>';
+                        }
+                        file_list_html += '</table>';
+                        $('#file_list_div').html(file_list_html);
+                        break;
+                    case '-1':
+                        my_dialog('消息', return_arr.msg + '!&nbsp;&nbsp;');
+                        break;
+                    case '-2':
+                        my_dialog('消息', return_arr.msg + '!&nbsp;&nbsp;');
+                        break;
+                    case '-3':
+                        $('#file_list_div').html(return_arr.msg);
+                        break;
+                    default :
+                        my_dialog('错误', '服务器繁忙&nbsp;&nbsp;');
+                        break;
+                }
+            }
+        });
+    });
     //批改作业
     $(document).delegate('.check_work_btn', 'click', function () {
         var id = $(this).data('id');
@@ -113,7 +150,6 @@
         check_dialog_html += '<div class="input-group"><div class="input-group-addon"><span class="glyphicon glyphicon-tower"></span></div><input id="score_input" class="form-control" type="text" placeholder="作业得分"/></div>';
         my_dialog('信息', check_dialog_html, {
             btn_text: '打分',
-            btn_class: 'success',
             btn_class: 'success',
             show_cancel: true,
             call_back: function () {
