@@ -92,13 +92,12 @@ class Work_Process extends CI_Model
 
     /**
      * 更新作业完成度信息
-     * @param $wid 作业id
-     * @param $uid 用户id
+     * @param $id 作业完成度记录的id
      * @param $update_arr 更新数组
      */
-    function update_one($wid, $uid, $update_arr)
+    function update_one($id, $update_arr)
     {
-        $this->db->where(array('uid' => $uid, 'wid' => $wid));
+        $this->db->where(array('id' => $id));
         $this->db->update($this->table_name, $update_arr);
     }
 }

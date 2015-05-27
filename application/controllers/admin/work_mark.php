@@ -24,7 +24,7 @@ class Work_Mark extends CI_Controller
     public function index($page = 1,$wid=0)
     {
         $wid=intval($wid);
-        $per_page = 1;//每页10条数据
+        $per_page = 10;//每页10条数据
         //获取单条作业题目信息:
         $this->load->model('work', 'work_cls');
         $work_article_arr=$this->work_cls->get_one_work('*',array('wid'=>$wid));
@@ -41,6 +41,23 @@ class Work_Mark extends CI_Controller
         $this->assign_arr['page_string'] = $this->page_cls->get_page_config($this, $this->work_process_cls->get_work_process_counts(array('wid'=>$wid)), true, $per_page,'','/'.$wid,'',base_url() . '/admin/' . $this->uri->segment(2) . '/index/1/'.$wid);
         //页面展示
         $this->smarty->view('admin/work_mark.tpl', $this->assign_arr);
+    }
+
+    public function mark($id)
+    {
+        $id=intval($id);
+        $score= $this->input->post('score', true);
+        if (!preg_match('/^[0-9]+([.]{1}[0-9]{1,2})?$/', $score)) {
+            echo $this->common_cls->json_output('-1', '分数必须是整数或者小数');
+            return;
+        }
+        $update_arr=array(
+            'score'=>$score,
+            'status'=>'2',
+            'score_time'=>time()
+        );
+        $this->work_process_cls->update_one($id,$update_arr);
+        echo $this->common_cls->json_output('1', '作业批阅成功');
     }
 
 

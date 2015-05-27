@@ -24,7 +24,7 @@
     <div class="panel panel-default" style="min-width: 450px;">
         <div class="panel-heading">
             <h3 class="panel-title">
-                作业"<span class="text-danger"><{$work_title}></span>"的完成情况
+                <span class="glyphicon glyphicon-check"></span>作业批改:"<span class="text-danger"><{$work_title}></span>"的完成情况
             </h3>
         </div>
         <table id="admin_table" class="table table-striped table-hover table-condensed">
@@ -48,7 +48,7 @@
                 </td>
                 <td class="text-center">
                     <{if $val.status=='1'}>
-                <span class="alert-danger">已上交</span>
+                    <span class="alert-danger">已上交</span>
                     <{else}>
                     <span class="alert-success">已批阅</span>
                     <{/if}>
@@ -70,13 +70,16 @@
                     <{/if}>
                 </td>
                 <td class="text-center">
-                    <div class="show_file btn btn-default btn-sm" data-id="<{$val.id}>">点击查看</div>
+                    <div class="show_file btn btn-default btn-sm"
+                         data-uid="<{$val.uid}>" data-wid="<{$val.wid}>">点击查看
+                    </div>
                 </td>
 
                 <td class="text-center">
                     <div class="btn-group" role="group">
-                        <div class="btn btn-success btn-sm">
-                            <span class="glyphicon glyphicon-ok-circle"></span>
+                        <div class="check_work_btn btn btn-success btn-sm"
+                             data-id="<{$val.id}>" data-user-name="<{$val.user_name}>">
+                            <span class="glyphicon glyphicon-ok-sign"></span>
                             打分
                         </div>
                     </div>
@@ -93,27 +96,34 @@
             <nav class="pull-right">
                 <{$page_string}>
             </nav>
-
         </div>
     </div>
 
 </div>
 
-
 <{include file="admin/footer.tpl"}>
 <script type="text/javascript">
-    //删除作业
-    $(document).delegate('.del_btn', 'click', function () {
-        var wid = $(this).data('wid');
-        var title = $(this).data('title');
-        my_dialog('确认删除', '确定要删除作业<span id="del_work_name" class="text-danger">' + title + '</span>吗?删除后将无法恢复!', {
-            btn_text: '删除',
-            btn_class: 'danger',
+    //批改作业
+    $(document).delegate('.check_work_btn', 'click', function () {
+        var id = $(this).data('id');
+        var user_name = $(this).data('user-name');
+        var check_dialog_html = '对学生<span class="text-danger">' + user_name + '</span>的本次作业评分:<br/>';
+        check_dialog_html += '<div class="input-group"><div class="input-group-addon"><span class="glyphicon glyphicon-tower"></span></div><input id="score_input" class="form-control" type="text" placeholder="作业得分"/></div>';
+        my_dialog('信息', check_dialog_html, {
+            btn_text: '打分',
+            btn_class: 'success',
+            btn_class: 'success',
             show_cancel: true,
             call_back: function () {
+                var score_text = $('#score_input').val().trim();
+                if (score_text == '' || !score_reg(score_text)) {
+                    my_dialog('提示', '输入的分数不合法', false);
+                    return false;
+                }
                 $.ajax({
                     type: 'post',
-                    url: '<{$smarty.const._admin_domain}><{$controller_name}>/del/' + wid,
+                    url: '<{$smarty.const._admin_domain}><{$controller_name}>/mark/' + id,
+                    data:{score:score_text},
                     success: function (res) {
                         var return_arr = eval('(' + res + ')');
                         switch (return_arr.status) {
@@ -128,15 +138,36 @@
                                     }
                                 });
                                 break;
+                            case '-1':
+                                my_dialog('消息', return_arr.msg + '!&nbsp;&nbsp;');
+                                break;
+                            case '-2':
+                                my_dialog('消息', return_arr.msg + '!&nbsp;&nbsp;');
+                                break;
                             default :
-                                my_dialog('提示', '操作失败:' + return_arr.msg, false);
+                                my_dialog('错误', '服务器繁忙&nbsp;&nbsp;');
                                 break;
                         }
                     }
                 });
+                return true;
             }
-        });
+        })
+
     });
+    //整数小数判断
+    function score_reg(str) {
+        var reg = /^[0-9]+([.]{1}[0-9]{1,2})?$/;
+        if (reg.test(str)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    //trim修复(IE)
+    String.prototype.trim = function () {
+        return this.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+    }
 </script>
 </body>
 </html>
