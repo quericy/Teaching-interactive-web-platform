@@ -29,7 +29,7 @@ class Work_Process extends CI_Model
         $offset = $offset > 0 ? $offset : 0;
         $this->db->join('user','user.uid=work_process.uid');
         $this->db->select('work_process.*,user.user_name')->where(array('wid' => $wid));
-        $this->db->order_by('id asc');
+        $this->db->order_by('submit_time asc');
         $query = $this->db->get($this->table_name, $per_page, $offset);
         return $this->security->xss_clean($query->result_array());
     }
@@ -70,7 +70,7 @@ class Work_Process extends CI_Model
         if (empty($res_arr)) {//没有记录
             $this->add_one($wid, $uid);
         } else {
-            $this->update_one($wid, $uid, array('status' => '1', 'submit_time' => time()));
+            $this->update_one($res_arr['id'], array('status' => '1', 'submit_time' => time()));
         }
     }
 

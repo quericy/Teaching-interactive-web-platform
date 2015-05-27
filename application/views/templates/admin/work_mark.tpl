@@ -103,6 +103,8 @@
 
 <{include file="admin/footer.tpl"}>
 <script type="text/javascript">
+    //查看附件
+
     //批改作业
     $(document).delegate('.check_work_btn', 'click', function () {
         var id = $(this).data('id');
