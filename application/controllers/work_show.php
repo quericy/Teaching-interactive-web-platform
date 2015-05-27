@@ -42,6 +42,22 @@ class work_show extends CI_Controller
         //页面展示
         $this->smarty->view('work_show.tpl', $this->assign_arr);
     }
+    public function upload_work()
+    {
+        //登录校验
+        if(!$this->common_cls->is_login(false)){
+            echo $this->common_cls->json_output('-99', '您未登录或已掉线!');
+            return;
+        }
+        if($this->input->cookie('type', TRUE)=='1'||$this->input->cookie('type', TRUE)=='2'){
+            echo $this->common_cls->json_output('-1', '教师无需提交作业!');
+            return;
+        }
+        $wid = intval($this->input->post('wid', true));
+        $id = intval($this->input->cookie('id', TRUE));
+        //echo  'wid:'.$wid.'||id:'.$id;
+        echo $this->common_cls->json_output('1', '作业上传成功');
+    }
 }
 
 /* End of file work_show.php */

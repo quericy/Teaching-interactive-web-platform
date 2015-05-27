@@ -17,6 +17,8 @@
     <link href="<{$smarty.const._site_css}>default.css" rel="stylesheet">
     <!--IE8 css query-->
     <script src="<{$smarty.const._site_js}>respond.min.js"></script>
+    <!--WebUploader css-->
+    <link href="<{$smarty.const._site_css}>webuploader.css" rel="stylesheet">
 </head>
 <body>
 <{include file="header.tpl"}>
@@ -79,10 +81,30 @@
                     </div>
                     <{else}>
                     <div class="text-warning"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;您的作业等待教师批改中</div>
+                    <div>在教师批改前,您还可以继续附加作业:</div>
+                <br/>
+                    <div id="uploader">
+                        <div class="container-fluid">
+                            <div id="picker" class="pull-left btn btn-default">选择作业</div>
+                            <div class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                            <div id="ctlBtn" class="btn btn-primary pull-left">开始上传</div>
+                        </div>
+                    </div>
+                    <div id="file_list" class="text-info container-fluid"></div>
                     <{/if}>
                     <{elseif $work_arr['end_time']>$smarty.now}>
                     <!--未上传过作业-->
-                    提交作业
+                    <div class="text-danger"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;您还没上传作业,请在截止日期前提交!
+                    </div>
+                <br/>
+                    <div id="uploader">
+                        <div class="container-fluid">
+                            <div id="picker" class="pull-left btn btn-default">选择作业</div>
+                            <div class="pull-left">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                            <div id="ctlBtn" class="btn btn-primary pull-left">开始上传</div>
+                        </div>
+                    </div>
+                    <div id="file_list" class="text-info container-fluid"></div>
                     <{else}>
                     <div class="col-md-12">
                         <div class="row">
@@ -91,7 +113,8 @@
                     </div>
                     <{/if}>
                     <{elseif isset($user_info['user_type'])&&$user_info['user_type']!='0'}>
-                    <div class="center">只有学生才需要提交作业,您可以在<a href="<{$smarty.const._admin_domain}>">管理后台</a>中执行批改作业等操作!</div>
+                    <div class="center">只有学生才需要提交作业,您可以在<a href="<{$smarty.const._admin_domain}>">管理后台</a>中执行批改作业等操作!
+                    </div>
                     <{else}>
                     <div class="center">
                         您需要登录后才可以提交作业&nbsp;&nbsp;
@@ -135,8 +158,80 @@
 </div>
 <!--列表end-->
 <{include file="footer.tpl"}>
+<!--WebUploader js-->
+<script src="<{$smarty.const._site_js}>webuploader.nolog.min.js"></script>
 <script type="text/javascript">
+    //ueditor
     uParse('#page_content');
+    //webuploader
+    var uploader = WebUploader.create({
+        swf: '<{$smarty.const._site_js}>Uploader.swf',
+        server: '<{$smarty.const._site_domain}>work_show/upload_work',
+        formData:{wid:123},
+        pick: '#picker',
+        accept: {
+            title: 'work_files',
+            extensions: 'gif,jpg,jpeg,bmp,png,doc,docx,ppt,pptx,xls,txt',
+            mimeTypes: [
+                'image/*',
+                'application/msword',   // doc
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // docx
+                'application/vnd.ms-powerpoint',// ppt pps pot ppa
+                'application/vnd.openxmlformats-officedocument.presentationml.presentation', // pptx
+                'application/vnd.ms-excel',
+                'text/plain'
+            ]
+        },
+        resize: false // 不压缩image
+    });
+    // 当有文件被添加进队列的时候
+    uploader.on('fileQueued', function (file) {
+        $('#file_list').append('<div id="' + file.id + '" class="item">' +
+        '<h4 class="info">' + file.name + '</h4>' +
+        '<p class="state">等待上传...</p>' +
+        '</div>');
+    });
+    // 文件上传过程中创建进度条实时显示。
+    uploader.on('uploadProgress', function (file, percentage) {
+        var $li = $('#' + file.id),
+                $percent = $li.find('.progress .progress-bar');
+
+        // 避免重复创建
+        if (!$percent.length) {
+            $percent = $('<div class="progress progress-striped active">' +
+            '<div class="progress-bar" role="progressbar" style="width: 0%">' +
+            '</div>' +
+            '</div>').appendTo($li).find('.progress-bar');
+        }
+
+        $li.find('p.state').text('上传中');
+
+        $percent.css('width', percentage * 100 + '%');
+    });
+
+    uploader.on('uploadAccept', function (object, ret) {
+        if (ret.status == '1') {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
+    uploader.on('uploadSuccess', function (file, response) {
+        $('#' + file.id).find('p.state').html('<span class="glyphicon glyphicon-ok-sign"></span> '+response.msg);
+    });
+
+    uploader.on('uploadError', function (file) {
+        $('#' + file.id).find('p.state').html('<span class="glyphicon glyphicon-info-sign"></span> 上传失败!');
+    });
+
+    uploader.on('uploadComplete', function (file) {
+        $('#' + file.id).find('.progress').fadeOut();
+    });
+    //上传按钮触发函数
+    $(document).delegate('#ctlBtn', 'click', function () {
+        uploader.upload();
+    });
 </script>
 </body>
 </html>
