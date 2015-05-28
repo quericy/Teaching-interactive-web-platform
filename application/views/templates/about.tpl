@@ -42,8 +42,8 @@
                             本项目采用<a rel="external nofollow" href="http://opensource.org/licenses/GPL-3.0">GNU GPL v3</a>许可证授权,欢迎大家在这个基础上进行改进并分享。
                             <br/>
                             GNU GPL v3许可证:
-                            <a rel="external nofollow" href="https://www.gnu.org/licenses/gpl-2.0.txt">
-                                https://www.gnu.org/licenses/gpl-2.0.txt
+                            <a rel="external nofollow" href="https://www.gnu.org/licenses/gpl-3.0.txt">
+                                https://www.gnu.org/licenses/gpl-3.0.txt
                             </a>
                         </div>
                         <div class="page-header">
