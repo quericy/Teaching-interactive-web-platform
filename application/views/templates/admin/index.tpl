@@ -92,7 +92,7 @@
                     <tr>
                         <td>作业:</td>
                         <td>发布<span class="label label-success"><{$count_cache.all_work_count}></span>份</td>
-                        <td>完成<span class="label label-success"><{$count_cache.work_process_count}></span>份</td>
+                        <td>上交<span class="label label-success"><{$count_cache.work_process_count}></span>份</td>
                     </tr>
                     <tr>
                         <td>课件资料:</td>
@@ -135,7 +135,7 @@
     };
     var sys_1_data = [
         {
-            label: '已提交',
+            label: '未批改',
             value: <{$count_cache.upload_work_count}>,
             color: "#F7464A"
         },

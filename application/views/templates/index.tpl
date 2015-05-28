@@ -194,7 +194,7 @@
                         </div>
                         <div class="stat-text">
                             <a href="">
-                                <h3 class="work-border-bottom1">1236</h3>
+                                <h3 class="work-border-bottom1"><{$count_cache.all_work_count}></h3>
                                 <h6>已发布作业</h6>
                             </a>
                         </div>
@@ -207,7 +207,7 @@
                         </div>
                         <div class="stat-text">
                             <a href="">
-                                <h3 class="work-border-bottom2">985</h3>
+                                <h3 class="work-border-bottom2"><{$count_cache.work_process_count}></h3>
                                 <h6>已上交作业</h6>
                             </a>
                         </div>
@@ -218,8 +218,8 @@
                         </div>
                         <div class="stat-text">
                             <a href="">
-                                <h3 class="work-border-bottom3">36</h3>
-                                <h6>在线教师</h6>
+                                <h3 class="work-border-bottom3"><{$count_cache.admin_count}></h3>
+                                <h6>专业教师</h6>
                             </a>
                         </div>
                     </div>
@@ -231,7 +231,7 @@
                         </div>
                         <div class="stat-text">
                             <a href="">
-                                <h3 class="work-border-bottom4">108</h3>
+                                <h3 class="work-border-bottom4"><{$count_cache.answer_count}></h3>
                                 <h6>最新留言</h6>
                             </a>
                         </div>

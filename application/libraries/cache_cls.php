@@ -78,7 +78,7 @@ class cache_cls
             $work_statistics_arr = $CI->work_process_cls->work_statistics();
             $count_statistics['upload_work_count'] = $work_statistics_arr['upload_work_count'];//未批改作业
             $count_statistics['mark_work_count'] = $work_statistics_arr['mark_work_count'];//已批改作业
-            $count_statistics['work_process_count'] = $work_statistics_arr['all_work_count'];//所有完成的作业
+            $count_statistics['work_process_count'] = $work_statistics_arr['all_work_count'];//所有上交的作业
             $CI->load->model('work', 'work_cls');
             $count_statistics['all_work_count'] = $CI->work_cls->get_work_count();//布置的作业总数
 
