@@ -23,7 +23,10 @@
             <{if $nav_show=='question'}>class="active"<{/if}>>
             <a href="<{$smarty.const._site_domain}>question_list">答疑</a>
             </li>
-            <li><a href="#">关于</a></li>
+            <li
+            <{if $nav_show=='about'}>class="active"<{/if}>>
+            <a href="<{$smarty.const._site_domain}>about">关于</a>
+            </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="divider"></li>

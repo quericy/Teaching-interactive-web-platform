@@ -190,10 +190,11 @@
                 <div class="row">
                     <div class="col-lg-3 col-sm-3 smoove-up-div">
                         <div>
-                            <a href=""><span class="glyphicon glyphicon-edit work-slider-color1"></span></a>
+                            <a href="<{$smarty.const._site_domain}>work_list">
+                                <span class="glyphicon glyphicon-edit work-slider-color1"></span></a>
                         </div>
                         <div class="stat-text">
-                            <a href="">
+                            <a href="<{$smarty.const._site_domain}>work_list">
                                 <h3 class="work-border-bottom1"><{$count_cache.all_work_count}></h3>
                                 <h6>已发布作业</h6>
                             </a>
@@ -201,12 +202,12 @@
                     </div>
                     <div class="col-lg-3 col-sm-3 smoove-up-div">
                         <div>
-                            <a href="">
+                            <a href="<{$smarty.const._site_domain}>work_list">
                                 <span class="glyphicon glyphicon-level-up work-slider-color2"></span>
                             </a>
                         </div>
                         <div class="stat-text">
-                            <a href="">
+                            <a href="<{$smarty.const._site_domain}>work_list">
                                 <h3 class="work-border-bottom2"><{$count_cache.work_process_count}></h3>
                                 <h6>已上交作业</h6>
                             </a>
@@ -214,10 +215,10 @@
                     </div>
                     <div class="col-lg-3 col-sm-3 smoove-up-div">
                         <div>
-                            <a href=""><span class="glyphicon glyphicon-user work-slider-color3"></span></a>
+                            <a href="<{$smarty.const._site_admin}>login"><span class="glyphicon glyphicon-user work-slider-color3"></span></a>
                         </div>
                         <div class="stat-text">
-                            <a href="">
+                            <a href="<{$smarty.const._site_admin}>login">
                                 <h3 class="work-border-bottom3"><{$count_cache.admin_count}></h3>
                                 <h6>专业教师</h6>
                             </a>
@@ -225,12 +226,12 @@
                     </div>
                     <div class="col-lg-3 col-sm-3 smoove-up-div">
                         <div>
-                            <a href="">
+                            <a href="<{$smarty.const._site_domain}>question_list">
                                 <span class="glyphicon glyphicon-heart-empty work-slider-color4"></span>
                             </a>
                         </div>
                         <div class="stat-text">
-                            <a href="">
+                            <a href="<{$smarty.const._site_domain}>question_list">
                                 <h3 class="work-border-bottom4"><{$count_cache.answer_count}></h3>
                                 <h6>最新留言</h6>
                             </a>
