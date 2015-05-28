@@ -108,7 +108,12 @@
         var wid = $(this).data('wid');
         var uid = $(this).data('uid');
         var file_dialog_html = '<div id="file_list_div">正在获取附件列表...</div>';
-        my_dialog('该学生上交附件', file_dialog_html, false);
+        my_dialog('该学生上交附件', file_dialog_html, {
+            dialog_size: 'modal-md',//中型尺寸
+            call_back: function () {
+                $('#my_modal_dialog').modal("hide");//手动关闭窗口
+            }
+        });
         $.ajax({
             type: 'post',
             url: '<{$smarty.const._admin_domain}><{$controller_name}>/get_file_list',

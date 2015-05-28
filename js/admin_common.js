@@ -19,7 +19,7 @@ $(document).ready(function () {
  * 自定义模态框
  * @param title 标题
  * @param content 正文
- * @param btn_obj 按钮对象(btn_text:按钮文本,btn_class:按钮样式,call_back:回调函数,cancel_call_back:取消按钮回调函数,show_cancel:显示取消按钮)
+ * @param btn_obj 按钮对象(btn_text:按钮文本,btn_class:按钮样式,call_back:回调函数,cancel_call_back:取消按钮回调函数,show_cancel:显示取消按钮,dialog_size:窗口大小)
  */
 function my_dialog(title, content, btn_obj) {
     //重新绑定回调函数
@@ -42,6 +42,9 @@ function my_dialog(title, content, btn_obj) {
     }
     var html = '<div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header"><button id="close_x_btn" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h5 class="modal-title" id="myModalLabel">' + title + '</h5></div><div class="modal-body">' + content + '</div><div class="modal-footer">';
     if (btn_obj != false) {
+        if (btn_obj.dialog_size != undefined) {
+            html = '<div class="modal-dialog modal-' + btn_obj.dialog_size + '"><div class="modal-content"><div class="modal-header"><button id="close_x_btn" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h5 class="modal-title" id="myModalLabel">' + title + '</h5></div><div class="modal-body">' + content + '</div><div class="modal-footer">';
+        }
         if (btn_obj.btn_text == undefined)btn_obj.btn_text = '确定';
         if (btn_obj.show_cancel == undefined)btn_obj.show_cancel = false;
         var ok_class;
@@ -65,6 +68,8 @@ function my_dialog(title, content, btn_obj) {
                 ok_class = 'btn-primary';
                 break;
         }
+
+
         html += '<button id="ok_btn" type="button" class="btn ' + ok_class + '">' + btn_obj.btn_text + '</button>';
 
         if (btn_obj.show_cancel == true) {
