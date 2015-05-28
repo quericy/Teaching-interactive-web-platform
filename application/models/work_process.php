@@ -39,10 +39,10 @@ class Work_Process extends CI_Model
      * @param $cond 指定条件
      * @return int 数量
      */
-    function get_work_process_counts($cond)
+    function get_work_process_counts($cond=null)
     {
         $this->db->from($this->table_name);
-        $this->db->where($cond);
+        if(!empty($cond))$this->db->where($cond);
         return $this->db->count_all_results();
     }
 
@@ -99,5 +99,17 @@ class Work_Process extends CI_Model
     {
         $this->db->where(array('id' => $id));
         $this->db->update($this->table_name, $update_arr);
+    }
+
+    /**
+     * 获得作业完成数和批改数的统计
+     * @return mixed 统计数组
+     */
+    function work_statistics()
+    {
+        $return_arr['upload_work_count']=$this->get_work_process_counts(array('status'=>'1'));
+        $return_arr['mark_work_count']=$this->get_work_process_counts(array('status'=>'2'));
+        $return_arr['all_work_count']=$this->get_work_process_counts();
+        return $return_arr;
     }
 }

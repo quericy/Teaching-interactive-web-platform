@@ -35,11 +35,14 @@ class Question extends CI_Model
 
     /**
      * 获得当前系统的问题总数
+     * @param $cond 指定条件
      * @return int 提问计数
      */
-    function get_question_count()
+    function get_question_count($cond=null)
     {
-        return $this->db->count_all($this->table_name);
+        $this->db->from($this->table_name);
+        if (!empty($cond)) $this->db->where($cond);
+        return $this->db->count_all_results();
     }
 
     /**
@@ -79,11 +82,11 @@ class Question extends CI_Model
         $this->db->insert($this->table_name, array(
             'title' => $title,
             'content' => $content,
-            'uid'=>$this->input->cookie('id', TRUE),
+            'uid' => $this->input->cookie('id', TRUE),
             'sub_time' => time(),
             'status' => '1'
         ));
-       return $this->db->insert_id();
+        return $this->db->insert_id();
     }
 
     /**

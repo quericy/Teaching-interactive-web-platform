@@ -50,13 +50,13 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="sys_div">
                         <canvas id="sys_status_3" class="sys_canvas" width="150"></canvas>
-                        <h4 class="text-muted text-center">资料类型分布</h4>
+                        <h4 class="text-muted text-center">资源类型分布</h4>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <div class="sys_div">
                         <canvas id="sys_status_4" class="sys_canvas" width="150"></canvas>
-                        <h4 class="text-muted text-center">系统资源状况</h4>
+                        <h4 class="text-muted text-center">提问答疑状况</h4>
                     </div>
                 </div>
             </div>
@@ -86,27 +86,27 @@
                 <table class="table table-striped info_tips_table">
                     <tr>
                         <td>用户:</td>
-                        <td>教师<span class="label label-success">3</span>人</td>
-                        <td>学生<span class="label label-success">5</span>人</td>
+                        <td>教师<span class="label label-success"><{$count_cache.admin_count}></span>人</td>
+                        <td>学生<span class="label label-success"><{$count_cache.user_count}></span>人</td>
                     </tr>
                     <tr>
                         <td>作业:</td>
-                        <td>发布<span class="label label-success">66</span>份</td>
-                        <td>完成<span class="label label-success">125</span>份</td>
+                        <td>发布<span class="label label-success"><{$count_cache.all_work_count}></span>份</td>
+                        <td>完成<span class="label label-success"><{$count_cache.work_process_count}></span>份</td>
                     </tr>
                     <tr>
                         <td>课件资料:</td>
-                        <td>课件<span class="label label-success">23</span>份</td>
-                        <td>资料<span class="label label-success">12</span>份</td>
+                        <td>课件<span class="label label-success"><{$count_cache.course_count}></span>份</td>
+                        <td>资料<span class="label label-success"><{$count_cache.data_count}></span>份</td>
                     </tr>
                     <tr>
                         <td>答疑:</td>
-                        <td>问答<span class="label label-success">213</span>条</td>
-                        <td>留言<span class="label label-success">92</span>条</td>
+                        <td>提问<span class="label label-success"><{$count_cache.question_count}></span>条</td>
+                        <td>回复<span class="label label-success"><{$count_cache.answer_count}></span>条</td>
                     </tr>
                 </table>
                 <div class="panel-footer">
-                    <div class="text-right">缓存生成时间:<code>2015年4月2日 15:30</code></div>
+                    <div class="text-right">缓存生成时间:<code><{$count_cache.cache_time}></code></div>
                 </div>
             </div>
         </div>
@@ -122,68 +122,73 @@
                 strokeColor: "rgba(119,119,119,1)",
                 pointColor: "rgba(220,220,220,1)",
                 pointStrokeColor: "#fff",
-                data: [65, 59, 90, 81, 56, 55, 40]
+                data: [12, 8, 15, 6, 13, 9, 7]
             },
             {
                 fillColor: "rgba(51,122,183,0.5)",
                 strokeColor: "rgba(51,122,183,1)",
                 pointColor: "rgba(151,187,205,1)",
                 pointStrokeColor: "#fff",
-                data: [28, 48, 40, 19, 96, 27, 100]
+                data: [2, 1, 3, 1, 0, 2, 3]
             }
         ]
     };
     var sys_1_data = [
         {
-            label: '已完成',
-            value: 30,
+            label: '已提交',
+            value: <{$count_cache.upload_work_count}>,
             color: "#F7464A"
         },
         {
-            label: '未完成',
-            value: 50,
+            label: '已批改',
+            value:  <{$count_cache.mark_work_count}>,
             color: "#E2EAE9"
         }
     ]
     var sys_2_data = [
         {
             label: '学生',
-            value: 90,
+            value: <{$count_cache.user_count}>,
             color: "#69D2E7"
         },
         {
             label: '教师',
-            value: 20,
+            value: <{$count_cache.admin_count}>,
             color: "#E2EAE9"
         }
     ]
     var sys_3_data = [
         {
             label: '课件',
-            value: 30,
+            value: <{$count_cache.course_count}>,
             color: "#97BBCD"
         },
         {
             label: '资料',
-            value: 40,
+            value: <{$count_cache.data_count}>,
             color: "#F38630"
         },
         {
-            label: '答疑',
-            value: 20,
+            label: '提问',
+            value: <{$count_cache.question_count}>,
             color: "#E0E4CC"
         }
     ]
     var sys_4_data = [
         {
-            label: '已使用',
-            value: 20,
+            label: '开启的提问',
+            value: <{$count_cache.open_question_count}>,
             color: "#337AB7"
         },
         {
-            label: '未使用',
-            value: 80,
+            label: '关闭的提问',
+            value: <{$count_cache.close_question_count}>,
             color: "#E2EAE9"
+        },
+        {
+            label: '答疑回复',
+            value: <{$count_cache.answer_count}>,
+            color: "#E0E4CC"
         }
     ]
     new Chart(get_canvas('UserInfoChart')).Line(lineChartData, {scaleShowLabels : true, animation: Modernizr.canvas,animationSteps:120,scaleFontColor : "#767C8D"});
