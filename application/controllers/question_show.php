@@ -24,13 +24,13 @@ class Question_Show extends CI_Controller
         $this->assign_arr['user_info'] = $this->common_cls->show_user_info();//登录信息展示
     }
 
-    public function index($qid=1)
+    public function index($qid = 1)
     {
         $qid = intval($qid);
         //提问内容
         $question_arr = $this->question_cls->get_one_data('question.*', array('qid' => $qid));
-        if(empty($question_arr)){
-            header('location:' . _site_domain.'question_list');
+        if (empty($question_arr)) {
+            header('location:' . _site_domain . 'question_list');
             return;
         }
         $this->assign_arr['question_arr'] = $question_arr;

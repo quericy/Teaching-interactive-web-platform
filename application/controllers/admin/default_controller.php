@@ -17,7 +17,7 @@ class Default_controller extends CI_Controller
 
     public function index()
     {
-        $this->smarty->assign('count_cache',$this->cache_cls->get_count_statistics());//获取系统统计数据缓存
+        $this->smarty->assign('count_cache', $this->cache_cls->get_count_statistics());//获取系统统计数据缓存
         $this->smarty->assign('web_title', '仪表板');
         $this->smarty->assign('nav_show', 'dashboard');
         $this->smarty->view('admin/index.tpl');
