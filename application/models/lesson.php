@@ -6,7 +6,8 @@
  * Time: 19:25
  */
 
-class Lesson {
+class Lesson extends CI_Model
+{
 
     private $table_name = 'lesson';//表名
 

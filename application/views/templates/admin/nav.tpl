@@ -47,6 +47,7 @@
                 <i class="glyphicon glyphicon-edit"></i>&nbsp;作业管理<i class="fa-collapse glyphicon"></i><span class="label label-info">+3</span>
             </a></li>
         <li><ul class="work-menu nav nav-list collapse <{if $nav_show=='work'}>in<{/if}>">
+                <li><a href="<{$smarty.const._admin_domain}>lesson_list"><span class="glyphicon glyphicon-triangle-right"></span> 课程列表</a></li>
                 <li><a href="<{$smarty.const._admin_domain}>work_list"><span class="glyphicon glyphicon-triangle-right"></span> 作业列表</a></li>
                 <li><a href="<{$smarty.const._admin_domain}>work_edit"><span class="glyphicon glyphicon-triangle-right"></span> 添加作业</a></li>
                 <!--<li><a href="#"><span class="glyphicon glyphicon-triangle-right"></span> 完成情况</a></li>-->
