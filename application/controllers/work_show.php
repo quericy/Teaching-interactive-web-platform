@@ -89,6 +89,7 @@ class work_show extends CI_Controller
         $config['max_size'] = 1024 * 8;
         $config['encrypt_name'] = FALSE;
         $config['overwrite'] = TRUE;
+        $config['remove_spaces'] = FALSE;
         $this->load->library('upload', $config);
         if (!isset($_FILES['file']['name'])) {//文件名不存在
             echo $this->common_cls->json_output('-1', '请选择要上传的文件!');
@@ -100,14 +101,16 @@ class work_show extends CI_Controller
         $_FILES['file']['name'] = @iconv($encode, _site_file_charset . "//IGNORE", $_FILES['file']['name']);//转码
 
         if (!$this->upload->do_upload('file')) {
-            echo $this->common_cls->json_output('-1',$this->upload->display_errors());
+            echo $this->common_cls->json_output('-1', $this->upload->display_errors());
             return;
         } else {
             $data = $this->upload->data();
             //更新作业进程信息
             $this->work_process_cls->change_one_user_process($wid);
+
+            $file_name = empty($data['file_name']) ? $file_name : $data['file_name'];
             //添加附件记录
-            $this->file_cls->add_one($wid, $id, $data['file_name'], $data['file_size']);
+            $this->file_cls->add_one($wid, $id, $file_name, $data['file_size']);
 
         }
         echo $this->common_cls->json_output('1', '作业上传成功');
