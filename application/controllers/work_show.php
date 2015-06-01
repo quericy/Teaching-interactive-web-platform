@@ -104,11 +104,13 @@ class work_show extends CI_Controller
             echo $this->common_cls->json_output('-1', $this->upload->display_errors());
             return;
         } else {
+
             $data = $this->upload->data();
+            $encode = mb_detect_encoding($data['file_name'], "UTF-8,GBK,GB2312,ASCII,CP936");
+            $new_file_name = @iconv($encode, "UTF-8//IGNORE", $data['file_name']);//重新转码为UTF8
             //更新作业进程信息
             $this->work_process_cls->change_one_user_process($wid);
-
-            $file_name = empty($data['file_name']) ? $file_name : $data['file_name'];
+            $file_name = empty($new_file_name) ? $file_name : $new_file_name;
             //添加附件记录
             $this->file_cls->add_one($wid, $id, $file_name, $data['file_size']);
 
