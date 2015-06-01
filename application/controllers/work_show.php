@@ -26,14 +26,14 @@ class work_show extends CI_Controller
         $this->assign_arr['user_info'] = $this->common_cls->show_user_info();//登录信息展示
     }
 
-    public function index($wid=1)
+    public function index($wid = 1)
     {
         $wid = intval($wid);
         $this->assign_arr['wid'] = $wid;
         //获取作业列表
         $this->assign_arr['work_arr'] = $this->work_cls->get_one_work('*', array('wid' => $wid));
-        if(empty($this->assign_arr['work_arr'])){
-            header('location:' . _site_domain.'work_list');
+        if (empty($this->assign_arr['work_arr'])) {
+            header('location:' . _site_domain . 'work_list');
             return;
         }
         //获取最新作业
@@ -94,13 +94,14 @@ class work_show extends CI_Controller
             echo $this->common_cls->json_output('-1', '请选择要上传的文件!');
             return;
         }
+        //解决文件名中文乱码问题
         $file_name = $this->security->xss_clean($_FILES['file']['name']);//获得安全的文件名
         $encode = mb_detect_encoding($_FILES['file']['name'], "UTF-8,GBK,GB2312,ASCII,CP936");
         $_FILES['file']['name'] = @iconv($encode, _site_file_charset . "//IGNORE", $_FILES['file']['name']);//转码
 
 
         if (!$this->upload->do_upload('file')) {
-            echo $this->common_cls->json_output('-1', '文件不合法');
+            echo $this->common_cls->json_output('-1', $this->upload->display_errors());
             return;
         } else {
             $data = $this->upload->data();
