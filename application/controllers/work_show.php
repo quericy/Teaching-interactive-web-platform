@@ -101,7 +101,7 @@ class work_show extends CI_Controller
 
 
         if (!$this->upload->do_upload('file')) {
-            echo $this->common_cls->json_output('-1', $this->upload->display_errors());
+            echo $this->common_cls->json_output('-1',$_FILES);
             return;
         } else {
             $data = $this->upload->data();
