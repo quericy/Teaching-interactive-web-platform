@@ -114,6 +114,10 @@ class Admin_list extends CI_Controller
     {
         /****权限判断(未完成)*****/
         $tid = intval($tid);
+        if($tid==1){
+            echo $this->common_cls->json_output('-1','无法删除系统默认用户!');
+            return;
+        }
         $this->log->add_log('删除教师(教师id:' . $tid . ')', $this->assign_arr['web_title']);
         $this->admin_cls->del_admin_by_tid($tid);
         echo $this->common_cls->json_output('1','删除教师成功!');
