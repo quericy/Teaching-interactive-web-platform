@@ -30,7 +30,7 @@ define('_admin_css',_site_css.'admin/');
 define('_admin_js',_site_js.'admin/');
 define('_admin_images',_site_js.'admin/');
 global $_site_version;
-$_site_version=='2.2.0';
+$_site_version=='1.0.0';
 /***全局变量end***/
 
 /*
