@@ -19,7 +19,7 @@
 * [GitHub](https://github.com/quericy/Teaching-interactive-web-platform)
 * [GitChina](https://git.oschina.net/quericy/Teaching-interactive-web-platform)
 
-
+---
 欢迎交流与探讨:
 
 * Blog: [quericy.me](http://quericy.me)
