@@ -13,6 +13,13 @@
 ---
 ### 本项目演示地址:[GitChina演示平台](http://teachtest.oschina.mopaas.com/)
 
+---
+### 本项目源码:
+
+* [GitHub](https://github.com/quericy/Teaching-interactive-web-platform)
+* [GitChina](https://git.oschina.net/quericy/Teaching-interactive-web-platform)
+
+
 欢迎交流与探讨:
 
 * Blog: [quericy.me](http://quericy.me)
