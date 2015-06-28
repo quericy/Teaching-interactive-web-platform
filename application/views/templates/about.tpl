@@ -49,7 +49,7 @@
                         <div class="page-header">
                             <h4>作者:</h4>
                         </div>
-                        <div class="well">陈熠</div>
+                        <div class="well">quericy</div>
                         <div class="row">
                             <div class="col-xs-4 col-md-3" style="min-width:160px;">
                                 <a href="https://github.com/quericy" target="_blank" class="thumbnail">
