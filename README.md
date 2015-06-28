@@ -10,7 +10,7 @@
 
 ---
 ### 本项目演示地址:
-[GitChina演示平台](http://teachtest.oschina.mopaas.com/)
+* [GitChina演示平台](http://teachtest.oschina.mopaas.com/)
 
 ---
 ### 本项目源码:
@@ -21,11 +21,11 @@
 ---
 ###数据库说明:
 
-*数据库位于项目的application/config/目录下，请导入teaching_interactive.sql到mysql数据库中，并配置database.php对应的数据库信息
-*后台教师登录初始用户名密码均为admin
+* 数据库位于项目的application/config/目录下，请导入teaching_interactive.sql到mysql数据库中，并配置database.php对应的数据库信息
+* 后台教师登录初始用户名密码均为admin
 
 ---
 欢迎交流与探讨:
 
 * Blog: [quericy.me](http://quericy.me)
-* github: [https://github.com/quericy](https://github.com/quericy)
+* GitHub: [https://github.com/quericy](https://github.com/quericy)
