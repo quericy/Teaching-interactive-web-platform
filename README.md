@@ -10,7 +10,7 @@
 
 ---
 ### 本项目演示地址:
-* [GitChina演示平台](http://teachtest.oschina.mopaas.com/)
+* [GitChina演示平台](http://teachtest.butterfly.mopaasapp.com/)
 
 ---
 ### 本项目源码:
@@ -27,5 +27,5 @@
 ---
 欢迎交流与探讨:
 
-* Blog: [quericy.me](http://quericy.me)
+* Blog: [quericy.me](https://quericy.me)
 * GitHub: [https://github.com/quericy](https://github.com/quericy)

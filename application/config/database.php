@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /*
 | -------------------------------------------------------------------
 | DATABASE CONNECTIVITY SETTINGS
@@ -47,40 +47,24 @@
 
 $active_group = 'default';
 $active_record = TRUE;
-//数据库临时切换
-if($_SERVER['SERVER_NAME']=='teachtest.oschina.mopaas.com'){//演示平台数据库
-	$db['default']['hostname'] = '10.4.26.93';
-	$db['default']['username'] = 'ulcVC3jQh2z1V';
-	$db['default']['password'] = 'p78s7qRXI7US1';
-	$db['default']['database'] = 'd5fb6626cd2934111b2b52b6ab6029beb';
-	$db['default']['dbdriver'] = 'mysql';
-	$db['default']['dbprefix'] = 'table_';
-	$db['default']['pconnect'] = TRUE;
-	$db['default']['db_debug'] = TRUE;
-	$db['default']['cache_on'] = FALSE;
-	$db['default']['cachedir'] = '';
-	$db['default']['char_set'] = 'utf8';
-	$db['default']['dbcollat'] = 'utf8_general_ci';
-	$db['default']['swap_pre'] = '';
-	$db['default']['autoinit'] = TRUE;
-	$db['default']['stricton'] = FALSE;
-}else{
-	$db['default']['hostname'] = 'localhost';
-	$db['default']['username'] = 'root';
-	$db['default']['password'] = 'root';
-	$db['default']['database'] = 'teaching_interactive';
-	$db['default']['dbdriver'] = 'mysql';
-	$db['default']['dbprefix'] = 'table_';
-	$db['default']['pconnect'] = TRUE;
-	$db['default']['db_debug'] = TRUE;
-	$db['default']['cache_on'] = FALSE;
-	$db['default']['cachedir'] = '';
-	$db['default']['char_set'] = 'utf8';
-	$db['default']['dbcollat'] = 'utf8_general_ci';
-	$db['default']['swap_pre'] = '';
-	$db['default']['autoinit'] = TRUE;
-	$db['default']['stricton'] = FALSE;
-}
+//数据库切换
+$db['default']['hostname'] = getenv('DB_HOST') ?: 'localhost';
+$db['default']['port'] = getenv('DB_PORT') ?: '3306';
+$db['default']['username'] = getenv('DB_USER') ?: 'root';
+$db['default']['password'] = getenv('DB_PASS') ?: 'root';
+$db['default']['database'] = getenv('DB_DATABASE') ?: 'teaching_interactive';
+$db['default']['dbdriver'] = getenv('DB_DRIVER') ?: 'mysql';
+$db['default']['dbprefix'] = getenv('DB_PREFIX') ?: 'table_';
+$db['default']['pconnect'] = TRUE;
+$db['default']['db_debug'] = TRUE;
+$db['default']['cache_on'] = FALSE;
+$db['default']['cachedir'] = '';
+$db['default']['char_set'] = 'utf8';
+$db['default']['dbcollat'] = 'utf8_general_ci';
+$db['default']['swap_pre'] = '';
+$db['default']['autoinit'] = TRUE;
+$db['default']['stricton'] = FALSE;
+
 
 
 
