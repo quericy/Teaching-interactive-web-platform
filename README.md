@@ -10,7 +10,7 @@
 
 ---
 ### 本项目演示地址:
-* [GitChina演示平台](http://teachtest.butterfly.mopaasapp.com/)
+* [AzureApp](https://teachinginteractive.azurewebsites.net/)
 
 ---
 ### 本项目源码:
