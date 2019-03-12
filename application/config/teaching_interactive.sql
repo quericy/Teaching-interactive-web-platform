@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `table_answer` (
   `uid` int(12) DEFAULT NULL COMMENT '学生id',
   `content` mediumtext NOT NULL COMMENT '回答内容',
   `sub_time` int(12) NOT NULL COMMENT '回答时间',
-  `UA` varchar(100) NOT NULL COMMENT '代理字符串',
+  `UA` varchar(1024) NOT NULL COMMENT '代理字符串',
   PRIMARY KEY (`id`),
   KEY `qid` (`qid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='答疑表' AUTO_INCREMENT=28 ;
@@ -124,7 +124,7 @@ INSERT INTO `table_data` (`did`, `tid`, `title`, `content`, `type`, `edit_time`)
 (1, 1, '测试课件1测试课件1测试课件1测试课件1测试课件1测试课件1测试课件1测试课件1测试课件1', '\n<h3 style="text-align: center;">  <span style="font-family: 微软雅黑, ''Microsoft YaHei'';"> <strong>XX学科第X章</strong></span></h3><p><br></p><pre class="brush:php;toolbar:false"><br></pre><pre class="brush:php;toolbar:false">&lt;?php\necho ''lalallalalallalalallalalallalalallalallaallalal'';</pre><p style="line-height: 16px;"> </p><table><tr class="firstRow"><td width="144" style="word-break: break-all;">编号</td><td width="144" style="word-break: break-all;">姓名</td><td width="144" style="word-break: break-all;">内容</td><td width="144" style="word-break: break-all;">。。。</td><td width="144" style="word-break: break-all;"><br></td><td width="144"><br></td></tr><tr><td width="144" style="word-break: break-all;">Nchu-01</td><td width="144" style="word-break: break-all;">张三</td><td width="144"><br></td><td width="144"><br></td><td width="144"><br></td><td width="144"><br></td></tr><tr><td width="144" style="word-break: break-all;">Nchu-02</td><td width="144" style="word-break: break-all;">李四</td><td width="144"><br></td><td width="144"><br></td><td width="144"><br></td><td width="144"><br></td></tr></table><p style="line-height: 16px;"><strong>加粗字体</strong></p><p style="line-height: 16px;"><em>斜体</em></p><p style="line-height: 16px;"><span style="text-decoration: underline; color: rgb(255, 0, 0);"><em>颜色+下划线</em></span></p><p style="line-height: 16px; text-align: right;">附件下载：</p><p style="line-height: 16px;"><img style="vertical-align: middle; margin-right: 2px;" src="http://ci.me/third_party/ueditor/dialogs/attachment/fileTypeImages/icon_doc.gif"><a style="font-size:12px; color:#0066cc;" href="/upload_files/ueditor/php/upload/file/20150604/1433432884102501.doc" title="1433432884102501.doc" target="_blank">1433432884102501.doc</a></p><p style="line-height: 16px; text-align: right;"><img style="vertical-align: middle; margin-right: 2px;" src="http://ci.me/third_party/ueditor/dialogs/attachment/fileTypeImages/icon_xls.gif"><a style="font-size:12px; color:#0066cc;" href="/upload_files/ueditor/php/upload/file/20150512/1431397445970108.xls" title="1431397445970108.xls" target="_blank">1431397445970108.xls</a></p><p style="line-height: 16px;"><br></p>\n', 1, 1433485012),
 (2, 2, '测试资料a', '&lt;script&gt;alert(1)&lt;/script&gt;', 2, 1431329399),
 (3, 1, '测试课件2(代码高亮)', '\n<p>测试课<strong>件a测试课件a</strong>\n  测试b</p><pre class="brush:php;toolbar:false">var_dump(a);\necho 111;\nphpinfo(); [removed]alert(1);</pre>_ueditor_page_break_tag_<p><br></p><p><br></p>\n', 1, 1433173209),
-(4, 1, '测试课件3(测试多媒体)', '\n<p>\n    <br>测试外链音乐:\n</p>\n<p>\n    <embed src="http://music.163.com/style/swf/widget.swf?sid=29816800&amp;type=2&amp;auto=0&amp;width=320&amp;height=66" width="340" height="86" allowscriptaccess="never"></embed></p>\n<p>\n    <br></p>\n<p>\n    <br></p>\n<p>\n    测试在线视频:\n</p>\n<p>\n    <embed class="edui-faked-video" src="http://player.youku.com/player.php/sid/XMTI1MTk2Mzk4NA==/v.swf?f=25767509&amp;qq-pf-to=pcqq.c2c&amp;ev=2" width="420" height="280" allowscriptaccess="never"></embed></p>\n<p>\n    测试第三方视频直链(html5):\n</p>\n<p>\n    <embed class="edui-faked-video" src="http://quericyblog.qiniudn.com/osu_for_surface.mp4" width="420" height="280" allowscriptaccess="never"  autostart="false"  ></embed></p>\n', 1, 1433210399),
+(4, 1, '测试课件3(测试多媒体)', '\n<p>\n    <br>测试外链音乐:\n</p>\n<p>\n    <embed src="http://music.163.com/style/swf/widget.swf?sid=29816800&amp;type=2&amp;auto=0&amp;width=320&amp;height=66" width="340" height="86" allowscriptaccess="never"></embed></p>\n<p>\n    <br></p>\n<p>\n    <br></p>\n<p>\n    测试在线视频:\n</p>\n<p>\n    <embed class="edui-faked-video" src="http://player.youku.com/player.php/sid/XMTI1MTk2Mzk4NA==/v.swf?f=25767509&amp;qq-pf-to=pcqq.c2c&amp;ev=2" width="420" height="280" allowscriptaccess="never"></embed></p>\n<p>\n    测试第三方视频直链(html5):\n</p>\n<p>\n    <embed class="edui-faked-video" src="http://odum9helk.qnssl.com/wangjiawei/1.mp4" width="420" height="280" allowscriptaccess="never"  autostart="false"  ></embed></p>\n', 1, 1433210399),
 (6, 3, '测试课件5', '测试课件a测试课件a', 1, 1431329299),
 (7, 3, '测试课件6', '测试课件a测试课件a', 1, 1431329299),
 (8, 3, '测试课件7', '测试课件a测试课件a', 1, 1431329299),
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `table_file` (
   `wid` int(12) unsigned NOT NULL COMMENT '附件所属作业wid',
   `uid` int(12) unsigned NOT NULL COMMENT '提交附件的用户',
   `file_name` varchar(200) NOT NULL COMMENT '附件文件名',
-  `uri` int(11) NOT NULL COMMENT '附件路径uri',
+  `uri` int(11) NOT NULL DEFAULT 0 COMMENT '附件路径uri',
   `size` varchar(100) NOT NULL COMMENT '附件大小(KB)',
   `add_time` int(11) NOT NULL COMMENT '上传时间',
   PRIMARY KEY (`fid`),
@@ -463,7 +463,7 @@ CREATE TABLE IF NOT EXISTS `table_user` (
 
 INSERT INTO `table_user` (`uid`, `user_name`, `user_pwd`, `email`, `status`, `login_time`, `login_ip`) VALUES
 (1, 'quericy', 'c2c9827b9eaf3b808e4e2ff8edb7491a', 'quericy@live.com', 1, 1435471154, '127.0.0.1'),
-(2, 'chenyi', 'c2c9827b9eaf3b808e4e2ff8edb7491a', 'chenyi2821267@163.com', 1, 1435471164, '127.0.0.1'),
+(2, 'queri', 'c2c9827b9eaf3b808e4e2ff8edb7491a', 'quericy@aaa.com', 1, 1435471164, '127.0.0.1'),
 (3, 'aaa', 'ae3a6986ac1d9ba489d155cf738832ea', 'aaa@aaa.com', 1, 1432570093, '127.0.0.1'),
 (4, 'cy', '16cd298b9ca3cb04ed20a95af9b69f75', 'f85a01b4@opayq.com', 1, 1433157520, '192.168.199.186'),
 (5, 'aaa2', 'd8fd78ebb24a91f32cbb4b425f9947b0', 'aaa2@aaa.com', 1, 1433481263, '127.0.0.1');
@@ -506,7 +506,7 @@ CREATE TABLE IF NOT EXISTS `table_work_process` (
   `uid` int(12) unsigned NOT NULL COMMENT '用户uid',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '完成状态(0:未完成,1:已上交,2:已批改)',
   `score` decimal(5,2) unsigned DEFAULT NULL COMMENT '分数',
-  `content` mediumtext NOT NULL COMMENT '作业内容',
+  `content` mediumtext NOT NULL DEFAULT '' COMMENT '作业内容',
   `fid` int(12) unsigned DEFAULT NULL COMMENT '上交作业附件fid',
   `submit_time` int(12) NOT NULL COMMENT '提交时间',
   `score_time` int(12) DEFAULT NULL COMMENT '批改时间',

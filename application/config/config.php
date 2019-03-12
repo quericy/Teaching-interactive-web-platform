@@ -2,10 +2,12 @@
 
 /***全局变量begin***/
 //系统环境变量是否开启SSL协议
-if(isset($_SERVER['USE_SSL'])&&$_SERVER['USE_SSL']=='1'){
-    define('_site_protocol','https://');
-}else{
-    define('_site_protocol','http://');
+if (isset($_SERVER['USE_SSL']) && $_SERVER['USE_SSL'] == '1') {
+    define('_site_protocol', 'https://');
+} elseif (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == '1' || strtolower($_SERVER['HTTPS']) == 'on')) {
+    define('_site_protocol', 'https://');
+} else {
+    define('_site_protocol', 'http://');
 }
 //系统环境变量是否指定域名
 if(isset($_SERVER['RUNTIME_DOMAIN'])&&!empty($_SERVER['RUNTIME_DOMAIN'])){
